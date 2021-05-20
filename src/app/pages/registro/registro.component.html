@@ -1,1 +1,137 @@
-<p>registro works!</p>
+<div class="container">
+  <form [formGroup]="formGroup" (ngSubmit)="Registro()">
+  <!-- <form [formGroup]="formGroup" (ngSubmit)="aceptar()"> -->
+      <div class="row">
+      <div class="col-md-12 mb-5">
+        <h2>Registro</h2>
+      </div>
+    </div>
+    <div class="row formulario">
+      <div class="col-md-6 mb-3">
+        <label for="nombre" class="form-label">Nombre</label>
+        <input type="text" class="form-control" id="nombre" placeholder="Ingrese nombre" formControlName='nombre'>
+        <small class="invalid" *ngIf="formGroup.get('nombre')?.errors?.required && formGroup.get('nombre')?.touched">El nombre es requerido</small>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="apellido" class="form-label">Apellido</label>
+        <input type="text" class="form-control" id="apellido" placeholder="Ingrese apellido" formControlName='apellido'>
+        <small class="invalid" *ngIf="formGroup.get('apellido')?.errors?.required && formGroup.get('apellido')?.touched">El apellido es requerido</small>
+      </div>
+      <div class="col-md-6 mb-3">
+        <label for="edad" class="form-label">Edad</label>
+        <input type="number" class="form-control" id="edad" placeholder="Ingrese edad" formControlName='edad'>
+        <small class="invalid" *ngIf="formGroup.get('edad')?.errors?.required && formGroup.get('edad')?.touched">La edad es requerida</small>
+      </div>
+      <!-- <div class="col-md-6 mb-3">
+        <label for="sexo" class="form-label">Sexo</label>
+        <select class="form-select" id="sexo" formControlName='sexo'>
+          <option value="">Seleccione uno</option>
+          <option value="F">Femenino</option>
+          <option value="M">Masculino</option>
+        </select>
+        <small class="invalid" *ngIf="formGroup.get('sexo')?.errors?.required">El sexo es requerido</small>
+      </div> -->
+      <div class="col-md-6 mb-3">
+        <label for="dni" class="form-label">DNI</label>
+        <input type="number" class="form-control" id="dni" placeholder="Ingrese dni" formControlName='dni'>
+        <small class="invalid" *ngIf="formGroup.get('dni')?.errors?.required && formGroup.get('dni')?.touched">El dni es requerido</small>
+      </div>
+      <div class="col-md-12 mb-5">
+        <label for="email" class="form-label">Email</label>
+        <input type="email" class="form-control" id="email" placeholder="Ingrese email" formControlName='email'>
+        <small class="invalid" *ngIf="formGroup.get('email')?.errors?.required && formGroup.get('email')?.touched">El email es requerido</small>
+      </div>
+      <div class="col-md-12 mb-5">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" id="password" placeholder="Ingrese password" formControlName='password'>
+        <small class="invalid" *ngIf="formGroup.get('password')?.errors?.required && formGroup.get('password')?.touched">La password es requerida</small>
+      </div>
+      <div class="col-md-12 mb-5">
+        <label for="imagen" class="form-label">Imagen de perfil</label>
+        <input type="text" class="form-control" id="imagen" placeholder="Ingrese imagen de perfil" formControlName='imagen'>
+        <small class="invalid" *ngIf="formGroup.get('imagen')?.errors?.required && formGroup.get('imagen')?.touched">La imagen de perfil es requerida</small>
+      </div>
+    </div>
+    <div class="row">
+      <!-- <div class="col-md-12 mb-5">
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" id="terminos">
+          <label for="recordar" class="form-check-label" for="terminos">
+            Aceptar términos y condiciones
+          </label>
+        </div>
+      </div> -->
+      <div class="col-md-12 d-grid gap-2">
+        <button type="submit" class="btn btn-primary btn-block" [disabled]="signup"  [disabled]='formGroup.invalid'>
+          <span *ngIf="signup" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+          Registro
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+
+<!-- <body>
+    <div class="jumbotron">
+      <h2 id="terminos">Terminos y condiciones</h2>
+      <p>El Gobierno Nacional no controla ni garantiza la ausencia de virus ni de otros elementos en los contenidos que puedan producir alteraciones en su sistema informático (software y hardware) o en los documentos electrónicos y ficheros almacenados en su sistema informático.</p>
+      <p>El Gobierno Nacional no puede garantizar que la transmisión de información por parte de los Usuarios sea completamente segura. El Usuario asume este riesgo.</p>
+     
+    </div>
+    <strong><p>No leer lo anterior, es solo un ejemplo sacado de https://www.argentina.gob.ar/terminos-y-condiciones </p></strong>
+
+    <button class="btn btn-lg btn-success" onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Acepto</button>
+    <button class="btn btn-lg btn-danger" routerLink="/" style="width:auto;">No acepto</button>
+
+    <div id="id01" class="modal">
+      <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">×</span>
+      <form class="modal-content animate" >
+      -->
+
+      <!-- <div class="container" *ngIf="!(auth.usuario | async)">
+          <label><b>Email</b></label>
+          <input [(ngModel)]="email" type="text" placeholder="Email" name="email" required>
+          <br>
+    
+          <label><b>Clave</b></label>
+          <input [(ngModel)]="password" type="password" placeholder="Contraseña" name="psw" required>
+          <br> -->
+    
+          <!-- <label><b>Repita la clave</b></label> -->
+          <!-- <input [(ngModel)]="pass2" type="password" placeholder="Aca repeti la misa clave  de arriba" name="psw-repeat" required> -->
+          <!-- <input type="password" placeholder="Aca repeti la misa clave  de arriba" name="psw-repeat" required>
+          <br> -->
+          <!-- <input type="checkbox" checked="checked">Recordar mis datos
+          <p>creando la cuenta aceptando los<a  onclick="document.getElementById('id01').style.display='none'"  >Terminos y condiciones</a>.</p>
+
+          <div >
+            <h1 class="text-danger">{{auth.errorRegistro}}</h1>
+          </div>      
+          
+          <div class="clearfix">
+            <button class="btn btn-lg btn-danger" type="button" onclick="document.getElementById('id01').style.display='none'">Me arrepenti</button>
+            <button class="btn btn-lg btn-success" [disabled]="signup" type="submit" (click)="Registro()">
+              <span *ngIf="signup" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+              Registrarme
+            </button>
+          </div> -->
+        <!-- </div>
+      </form>
+    </div> -->
+
+    
+    <!-- <script>
+    // Get the modal
+    var modal = document.getElementById('id01');
+    
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+    </script>
+    
+    </body> -->

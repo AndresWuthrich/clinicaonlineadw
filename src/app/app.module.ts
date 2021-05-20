@@ -7,25 +7,32 @@ import { BienvenidoComponent } from './pages/bienvenido/bienvenido.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegistroComponent } from './pages/registro/registro.component';
 
-// import { AngularFireModule } from '@angular/fire';
-// import { AngularFireDatabaseModule } from '@angular/fire/database';
-import { FormsModule } from '@angular/forms';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
+import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { environment } from 'src/environments/environment';
 import { AuthService } from './services/auth.service';
+import { NavbarComponent } from './navbar/navbar.component';
+import { UsuarioComponent } from './pages/usuario/usuario.component';
+import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BienvenidoComponent,
     LoginComponent,
-    RegistroComponent
+    RegistroComponent,
+    NavbarComponent,
+    UsuarioComponent,
+    PageNotFoundComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    // AngularFireModule.initializeApp(environment.firebase),
-    // AngularFireDatabaseModule
+    AngularFireModule.initializeApp(environment.firebase),
+    AngularFireDatabaseModule,
+    ReactiveFormsModule
   ],
   providers: [AuthService],
   bootstrap: [AppComponent]
