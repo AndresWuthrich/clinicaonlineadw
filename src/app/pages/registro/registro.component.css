@@ -27,11 +27,6 @@ input[type=text], input[type=password] {
 /* Float cancel and signup buttons and add an equal width */
 .cancelbtn,.signupbtn {float:left;width:50%}
 
-/* Add padding to container elements */
-.container {
-    padding: 16px;
-}
-
 /* The Modal (background) */
 .modal {
     display: none; /* Hidden by default */
