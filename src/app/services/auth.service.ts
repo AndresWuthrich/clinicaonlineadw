@@ -29,11 +29,11 @@ export class AuthService {
   Registro(email: string, password: string){
     this.fireStoreAuth.createUserWithEmailAndPassword(email, password)
     .then(value => {
-      // console.log('Registro exitoso');
-      this.router.navigate(['bienvenido']);
+      console.log('Registro exitoso');
+      // this.router.navigate(['bienvenido']);
     })
     .catch(error =>  {
-      this.errorRegistro = error.message;
+      //this.errorRegistro = error.message;
 
       Swal.fire({
         title: error.code,
@@ -49,6 +49,7 @@ export class AuthService {
     .signInWithEmailAndPassword(email, password)
     .then(value =>{
       console.log("Ingreso exitoso");
+
       this.router.navigate(['bienvenido']);
     })
     .catch(error =>  {

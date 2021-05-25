@@ -3,20 +3,23 @@
     <nav class="my-2 my-md-0 mr-md-3">
       <!-- <a class="p-2 text-dark" routerLink="/quiensoy">Quien soy?</a> -->
       <a class="p-2 text-dark" href="https://github.com/AndresWuthrich/clinicaonlineadw">en GitHub</a>
+      <a class="p-2 text-dark" routerLink="/usuarios">Usuarios</a>
 
-      <!-- <div *ngIf="userLogueado | async as user"> -->
-        <!-- <nav class="my-2 my-md-0 mr-md-3">
-          <a class="p-2 text-dark" routerLink="/chat">Chat</a>
-          <a class="p-2 text-dark" routerLink="/encuesta">Encuesta</a>
-        </nav> -->
-      <!-- </div> -->
+      <div *ngIf="userLogueado | async as user">
+        <nav class="my-2 my-md-0 mr-md-3">
+          <a class="p-2 text-dark" routerLink="/perfil">Mi perfil</a>
+          <a class="p-2 text-dark" routerLink="/misturnos">Mis turnos</a>
+          <a class="p-2 text-dark" routerLink="/turnos">Turnos</a>
+        </nav>
+      </div>
     </nav>
     
     <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white" *ngIf="userLogueado | async as user; else login">
       <h5 class="my-0 mr-md-auto font-weight-normal">Bienvenidx <i>{{ (userLogueado | async)?.email}}</i> !!  </h5>
       <nav class="my-2 my-md-0 mr-md-3">
         <a class="btn btn-outline-primary" (click)='Logout()'>Logout</a>
-        </nav> 
+        <a class="btn btn-outline-primary" (click)='Logout()'>Solicitar Turno</a>
+      </nav> 
     </div>
     <ng-template #login>
       <a class="btn btn-outline-primary" routerLink="/login">Login</a>

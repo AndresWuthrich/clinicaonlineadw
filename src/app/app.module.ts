@@ -15,6 +15,8 @@ import { AuthService } from './services/auth.service';
 import { NavbarComponent } from './navbar/navbar.component';
 import { UsuarioComponent } from './pages/usuario/usuario.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
+import { PerfilDirective } from './directivas/perfil.directive';
+import { PerfilComponent } from './pages/perfil/perfil.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.com
     RegistroComponent,
     NavbarComponent,
     UsuarioComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
+    PerfilDirective,
+    PerfilComponent
   ],
   imports: [
     BrowserModule,

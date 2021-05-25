@@ -1,27 +1,44 @@
 # ClinicaOnline
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.0.0.
+Proyecto realizado con [Angular CLI](https://github.com/angular/angular-cli) version 12.0.0.
 
-## Development server
+TP Final Laboratorio IV 2021 - UTNFRA - Técnico superior en programación.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+[Sitio WEB de GitHub](https://github.com/AndresWuthrich/clinicaonlineadw)
 
-## Code scaffolding
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+-----
+## Ingreso a la Web 
 
-## Build
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+**Bienvenida**
+<!-- >Desde la pantalla de bienvenida podrás: -->
+>Desde la pantalla de bienvenida podrás:
+* Visualizar novedades de la clínica.
+* Ingresar a las siguientes funcionalidades:
+    * Login.
+    * Registro.
+    * Administración de usuarios (sólo Administrador).
+    * Turnos.
 
-## Running unit tests
+![principal](http://octaviovillegas.github.io/CursoIngresoJS/img/principal.gif)
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+[PDF de los TPs](http://octaviovillegas.github.io/CursoIngresoJS/Guia%20de%20TPs%20curso%20de%20ingreso.pdf)
 
-## Running end-to-end tests
+![principal](http://octaviovillegas.github.io/CursoIngresoJS/img/cjsentreadasalida.png)
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice.
+-----
+## Cuestionario 
+* :point_left:
 
-## Further help
+**A tener en cuenta**
+* :date:Los cuestionarios se habilitan en ciertas fechas ya estipuladas.
+* :no_entry_sign:Se debe contestar sin buscar en la web las respuestas.
+* :no_entry_sign:Se debe contestar sin realizar pruebas de código.
+* :passport_control:Se debe iniciar sesion en google para ingresar a los cuestionarios.
+* :hand:Solo se puede contestar una vez cada cuestionario.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+**Las respuestas recibidas  son analizadas para:**
+* :exclamation:Hacer una mejora continua del curso.
+* :muscle:Reforzar conceptos que sean necesarios.
+* :mortar_board:Tener la evolución del alumno durante el curso.

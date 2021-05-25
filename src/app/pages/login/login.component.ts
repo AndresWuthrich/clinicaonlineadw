@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Usuario } from 'src/app/clases/usuario';
 import { AuthService } from 'src/app/services/auth.service';
+import { UsuarioService } from 'src/app/services/usuario.service';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -12,8 +14,10 @@ export class LoginComponent implements OnInit {
   public loading: boolean;
   email: string = '';
   password: string = '';
+  public listaUsuariosAccesoRapido: Usuario[] = [];
+  public autocompletar: string = '';
 
-  constructor(public auth: AuthService) {
+  constructor(private usuarioService: UsuarioService, public auth: AuthService) {
     this.loading = false;
    }
 
@@ -38,7 +42,14 @@ export class LoginComponent implements OnInit {
   }
 
   Autocompletar(){
-    this.email="andreswuthrich82@gmail.com";
-    this.password="adw1982";
+    this.autocompletar='si';
+
+    this.usuarioService.traerTodos().subscribe((usuarios: Usuario[]) => {
+      console.log(usuarios);
+      this.listaUsuariosAccesoRapido = usuarios;
+    });
+
+    // this.email="andreswuthrich82@gmail.com";
+    // this.password="adw1982";
   }
 }
