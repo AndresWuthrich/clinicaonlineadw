@@ -17,6 +17,7 @@ import { UsuarioComponent } from './pages/usuario/usuario.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { PerfilDirective } from './directivas/perfil.directive';
 import { PerfilComponent } from './pages/perfil/perfil.component';
+import { TurnoComponent } from './pages/turno/turno.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { PerfilComponent } from './pages/perfil/perfil.component';
     UsuarioComponent,
     PageNotFoundComponent,
     PerfilDirective,
-    PerfilComponent
+    PerfilComponent,
+    TurnoComponent
   ],
   imports: [
     BrowserModule,

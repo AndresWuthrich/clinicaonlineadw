@@ -3,14 +3,15 @@
 <button class="btn btn-primary button" (click)="elegirPerfil('paciente')" *ngIf="perfil!='paciente' && perfil!='especialista'">Paciente</button>
 <button class="btn btn-primary button" (click)="elegirPerfil('especialista')" *ngIf="perfil!='paciente' && perfil!='especialista'">Especialista</button>
 
-<div class="container">
-  <form class="form" [formGroup]="formRegistro" (ngSubmit)="registro()" *ngIf="perfil=='paciente' || perfil=='especialista'">
-      <div class="row">
-      <div class="col-md-12 mb-5">
+<div class="container" *ngIf="perfil=='paciente' || perfil=='especialista'">
+  <form class="form" [formGroup]="formRegistro" (ngSubmit)="registro()">
+  <!-- <form class="form" [formGroup]="formRegistro" (ngSubmit)="registro()" *ngIf="perfil=='paciente' || perfil=='especialista'"> -->
+    <div class="row">
+      <div class="col-md-12 mb-3">
         <h2>Registro</h2>
       </div>
     </div>
-    <div class="row formulario">
+    <div class="row formulario container">
       <div class="col-md-6 mb-2">
         <label for="nombre" class="form-label">Nombre</label>
         <input type="text" class="form-control" id="nombre" placeholder="Ingrese nombre" formControlName='nombre'>
@@ -27,15 +28,7 @@
         <small class="invalid" *ngIf="formRegistro.get('edad')?.errors?.required && formRegistro.get('edad')?.touched">La edad es requerida</small>
         <small class="invalid" *ngIf="formRegistro.get('edad')?.errors?.min || formRegistro.get('edad')?.errors?.max && formRegistro.get('edad')?.touched ">La edad debe ser entre 18 a 99 años</small>
       </div>
-      <!-- <div class="col-md-6 mb-3">
-        <label for="sexo" class="form-label">Sexo</label>
-        <select class="form-select" id="sexo" formControlName='sexo'>
-          <option value="">Seleccione uno</option>
-          <option value="F">Femenino</option>
-          <option value="M">Masculino</option>
-        </select>
-        <small class="invalid" *ngIf="formGroup.get('sexo')?.errors?.required">El sexo es requerido</small>
-      </div> -->
+
       <div class="col-md-6 mb-2">
         <label for="dni" class="form-label">DNI</label>
         <input type="number" class="form-control" id="dni" placeholder="Ingrese dni" formControlName='dni'>
@@ -44,14 +37,12 @@
       </div>
 
       <!-- <div class="col-md-6 mb-3" *appPerfil="condicion"> -->
-        <!-- <div class="col-md-12 mb-5"> -->
       <div class="col-md-12 mb-2" *ngIf="perfil=='paciente'">
         <label for="obraSocial" class="form-label">Obra social</label>
         <input type="text" class="form-control" id="obraSocial" placeholder="Ingrese obra social" formControlName='obraSocial'>
         <small class="invalid" *ngIf="formRegistro.get('obraSocial')?.errors?.required && formRegistro.get('obraSocial')?.touched">La obra social es requerida</small>
       </div>
 
-      <!-- <div class="col-md-12 mb-5"> -->
       <div class="col-md-12 mb-2" *ngIf="perfil=='especialista'">
       <!-- <div class="col-md-6 mb-3" *appPerfil="!condicion"> -->
         <label for="especialidad" class="form-label">Especialidad</label>
@@ -73,37 +64,33 @@
 
       <div class="col-md-12 mb-2">
         <label for="imagen" class="form-label">Imagen de perfil</label>
-        <input type="text" class="form-control" id="imagen" placeholder="Ingrese imagen de perfil" formControlName='imagen'>
+        <input type="file" class="form-control" id="imagen" placeholder="Ingrese imagen de perfil" formControlName='imagen' (change)="cargarImagen($event)">
         <small class="invalid" *ngIf="formRegistro.get('imagen')?.errors?.required && formRegistro.get('imagen')?.touched">La imagen de perfil es requerida</small>
       </div>
-      <!-- <div class="col-md-12 mb-5"> -->
       <div class="col-md-12 mb-2" *ngIf="perfil=='paciente'">
       <!-- <div class="col-md-12 mb-5" *appPerfil="condicion"> -->
         <label for="imagen2" class="form-label">2da imagen de perfil</label>
-        <input type="text" class="form-control" id="imagen2" placeholder="Ingrese 2da imagen de perfil" formControlName='imagen2'>
+        <input type="file" class="form-control" id="imagen2" placeholder="Ingrese 2da imagen de perfil" formControlName='imagen2' (change)="cargarImagen2($event)">
         <small class="invalid" *ngIf="formRegistro.get('imagen2')?.errors?.required && formRegistro.get('imagen2')?.touched">La 2da imagen de perfil es requerida</small>
       </div>
-
     </div>
-    <div class="row">
-      <!-- <div class="col-md-12 mb-5">
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="terminos">
-          <label for="recordar" class="form-check-label" for="terminos">
-            Aceptar términos y condiciones
-          </label>
-        </div>
-      </div> -->
-      <div class="col-md-12 d-grid gap-2">
+
+    <script src='https://www.google.com/recaptcha/api.js?hl=es'></script>
+    <div class="g-recaptcha" data-sitekey="6LdCCPMaAAAAAGknNFbHeXd8ZdYAYGTPUQD0GJMA"></div>
+  
+    <div class="row container">
+      <div class="col-md-12 d-grid gap-2 container2">
         <!-- <button type="submit" class="btn btn-primary btn-block" [disabled]="signup"  [disabled]='formRegistro.invalid'> -->
         <button type="submit" class="btn btn-primary btn-block" [disabled]="signup">
             <span *ngIf="signup" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
           Registro
         </button>
       </div>
-      <div class="col-md-12 d-grid gap-2">
+      <div class="col-md-12 d-grid gap-2 container2">
         <button class="btn btn-danger btn-block" routerLink="/">Me arrepentí</button>
       </div>
     </div>
   </form>
+
 </div>
+

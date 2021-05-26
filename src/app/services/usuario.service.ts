@@ -32,28 +32,13 @@ export class UsuarioService {
 
   //  agregarUsuario(nombre: string, apellido: string, edad: number, dni: number, perfil: string, email: string, password: string, imagen: string, imagen2: string, obraSocial: string, especialidad: string){
   agregarUsuario(usuario: Usuario){
-    // let usuario: Usuario = {
-    //   nombre: nombre,
-    //   apellido: apellido,
-    //   edad: edad,
-    //   dni: dni,
-    //   perfil: perfil,
-    //   email: email,
-    //   password: password,
-    //   imagenPerfil: imagen,
-    //   imagenPerfil2: imagen2,
-    //   uid: this.auth.usuario.uid,
-    //   obraSocial: obraSocial,
-    //   especialidad: especialidad,
-    // }
-    // return this.itemsCollection.add({...usuario});
+
     return this.itemsCollection.add(JSON.parse(JSON.stringify(usuario)));
   }
 
   agregarEspecialista(imagen: any, usuario: Usuario){
-    this.filePath = `imagenes/${imagen}`;
-    // this.filePath = `imagenes/${imagen.name}`;
-    // console.log(imagen.name);
+    this.filePath = `imagenes/${imagen.name}`;
+    console.log(imagen.name);
     const fileRef = this.storage.ref(this.filePath);
     console.log(this.filePath);
     const task = this.storage.upload(this.filePath, imagen);
@@ -68,6 +53,43 @@ export class UsuarioService {
         return this.itemsCollection.add(JSON.parse(JSON.stringify(usuario)));
       })
     })).subscribe();
+  }
+
+  agregarPaciente(imagen: any, imagen2: any, usuario: Usuario){
+    this.filePath = `imagenes/${imagen.name}`;
+    console.log(imagen.name);
+    const fileRef = this.storage.ref(this.filePath);
+    console.log(this.filePath);
+    const task = this.storage.upload(this.filePath, imagen);
+    console.log(imagen);
+    task.snapshotChanges().pipe(finalize(()=>{
+      fileRef.getDownloadURL().subscribe(urlImagen =>{
+        console.log('URL_IMAGEN', urlImagen);
+
+        // this.guardarPeliculaConFoto(pelicula, urlImagen);
+        usuario.imagenPerfil = urlImagen;
+        // console.log("hola" + usuario);
+        // return this.itemsCollection.add(JSON.parse(JSON.stringify(usuario)));
+      })
+    })).subscribe();
+
+    this.filePath = `imagenes/${imagen2.name}`;
+    console.log(imagen2.name);
+    const fileRef2 = this.storage.ref(this.filePath);
+    console.log(this.filePath);
+    const task2 = this.storage.upload(this.filePath, imagen2);
+    console.log(imagen2);
+    task.snapshotChanges().pipe(finalize(()=>{
+      fileRef2.getDownloadURL().subscribe(urlImagen =>{
+        console.log('URL_IMAGEN', urlImagen);
+
+        // this.guardarPeliculaConFoto(pelicula, urlImagen);
+        usuario.imagenPerfil2 = urlImagen;
+        console.log("hola" + usuario);
+        return this.itemsCollection.add(JSON.parse(JSON.stringify(usuario)));
+      })
+    })).subscribe();
+
   }
 
   traerTodos(){

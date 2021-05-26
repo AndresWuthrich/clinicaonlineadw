@@ -52,4 +52,13 @@ export class LoginComponent implements OnInit {
     // this.email="andreswuthrich82@gmail.com";
     // this.password="adw1982";
   }
+
+  cargarUsuariosAccesoRapido(email: string){
+    this.listaUsuariosAccesoRapido.forEach(usuario => {
+      if(usuario.email == email){
+        this.email=usuario.email;
+        this.password=usuario.password;
+      }
+    });
+  }
 }

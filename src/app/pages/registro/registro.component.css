@@ -1,12 +1,3 @@
-input[type=text], input[type=password] {
-    width: 100%;
-    padding: 6px 10px;
-    margin: 4px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-}
-
 /* Set a style for all buttons */
 .button {
     /* background-color: #4CAF50;
@@ -18,15 +9,6 @@ input[type=text], input[type=password] {
     width: 100%;
     height: 100%;
 } */
-
-/* Extra styles for the cancel button */
-/* .cancelbtn {
-    padding: 14px 20px;
-    background-color: #f44336;
-} */
-
-/* Float cancel and signup buttons and add an equal width */
-.cancelbtn,.signupbtn {float:left;width:50%}
 
 /* The Modal (background) */
 .modal {
@@ -87,17 +69,13 @@ div{
 
 
 .container {
-    /* max-width: 600px; */
     padding: 10px;
-
-    /* SHADOW */
-    /* -webkit-box-shadow: 1px 1px 31px -5px rgba(0,0,0,0.75);
-    -moz-box-shadow: 1px 1px 31px -5px rgba(0,0,0,0.75);
-    box-shadow: 1px 1px 31px -5px rgba(0,0,0,0.75); */
+    margin: 5px; 
 }
 
-.formulario div[class^="col-md-"] {
-    height: 90px;
+.container2 {
+    /* padding: 10px; */
+    margin: 2px; 
 }
 
 .invalid {
@@ -112,7 +90,7 @@ div{
     content: "";
     position: absolute;
     z-index: -1;
-        background-image:url('../../../assets/imagenes/back1.jpg');
+    background-image:url('../../../assets/imagenes/back1.jpg');
     background-size: 100%;
     top: 0;
     bottom: 0;

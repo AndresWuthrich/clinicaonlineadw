@@ -19,6 +19,9 @@ export class RegistroComponent implements OnInit {
   public condicion: boolean = false;
   public perfil: string = '';
   private imagenPerfil: any;
+  private imagenPerfil2: any;
+
+  public usuarioAlta: Usuario = new Usuario();
 
   private dbpath = '/usuarios';
 
@@ -45,25 +48,10 @@ export class RegistroComponent implements OnInit {
       'obraSocial':['', Validators.required],
       'especialidad':['', Validators.required],          
     });
-
   }
 
   ngOnInit(): void {
   }
-
-  // public aceptar(): void {
-  //   console.log(this.formGroup.getRawValue());
-  // }
-  // Registro(){
-  //   this.signup = true;
-
-  //   setTimeout(() => {
-  //     this.signup = false;
-  //   }, 3000);
-
-  //   this.auth.Registro(this.email, this.password);
-  //   this.email = this.password = '';
-  // }
 
   elegirPerfil(perfil: string){
     this.perfil = perfil;
@@ -80,58 +68,56 @@ export class RegistroComponent implements OnInit {
       this.signup = false;
     }, 3000);
 
-    // var nombre = this.formRegistro.controls['nombre'].value;
-    // var apellido = this.formRegistro.controls['apellido'].value;
-    // var edad = this.formRegistro.controls['edad'].value;
-    // var dni = this.formRegistro.controls['dni'].value;
-    // // var perfil = this.formRegistro.controls['perfil'].value;
-    // var email2 = this.formRegistro.controls['email'].value;
-    // var password2 = this.formRegistro.controls['password'].value;
-    // var imagen = this.formRegistro.controls['imagen'].value;
-    // var imagen2 = this.formRegistro.controls['imagen2'].value;
-    // var obraSocial = this.formRegistro.controls['obraSocial'].value;
-    // var especialidad = this.formRegistro.controls['especialidad'].value;
-
-    // this.auth.Registro(this.email, this.password);
     this.auth.Registro(email, password);
 
+    this.usuarioAlta.nombre = this.formRegistro.controls['nombre'].value;
+    this.usuarioAlta.apellido = this.formRegistro.controls['apellido'].value;
+    this.usuarioAlta.edad = this.formRegistro.controls['edad'].value;
+    this.usuarioAlta.dni = this.formRegistro.controls['dni'].value;
+    this.usuarioAlta.perfil = this.perfil;
+    this.usuarioAlta.email = this.formRegistro.controls['email'].value;
+    this.usuarioAlta.password = this.formRegistro.controls['password'].value;
+    this.usuarioAlta.imagenPerfil = this.formRegistro.controls['imagen'].value;
+
     if(this.perfil=='paciente'){
-      let usuario: Usuario = {
-        nombre: this.formRegistro.controls['nombre'].value,
-        apellido: this.formRegistro.controls['apellido'].value,
-        edad: this.formRegistro.controls['edad'].value,
-        dni: this.formRegistro.controls['dni'].value,
-        perfil: this.perfil,
-        email: this.formRegistro.controls['email'].value,
-        password: this.formRegistro.controls['password'].value,
-        imagenPerfil: this.formRegistro.controls['imagen'].value,
-        imagenPerfil2: this.formRegistro.controls['imagen2'].value,
-        obraSocial: this.formRegistro.controls['obraSocial'].value,
-      }
-
-      this.imagenPerfil = this.formRegistro.controls['imagen'].value;
-      // this.usuarioService.agregarUsuario(nombre, apellido, edad, dni, this.perfil, email2, password2, imagen, imagen2, obraSocial, especialidad)
+      // let usuario: Usuario = {
+      //   nombre: this.formRegistro.controls['nombre'].value,
+      //   apellido: this.formRegistro.controls['apellido'].value,
+      //   edad: this.formRegistro.controls['edad'].value,
+      //   dni: this.formRegistro.controls['dni'].value,
+      //   perfil: this.perfil,
+      //   email: this.formRegistro.controls['email'].value,
+      //   password: this.formRegistro.controls['password'].value,
+      //   imagenPerfil: this.formRegistro.controls['imagen'].value,
+      //   imagenPerfil2: this.formRegistro.controls['imagen2'].value,
+      //   obraSocial: this.formRegistro.controls['obraSocial'].value,
+      // }
+      this.usuarioAlta.imagenPerfil2 = this.formRegistro.controls['imagen2'].value;
+      this.usuarioAlta.obraSocial = this.formRegistro.controls['obraSocial'].value;
+      
+      // console.log(this.imagenPerfil);
       // this.usuarioService.agregarUsuario(usuario).finally(()=>{"exito"});
+      this.usuarioService.agregarPaciente(this.imagenPerfil, this.imagenPerfil2, this.usuarioAlta);
       // this.email = this.password = '';
-    } else {
-      let usuario: Usuario = {
-        nombre: this.formRegistro.controls['nombre'].value,
-        apellido: this.formRegistro.controls['apellido'].value,
-        edad: this.formRegistro.controls['edad'].value,
-        dni: this.formRegistro.controls['dni'].value,
-        perfil: this.perfil,
-        email: this.formRegistro.controls['email'].value,
-        password: this.formRegistro.controls['password'].value,
-        imagenPerfil: this.formRegistro.controls['imagen'].value,
-        especialidad: this.formRegistro.controls['especialidad'].value,
-      }
-      this.imagenPerfil = this.formRegistro.controls['imagen'].value;
 
-      console.log(this.imagenPerfil);
+    } else {
+      this.usuarioAlta.especialidad = this.formRegistro.controls['especialidad'].value;
+      
+      // console.log(this.imagenPerfil);
       // this.usuarioService.agregarUsuario(usuario).finally(()=>{"exito"});
-      this.usuarioService.agregarEspecialista(this.imagenPerfil, usuario);
+      this.usuarioService.agregarEspecialista(this.imagenPerfil, this.usuarioAlta);
       // this.email = this.password = '';
     }
     this.router.navigate(['bienvenido']);
+  }
+
+  cargarImagen(event: any): void {
+    this.imagenPerfil = event.target.files[0];
+    console.log(this.imagenPerfil);
+  }
+
+  cargarImagen2(event: any): void {
+    this.imagenPerfil2 = event.target.files[0];
+    console.log(this.imagenPerfil2);
   }
 }
