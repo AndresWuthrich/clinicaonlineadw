@@ -79,12 +79,12 @@ export class UsuarioService {
     console.log(this.filePath);
     const task2 = this.storage.upload(this.filePath, imagen2);
     console.log(imagen2);
-    task.snapshotChanges().pipe(finalize(()=>{
-      fileRef2.getDownloadURL().subscribe(urlImagen =>{
-        console.log('URL_IMAGEN', urlImagen);
+    task2.snapshotChanges().pipe(finalize(()=>{
+      fileRef2.getDownloadURL().subscribe(urlImagen2 =>{
+        console.log('URL_IMAGEN2', urlImagen2);
 
         // this.guardarPeliculaConFoto(pelicula, urlImagen);
-        usuario.imagenPerfil2 = urlImagen;
+        usuario.imagenPerfil2 = urlImagen2;
         console.log("hola" + usuario);
         return this.itemsCollection.add(JSON.parse(JSON.stringify(usuario)));
       })

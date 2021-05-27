@@ -36,3 +36,9 @@ left: 0;
 right: 0;
 opacity: .55;
 }
+
+img{
+  width: 60px;
+  height: 60px;
+  border-radius: 5px;
+}

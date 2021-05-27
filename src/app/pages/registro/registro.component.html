@@ -1,3 +1,8 @@
+<head>
+  <script src='https://www.google.com/recaptcha/api.js?hl=es'></script>
+
+</head>
+<body>
 <!-- <button class="btn btn-primary" (click)="condicion = condicion">Paciente</button>
 <button class="btn btn-primary" (click)="condicion = !condicion">Especialista</button> -->
 <button class="btn btn-primary button" (click)="elegirPerfil('paciente')" *ngIf="perfil!='paciente' && perfil!='especialista'">Paciente</button>
@@ -75,7 +80,6 @@
       </div>
     </div>
 
-    <script src='https://www.google.com/recaptcha/api.js?hl=es'></script>
     <div class="g-recaptcha" data-sitekey="6LdCCPMaAAAAAGknNFbHeXd8ZdYAYGTPUQD0GJMA"></div>
   
     <div class="row container">
@@ -93,3 +97,5 @@
   </form>
 
 </div>
+
+</body>
