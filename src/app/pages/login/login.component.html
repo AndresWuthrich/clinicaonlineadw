@@ -4,30 +4,30 @@
 
 <body class="body text-center">
 
-    <div>
+    <div class="col-md-6">
       <!-- <div  *ngIf="!(auth.usuario | async)"> CON ESTO NO ANDA-->
         <!-- <form class="form-signin"> -->
       <!-- <img class="mb-4" src="./assets/imagenes/loginadw.jpg " alt="" width="72" height="72"> -->
       <h1 class="h3 mb-3 font-weight-normal">Iniciar sesión</h1>
       
       <div class="row justify-content-around form">
-        <div class= "col-12">
+        <div class= "col-8">
           <label for="inputEmail" class="sr-only">Email</label>
           <input type="email" id="inputEmail" class="form-control" [(ngModel)]="email" placeholder="Email" required autofocus>
         </div>
-      </div>
-  
-      <div class= "col-12">
-        <label for="inputPassword" class="sr-only">Contraseña</label>
-        <input type="password" id="inputPassword" class="form-control" [(ngModel)]="password" placeholder="Contraseña" required>
-        <div class="checkbox mb-3">
-          <label>
-            <input type="checkbox" value="remember-me"> Recordar mis datos
-          </label>
+
+        <div class= "col-8">
+          <label for="inputPassword" class="sr-only">Contraseña</label>
+          <input type="password" id="inputPassword" class="form-control" [(ngModel)]="password" placeholder="Contraseña" required>
+          <div class="checkbox mb-3">
+            <label>
+              <input type="checkbox" value="remember-me"> Recordar mis datos
+            </label>
+          </div>
         </div>
       </div>
   
-      <div>
+      <div class="justify-content-around form">
         <button class="btn btn-lg btn-primary" [disabled]="loading" type="submit" style="margin: 5px" (click)="Ingresar()">
           <!-- <img width="24px" src="../../../assets/imagenes/adn.gif" /> -->
           <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
@@ -35,33 +35,28 @@
         </button>
         
         <button class="btn btn-lg btn-danger" style="margin: 5px" routerLink="/">Cancelar</button>
-        <br>
+    
         <button class="btn btn-lg btn-success" type="submit" style="margin: 5px" routerLink="/registro">Registrarse</button>
-
       </div>
     </div>
-    <div>
 
-      <div class= "col-1">
+    <div class="col-md-6">
+      <div>
         <button class="btn btn-lg btn-warning" (click)="Autocompletar()">Test</button>
       </div>
 
       <div class="row g-4" *ngIf="autocompletar=='si'">
         <h4 class="mb-1">Usuarios</h4>
-        <!-- <div class="actorPrincipal" *ngIf="banderaActorSeleccionado">
-            <h6 class="mb-5"> Seleccione uno o varios actores de la lista de la derecha</h6>
-        </div>
-        <div class="col-md-12 mb-4" *ngIf="listaActoresSeleccionados.length"> -->
-            <ul class="list-group mb-5 card-body overflow-auto" id="boxConScroll" style="height: 200px;"
+
+            <ul class="overflow-auto" id="boxConScroll" style="height: 300px;"
                 #scrollMe [scrollTop]="scrollMe">
-                <li type="text" class="list-group-item d-flex justify-content-between lh-condensed elegido"
+                <li type="text" class="list-group-item d-flex justify-content"
                     *ngFor="let usuario of listaUsuariosAccesoRapido" disable>
 
                     <input type="text" class="form-control" value="{{usuario.especialidad}} {{usuario.apellido}} {{usuario.nombre}}"disabled>
                     <button class="btn" (click)="cargarUsuariosAccesoRapido(usuario.email)"><img src="{{usuario.imagenPerfil}}"/></button>
                 </li>
             </ul>
-        <!-- </div> -->
       </div>
     </div>
     <!-- </form> -->

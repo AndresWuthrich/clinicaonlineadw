@@ -16,8 +16,10 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { UsuarioComponent } from './pages/usuario/usuario.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { PerfilDirective } from './directivas/perfil.directive';
-import { PerfilComponent } from './pages/perfil/perfil.component';
 import { TurnoComponent } from './pages/turno/turno.component';
+import { EnvioEmailComponent } from './pages/envio-email/envio-email.component';
+import { MiPerfilComponent } from './pages/mi-perfil/mi-perfil.component';
+import { SolicitarTurnoComponent } from './pages/solicitar-turno/solicitar-turno.component';
 
 @NgModule({
   declarations: [
@@ -29,8 +31,10 @@ import { TurnoComponent } from './pages/turno/turno.component';
     UsuarioComponent,
     PageNotFoundComponent,
     PerfilDirective,
-    PerfilComponent,
-    TurnoComponent
+    TurnoComponent,
+    EnvioEmailComponent,
+    MiPerfilComponent,
+    SolicitarTurnoComponent
   ],
   imports: [
     BrowserModule,

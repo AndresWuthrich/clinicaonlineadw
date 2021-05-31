@@ -1,3 +1,5 @@
+import { Especialidad } from "./especialidad";
+
 export class Usuario {
     nombre: string = '';
     apellido: string = '';
@@ -10,5 +12,7 @@ export class Usuario {
     imagenPerfil2?: string = '';
     uid?: string = '';
     obraSocial?: string = '';
-    especialidad?: string = '';
+    // especialidad?: string = '';
+    especialidad?: Array<Especialidad>;
+    cuentaAprobada?: boolean = false;
 }

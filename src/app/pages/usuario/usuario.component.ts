@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Usuario } from 'src/app/clases/usuario';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-usuario',
@@ -12,13 +13,6 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 })
 export class UsuarioComponent implements OnInit {
 
-//   constructor() { }
-
-//   ngOnInit(): void {
-//   }
-
-// }
-
   // email: string = '';
   // password: string = '';
   public signup: boolean;
@@ -26,12 +20,14 @@ export class UsuarioComponent implements OnInit {
   public condicion: boolean = false;
   public perfil: string = '';
   private imagenPerfil: any;
-
+  
   private dbpath = '/usuarios';
 
   usuarioIngresado: any;
   
   public formAdmin: FormGroup;
+  public listaUsuariosEspecialistas: Usuario[] = [];
+  public usuarioAlta: Usuario = new Usuario();
 
   constructor(private fb: FormBuilder, private usuarioService: UsuarioService, private router: Router, public auth: AuthService) {
     // this.usuarioIngresado = this.authService.usuario;
@@ -53,30 +49,21 @@ export class UsuarioComponent implements OnInit {
       // 'especialidad':['', Validators.required],          
     });
 
+    this.usuarioService.traerEspecialistas().subscribe((usuarios: Usuario[]) => {
+      console.log(usuarios);
+      this.listaUsuariosEspecialistas = usuarios;
+    });
+
   }
 
   ngOnInit(): void {
   }
 
-  // public aceptar(): void {
-  //   console.log(this.formGroup.getRawValue());
-  // }
-  // Registro(){
-  //   this.signup = true;
-
-  //   setTimeout(() => {
-  //     this.signup = false;
-  //   }, 3000);
-
-  //   this.auth.Registro(this.email, this.password);
-  //   this.email = this.password = '';
-  // }
-
   elegirPerfil(perfil: string){
     this.perfil = perfil;
   }
 
-  registro(){
+  async registro(){
     console.log(this.formAdmin.getRawValue());
 
     const { email, password } = this.formAdmin.value;
@@ -87,58 +74,59 @@ export class UsuarioComponent implements OnInit {
       this.signup = false;
     }, 3000);
 
-    // var nombre = this.formRegistro.controls['nombre'].value;
-    // var apellido = this.formRegistro.controls['apellido'].value;
-    // var edad = this.formRegistro.controls['edad'].value;
-    // var dni = this.formRegistro.controls['dni'].value;
-    // // var perfil = this.formRegistro.controls['perfil'].value;
-    // var email2 = this.formRegistro.controls['email'].value;
-    // var password2 = this.formRegistro.controls['password'].value;
-    // var imagen = this.formRegistro.controls['imagen'].value;
-    // var imagen2 = this.formRegistro.controls['imagen2'].value;
-    // var obraSocial = this.formRegistro.controls['obraSocial'].value;
-    // var especialidad = this.formRegistro.controls['especialidad'].value;
 
-    // this.auth.Registro(this.email, this.password);
-    this.auth.Registro(email, password);
+    this.auth.Registro(email, password);//.then(value => { console.log(value?.user?.uid)});
+    console.log(this.auth.usuario.uid);
 
-    if(this.perfil=='paciente'){
-      let usuario: Usuario = {
-        nombre: this.formAdmin.controls['nombre'].value,
-        apellido: this.formAdmin.controls['apellido'].value,
-        edad: this.formAdmin.controls['edad'].value,
-        dni: this.formAdmin.controls['dni'].value,
-        perfil: this.perfil,
-        email: this.formAdmin.controls['email'].value,
-        password: this.formAdmin.controls['password'].value,
-        imagenPerfil: this.formAdmin.controls['imagen'].value,
-        imagenPerfil2: this.formAdmin.controls['imagen2'].value,
-        obraSocial: this.formAdmin.controls['obraSocial'].value,
-      }
-
-      this.imagenPerfil = this.formAdmin.controls['imagen'].value;
-      // this.usuarioService.agregarUsuario(nombre, apellido, edad, dni, this.perfil, email2, password2, imagen, imagen2, obraSocial, especialidad)
-      // this.usuarioService.agregarUsuario(usuario).finally(()=>{"exito"});
-      // this.email = this.password = '';
-    } else {
-      let usuario: Usuario = {
-        nombre: this.formAdmin.controls['nombre'].value,
-        apellido: this.formAdmin.controls['apellido'].value,
-        edad: this.formAdmin.controls['edad'].value,
-        dni: this.formAdmin.controls['dni'].value,
-        perfil: this.perfil,
-        email: this.formAdmin.controls['email'].value,
-        password: this.formAdmin.controls['password'].value,
-        imagenPerfil: this.formAdmin.controls['imagen'].value,
-        especialidad: this.formAdmin.controls['especialidad'].value,
-      }
-      this.imagenPerfil = this.formAdmin.controls['imagen'].value;
-
-      console.log(this.imagenPerfil);
-      // this.usuarioService.agregarUsuario(usuario).finally(()=>{"exito"});
-      this.usuarioService.agregarEspecialista(this.imagenPerfil, usuario);
-      // this.email = this.password = '';
+    try{  
+      this.usuarioAlta.nombre = this.formAdmin.controls['nombre'].value;
+      this.usuarioAlta.apellido = this.formAdmin.controls['apellido'].value;
+      this.usuarioAlta.edad = this.formAdmin.controls['edad'].value;
+      this.usuarioAlta.dni = this.formAdmin.controls['dni'].value;
+      this.usuarioAlta.perfil = "administrador";// this.perfil;
+      this.usuarioAlta.email = this.formAdmin.controls['email'].value;
+      this.usuarioAlta.password = this.formAdmin.controls['password'].value;
+      this.usuarioAlta.imagenPerfil = this.formAdmin.controls['imagen'].value;
+      this.usuarioAlta.uid = this.auth.usuario.uid;
+      this.usuarioAlta.cuentaAprobada = true;
+  
+        // console.log(this.imagenPerfil);
+      this.usuarioService.agregarEspecialista(this.imagenPerfil, this.usuarioAlta);
+        // this.email = this.password = '';
+      // this.router.navigate(['verificacion-email']);
+      // this.router.navigate(['bienvenido']);
+      Swal.fire({
+        title: 'Alta exitosa de administrador'
+      });
     }
-    this.router.navigate(['bienvenido']);
+    catch(error){
+      Swal.fire({
+        title: error.code,
+        text: error.message
+      });
+    }
+  }
+
+  cargarImagen(event: any): void {
+    this.imagenPerfil = event.target.files[0];
+    console.log(this.imagenPerfil);
+  }
+
+  async aprobarUsuario(usuario: Usuario){
+    usuario.cuentaAprobada = true;
+    // var uidUsuario = await this.usuarioService.obtenerKeyUsuario(usuario);
+    // console.log(uidUsuario);
+    // if (uidUsuario != null) {
+    //   this.usuarioService.updateAprovadoPorAdmin(uidUsuario, usuario);
+    // }
+  }
+
+  async desaprobarUsuario(usuario: Usuario){
+    usuario.cuentaAprobada = false;
+    // var uidUsuario = await this.usuarioService.obtenerKeyUsuario(usuario);
+    // console.log(uidUsuario);
+    // if (uidUsuario != null) {
+    //   this.usuarioService.updateAprovadoPorAdmin(uidUsuario, usuario);
+    // }
   }
 }

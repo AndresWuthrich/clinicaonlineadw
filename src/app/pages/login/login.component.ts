@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Usuario } from 'src/app/clases/usuario';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
@@ -17,21 +18,55 @@ export class LoginComponent implements OnInit {
   public listaUsuariosAccesoRapido: Usuario[] = [];
   public autocompletar: string = '';
 
-  constructor(private usuarioService: UsuarioService, public auth: AuthService) {
+  constructor(private usuarioService: UsuarioService, public auth: AuthService, private router: Router) {
     this.loading = false;
    }
 
   ngOnInit(): void {
   }
 
-  Ingresar(){
+  async Ingresar(){
     this.loading = true;
 
     setTimeout(() => {
       this.loading = false;
     }, 3000);
 
-    this.auth.Ingresar(this.email, this.password);
+    try{
+      const usuarioLogin = await this.auth.Ingresar(this.email, this.password);
+    //   if (usuarioLogin && usuarioLogin.user?.emailVerified){
+    //     console.log('USER', usuarioLogin);
+    //     this.router.navigate(['bienvenido']);
+    //   }else if (usuarioLogin && usuarioLogin.user?.emailVerified==false){
+    //     this.router.navigate(['verificacion-email']);
+    //   } else {
+    //     this.router.navigate(['registro']);    
+    //   } 
+
+    //   this.usuarioService.traerTodos().subscribe((usuarios: Usuario[]) => {
+    //     console.log(usuarios);
+    //     usuarios.forEach(usuario => {
+
+    //     })
+    //   });
+  
+  
+
+      if (usuarioLogin && usuarioLogin.user?.emailVerified){
+        console.log('USER', usuarioLogin);
+        this.router.navigate(['bienvenido']);
+      }else if (usuarioLogin && usuarioLogin.user?.emailVerified==false){
+        this.router.navigate(['verificacion-email']);
+      } else {
+        this.router.navigate(['registro']);    
+      } 
+
+
+
+    }catch (error){
+    console.log('error');
+    }
+
     // this.email=this.password="";
 
     // if(this.auth.errorLogin){

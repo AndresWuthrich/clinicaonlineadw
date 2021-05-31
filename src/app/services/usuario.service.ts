@@ -92,6 +92,12 @@ export class UsuarioService {
 
   }
 
+  traerEspecialistas(){
+    return this.usuarios.pipe(map(value => { return value.filter(user => { return user.perfil == "especialista";
+  });
+  }));
+  }
+
   traerTodos(){
     return this.usuarios;
   }

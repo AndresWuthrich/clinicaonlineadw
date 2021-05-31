@@ -26,10 +26,15 @@ export class AuthService {
     });
    }
 
-  Registro(email: string, password: string){
+  async sendVerificationEmail():Promise<void>{
+    return (await this.fireStoreAuth.currentUser)?.sendEmailVerification();
+  }
+
+  async  Registro(email: string, password: string){
     this.fireStoreAuth.createUserWithEmailAndPassword(email, password)
     .then(value => {
       console.log('Registro exitoso');
+      this.sendVerificationEmail();
       // this.router.navigate(['bienvenido']);
     })
     .catch(error =>  {
@@ -44,25 +49,51 @@ export class AuthService {
     });
   }
 
-  Ingresar(email: string, password: string){
-    this.fireStoreAuth
-    .signInWithEmailAndPassword(email, password)
-    .then(value =>{
-      console.log("Ingreso exitoso");
+  async Ingresar(email: string, password: string){
+  //    this.fireStoreAuth
+  //   .signInWithEmailAndPassword(email, password)
+  //   .then(value =>{
+  //     console.log("Ingreso exitoso");
+      
+  //     // this.router.navigate(['bienvenido']);
+  //   })
+  //   .catch(error =>  {
+  //     this.errorLogin = error.message;
 
-      this.router.navigate(['bienvenido']);
-    })
-    .catch(error =>  {
-      this.errorLogin = error.message;
-
-      Swal.fire({
-        title: error.code,
-        text: error.message
-      });
-
-      // this.router.navigate(['error']);
-    });
+  //     Swal.fire({
+  //       title: error.code,
+  //       text: error.message
+  //     });
+  //   });
+  // }
+  
+  try{
+  const resultado = await this.fireStoreAuth
+  .signInWithEmailAndPassword(email, password);
+  // .then(value =>{
+  //   console.log("Ingreso exitoso");
+    
+  //   // this.router.navigate(['bienvenido']);
+  // })
+    
+  if(resultado.user?.emailVerified==false){
+    console.log('Envio de verificacion exitoso');
+    this.sendVerificationEmail();
   }
+  
+  return resultado;
+  }catch(error)  {
+  // //   this.errorLogin = error.message;
+     console.log(error);
+
+    Swal.fire({
+      title: error.code,
+      text: error.message
+    });
+  return error;
+  //   // this.router.navigate(['error']);
+  } 
+}
 
   Logout(){
     this.fireStoreAuth.signOut();

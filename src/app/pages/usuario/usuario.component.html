@@ -1,114 +1,121 @@
 <app-navbar></app-navbar>
 <!-- <br>< br> -->
-<p>usuario works!</p>
 
 <!-- <button class="btn btn-primary" (click)="condicion = condicion">Paciente</button>
 <button class="btn btn-primary" (click)="condicion = !condicion">Especialista</button> -->
 <!-- <button class="btn btn-primary button" (click)="elegirPerfil('paciente')" *ngIf="perfil!='paciente' && perfil!='especialista'">Paciente</button>
 <button class="btn btn-primary button" (click)="elegirPerfil('especialista')" *ngIf="perfil!='paciente' && perfil!='especialista'">Especialista</button> -->
+<div class="row">
+  <!-- <div class="col-md-4 mx-auto mt-4"> -->
 
-<div class="container">
-  <!-- <form class="form" [formGroup]="formAdmin" (ngSubmit)="registroAdmin()" *ngIf="perfil=='paciente' || perfil=='especialista'"> -->
-  <form class="form" [formGroup]="formAdmin" (ngSubmit)="registro()">
-      <div class="row">
-      <div class="col-md-12 mb-5">
-        <h2>Registro Admin</h2>
+  <div class="col-md-5">
+    <div class="card">
+        <div class="card-body">
+
+          <!-- <form class="form" [formGroup]="formAdmin" (ngSubmit)="registroAdmin()" *ngIf="perfil=='paciente' || perfil=='especialista'"> -->
+        <form class="form" [formGroup]="formAdmin" (ngSubmit)="registro()">
+            <div class="row">
+            <div class="col-md-12 mb-5">
+              <h2>Registro Admin</h2>
+            </div>
+          </div>
+          <div class="row formulario">
+            <div class="col-md-6 mb-2">
+              <label for="nombre" class="form-label">Nombre</label>
+              <input type="text" class="form-control" id="nombre" placeholder="Ingrese nombre" formControlName='nombre'>
+              <small class="invalid" *ngIf="formAdmin.get('nombre')?.errors?.required && formAdmin.get('nombre')?.touched">El nombre es requerido</small>
+            </div>
+            <div class="col-md-6 mb-2">
+              <label for="apellido" class="form-label">Apellido</label>
+              <input type="text" class="form-control" id="apellido" placeholder="Ingrese apellido" formControlName='apellido'>
+              <small class="invalid" *ngIf="formAdmin.get('apellido')?.errors?.required && formAdmin.get('apellido')?.touched">El apellido es requerido</small>
+            </div>
+            <div class="col-md-6 mb-2">
+              <label for="edad" class="form-label">Edad</label>
+              <input type="number" class="form-control" id="edad" placeholder="Ingrese edad" formControlName='edad'>
+              <small class="invalid" *ngIf="formAdmin.get('edad')?.errors?.required && formAdmin.get('edad')?.touched">La edad es requerida</small>
+              <small class="invalid" *ngIf="formAdmin.get('edad')?.errors?.min || formAdmin.get('edad')?.errors?.max && formAdmin.get('edad')?.touched ">La edad debe ser entre 18 a 99 años</small>
+            </div>
+
+            <div class="col-md-6 mb-2">
+              <label for="dni" class="form-label">DNI</label>
+              <input type="number" class="form-control" id="dni" placeholder="Ingrese dni" formControlName='dni'>
+              <small class="invalid" *ngIf="formAdmin.get('dni')?.errors?.required && formAdmin.get('dni')?.touched">El dni es requerido</small>
+              <small class="invalid" *ngIf="formAdmin.get('dni')?.errors?.min && formAdmin.get('dni')?.touched">El dni debe ser mayor a 1.000.000</small>
+            </div>
+
+            <div class="col-md-12 mb-2">
+              <label for="email" class="form-label">Email</label>
+              <input type="email" class="form-control" id="email" placeholder="Ingrese email" formControlName='email'>
+              <small class="invalid" *ngIf="formAdmin.get('email')?.errors?.required && formAdmin.get('email')?.touched">El email es requerido</small>
+            </div>
+            <div class="col-md-12 mb-2">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control" id="password" placeholder="Ingrese password" formControlName='password'>
+              <small class="invalid" *ngIf="formAdmin.get('password')?.errors?.required && formAdmin.get('password')?.touched">La password es requerida</small>
+              <small class="invalid" *ngIf="formAdmin.get('password')?.errors?.minLength && formAdmin.get('password')?.touched">La password debe tener mínimo 6 caracteres</small>
+            </div>
+
+            <div class="col-md-12 mb-2">
+              <label for="imagen" class="form-label">Imagen de perfil</label>
+              <input type="file" class="form-control" id="imagen" placeholder="Ingrese imagen de perfil" formControlName='imagen' (change)="cargarImagen($event)">
+              <small class="invalid" *ngIf="formAdmin.get('imagen')?.errors?.required && formAdmin.get('imagen')?.touched">La imagen de perfil es requerida</small>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12 d-grid gap-2">
+              <!-- <button type="submit" class="btn btn-primary btn-block" [disabled]="signup"  [disabled]='formRegistro.invalid'> -->
+              <button type="submit" class="btn btn-primary btn-block" [disabled]="signup">
+                  <span *ngIf="signup" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                Registro
+              </button>
+            </div>
+            <div class="col-md-12 d-grid gap-2">
+              <button class="btn btn-danger btn-block" routerLink="/">Me arrepentí</button>
+            </div>
+          </div>
+        </form>
       </div>
     </div>
-    <div class="row formulario">
-      <div class="col-md-6 mb-2">
-        <label for="nombre" class="form-label">Nombre</label>
-        <input type="text" class="form-control" id="nombre" placeholder="Ingrese nombre" formControlName='nombre'>
-        <small class="invalid" *ngIf="formAdmin.get('nombre')?.errors?.required && formAdmin.get('nombre')?.touched">El nombre es requerido</small>
-      </div>
-      <div class="col-md-6 mb-2">
-        <label for="apellido" class="form-label">Apellido</label>
-        <input type="text" class="form-control" id="apellido" placeholder="Ingrese apellido" formControlName='apellido'>
-        <small class="invalid" *ngIf="formAdmin.get('apellido')?.errors?.required && formAdmin.get('apellido')?.touched">El apellido es requerido</small>
-      </div>
-      <div class="col-md-6 mb-2">
-        <label for="edad" class="form-label">Edad</label>
-        <input type="number" class="form-control" id="edad" placeholder="Ingrese edad" formControlName='edad'>
-        <small class="invalid" *ngIf="formAdmin.get('edad')?.errors?.required && formAdmin.get('edad')?.touched">La edad es requerida</small>
-        <small class="invalid" *ngIf="formAdmin.get('edad')?.errors?.min || formAdmin.get('edad')?.errors?.max && formAdmin.get('edad')?.touched ">La edad debe ser entre 18 a 99 años</small>
-      </div>
-      <!-- <div class="col-md-6 mb-3">
-        <label for="sexo" class="form-label">Sexo</label>
-        <select class="form-select" id="sexo" formControlName='sexo'>
-          <option value="">Seleccione uno</option>
-          <option value="F">Femenino</option>
-          <option value="M">Masculino</option>
-        </select>
-        <small class="invalid" *ngIf="formGroup.get('sexo')?.errors?.required">El sexo es requerido</small>
-      </div> -->
-      <div class="col-md-6 mb-2">
-        <label for="dni" class="form-label">DNI</label>
-        <input type="number" class="form-control" id="dni" placeholder="Ingrese dni" formControlName='dni'>
-        <small class="invalid" *ngIf="formAdmin.get('dni')?.errors?.required && formAdmin.get('dni')?.touched">El dni es requerido</small>
-        <small class="invalid" *ngIf="formAdmin.get('dni')?.errors?.min && formAdmin.get('dni')?.touched">El dni debe ser mayor a 1.000.000</small>
-      </div>
 
-      <!-- <div class="col-md-6 mb-3" *appPerfil="condicion"> -->
-        <!-- <div class="col-md-12 mb-5"> -->
-      <!-- <div class="col-md-12 mb-2" *ngIf="perfil=='paciente'">
-        <label for="obraSocial" class="form-label">Obra social</label>
-        <input type="text" class="form-control" id="obraSocial" placeholder="Ingrese obra social" formControlName='obraSocial'>
-        <small class="invalid" *ngIf="formRegistro.get('obraSocial')?.errors?.required && formRegistro.get('obraSocial')?.touched">La obra social es requerida</small>
-      </div> -->
 
-      <!-- <div class="col-md-12 mb-5"> -->
-      <!-- <div class="col-md-12 mb-2" *ngIf="perfil=='especialista'"> -->
-      <!-- <div class="col-md-6 mb-3" *appPerfil="!condicion"> -->
-        <!-- <label for="especialidad" class="form-label">Especialidad</label>
-        <input type="text" class="form-control" id="especialidad" placeholder="Ingrese especialidad" formControlName='especialidad'>
-        <small class="invalid" *ngIf="formRegistro.get('especialidad')?.errors?.required && formRegistro.get('especialidad')?.touched">La especialidad es requerida</small>
-      </div> -->
+    <div class="col-md-8 col-lg-8 order-md-last" id="box">
+      <div class="card">
+          <div class="card-body">
+              <h2 class="mb-3 mt-3">Listado de Usuarios ESPECIALISTAS</h2>
+              <table class="table table-hover">
+                  <thead>
+                      <tr>
+                          <th scope="col">Nombre</th>
+                          <th scope="col">Apellido</th>
+                          <th scope="col">Email</th>
+                          <th scope="col">Perfil</th>
+                          <th scope="col">Estado Actual</th>
+                          <th scope="col">Aprobar</th>
+                          <th scope="col">Rechazar</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let usuario of listaUsuariosEspecialistas ">
+                          <td>{{usuario.nombre}}</td>
+                          <td>{{usuario.apellido}}</td>
+                          <td>{{usuario.email}}</td>
+                          <td>{{usuario.perfil}}</td>
+                          <td>{{usuario.cuentaAprobada}}</td>
+                          <td><button class="btn btn-success" *ngIf="usuario.perfil=='especialista'"
+                                  (click)="aprobarUsuario(usuario)">Aprobar</button></td>
+                          <td><button class="btn btn-danger" *ngIf="usuario.perfil=='especialista'"
+                                  (click)="desaprobarUsuario(usuario)">Desaprobar</button></td>
 
-      <div class="col-md-12 mb-2">
-        <label for="email" class="form-label">Email</label>
-        <input type="email" class="form-control" id="email" placeholder="Ingrese email" formControlName='email'>
-        <small class="invalid" *ngIf="formAdmin.get('email')?.errors?.required && formAdmin.get('email')?.touched">El email es requerido</small>
-      </div>
-      <div class="col-md-12 mb-2">
-        <label for="password" class="form-label">Password</label>
-        <input type="password" class="form-control" id="password" placeholder="Ingrese password" formControlName='password'>
-        <small class="invalid" *ngIf="formAdmin.get('password')?.errors?.required && formAdmin.get('password')?.touched">La password es requerida</small>
-        <small class="invalid" *ngIf="formAdmin.get('password')?.errors?.minLength && formAdmin.get('password')?.touched">La password debe tener mínimo 6 caracteres</small>
-      </div>
+                          <td *ngIf="usuario.perfil != 'especialista'"></td>
+                          <td *ngIf="usuario.perfil != 'especialista'"></td>
 
-      <div class="col-md-12 mb-2">
-        <label for="imagen" class="form-label">Imagen de perfil</label>
-        <input type="text" class="form-control" id="imagen" placeholder="Ingrese imagen de perfil" formControlName='imagen'>
-        <small class="invalid" *ngIf="formAdmin.get('imagen')?.errors?.required && formAdmin.get('imagen')?.touched">La imagen de perfil es requerida</small>
+                      </tr>
+                  </tbody>
+              </table>
+          </div>
       </div>
-      <!-- <div class="col-md-12 mb-5"> -->
-      <!-- <div class="col-md-12 mb-2" *ngIf="perfil=='paciente'"> -->
-      <!-- <div class="col-md-12 mb-5" *appPerfil="condicion"> -->
-        <!-- <label for="imagen2" class="form-label">2da imagen de perfil</label>
-        <input type="text" class="form-control" id="imagen2" placeholder="Ingrese 2da imagen de perfil" formControlName='imagen2'>
-        <small class="invalid" *ngIf="formRegistro.get('imagen2')?.errors?.required && formRegistro.get('imagen2')?.touched">La 2da imagen de perfil es requerida</small>
-      </div> -->
+  </div>
+</div>
 
-    </div>
-    <div class="row">
-      <!-- <div class="col-md-12 mb-5">
-        <div class="form-check">
-          <input type="checkbox" class="form-check-input" id="terminos">
-          <label for="recordar" class="form-check-label" for="terminos">
-            Aceptar términos y condiciones
-          </label>
-        </div>
-      </div> -->
-      <div class="col-md-12 d-grid gap-2">
-        <!-- <button type="submit" class="btn btn-primary btn-block" [disabled]="signup"  [disabled]='formRegistro.invalid'> -->
-        <button type="submit" class="btn btn-primary btn-block" [disabled]="signup">
-            <span *ngIf="signup" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
-          Registro
-        </button>
-      </div>
-      <div class="col-md-12 d-grid gap-2">
-        <button class="btn btn-danger btn-block" routerLink="/">Me arrepentí</button>
-      </div>
-    </div>
-  </form>
 </div>
