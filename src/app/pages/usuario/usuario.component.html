@@ -103,13 +103,12 @@
                           <td>{{usuario.perfil}}</td>
                           <td>{{usuario.cuentaAprobada}}</td>
                           <td><button class="btn btn-success" *ngIf="usuario.perfil=='especialista'"
-                                  (click)="aprobarUsuario(usuario)">Aprobar</button></td>
+                                  (click)="aprobarUsuario(usuario, true)">Aprobar</button></td>
                           <td><button class="btn btn-danger" *ngIf="usuario.perfil=='especialista'"
-                                  (click)="desaprobarUsuario(usuario)">Desaprobar</button></td>
+                                  (click)="aprobarUsuario(usuario, false)">Desaprobar</button></td>
 
                           <td *ngIf="usuario.perfil != 'especialista'"></td>
                           <td *ngIf="usuario.perfil != 'especialista'"></td>
-
                       </tr>
                   </tbody>
               </table>

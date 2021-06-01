@@ -112,21 +112,13 @@ export class UsuarioComponent implements OnInit {
     console.log(this.imagenPerfil);
   }
 
-  async aprobarUsuario(usuario: Usuario){
-    usuario.cuentaAprobada = true;
-    // var uidUsuario = await this.usuarioService.obtenerKeyUsuario(usuario);
-    // console.log(uidUsuario);
-    // if (uidUsuario != null) {
-    //   this.usuarioService.updateAprovadoPorAdmin(uidUsuario, usuario);
-    // }
-  }
-
-  async desaprobarUsuario(usuario: Usuario){
-    usuario.cuentaAprobada = false;
-    // var uidUsuario = await this.usuarioService.obtenerKeyUsuario(usuario);
-    // console.log(uidUsuario);
-    // if (uidUsuario != null) {
-    //   this.usuarioService.updateAprovadoPorAdmin(uidUsuario, usuario);
-    // }
+  async aprobarUsuario(usuario: Usuario, aprobar: boolean){
+    usuario.cuentaAprobada = aprobar;
+    console.log(aprobar);
+    var documentoUsuario = await this.usuarioService.obtenerDocumentoUsuario(usuario);
+    console.log(documentoUsuario);
+    if (documentoUsuario != null) {
+        this.usuarioService.actualizarCuentaAprobada(documentoUsuario, usuario.cuentaAprobada);
+    }
   }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-// import * as firebase from 'firebase/app';
+import { first} from 'rxjs/operators';
 
 import { AngularFireAuth } from '@angular/fire/auth';
 import { Observable } from 'rxjs/internal/Observable';
@@ -99,4 +99,9 @@ export class AuthService {
     this.fireStoreAuth.signOut();
     this.router.navigate(['login']);
   }
+
+  obtenerUsuarioActual() {
+    return this.fireStoreAuth.authState.pipe(first()).toPromise();
+  }  
 }
+

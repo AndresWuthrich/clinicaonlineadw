@@ -6,7 +6,8 @@ import { Usuario } from '../clases/usuario';
 import { AuthService } from './auth.service';
 import { finalize } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
-
+import Swal from 'sweetalert2';
+import { resolve } from '@angular/compiler-cli/src/ngtsc/file_system';
 
 @Injectable({
   providedIn: 'root'
@@ -100,5 +101,41 @@ export class UsuarioService {
 
   traerTodos(){
     return this.usuarios;
+  }
+
+  async obtenerDocumentoUsuario(user: Usuario) {
+    var value = await this.afs.collection(this.dbPath).ref.where('email', '==', user.email).get();
+    if (value.docs[0].exists) {
+      return value.docs[0].id;
+    }
+    else {
+      return null;
+    }
+  }
+
+  async obtenerUsuarioPorEmail(email: string) {
+    return new Promise((resolve, reject) => {this.afs.collection(this.dbPath).get().subscribe((querySnapshot) => {
+      let doc = querySnapshot.docs.find(doc => (doc.data() as Usuario).email == email);
+      resolve(doc?.data());
+      console.log(doc);
+    })
+    });
+  }
+
+  async actualizarCuentaAprobada(documento: any, aprobar: boolean){
+    var usuario = this.afs.collection(this.dbPath).doc(documento);
+
+    return usuario.update({
+      cuentaAprobada: aprobar
+    }).then(() => {
+      Swal.fire({
+        title: 'Cambio de estado exitoso'
+      });
+    }).catch((error) => {
+      Swal.fire({
+        title: error.code,
+        text: error.message
+      });
+    });
   }
 }
