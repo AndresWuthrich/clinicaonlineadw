@@ -114,13 +114,13 @@
     </form>
   </div>
 
-  <div class="col-md-5 col-lg-4 order-md-last mt-5" id="box" *ngIf="perfil=='especialista'">
+  <div class="col-md-12" id="box" *ngIf="perfil=='especialista'">
     <div class="card">
         <div class="card-body">
             <h4 class="d-flex justify-content-between align-items-center mb-3" *ngIf="listaEspecialidades != null">
                 <h4>Lista de especialidades</h4>
             </h4>
-            <ul class="list-group mb-3 table-light">
+            <ul class="list-group mb-3">
                 <li class="list-group-item d-flex justify-content-between" *ngFor="let especialidad of listaEspecialidades"
                   (click)="agregarEspecialidad(especialidad)">
                     <div>
@@ -130,12 +130,15 @@
             </ul>
             <hr>
             <div>
-                <div class="form-group">
+                <div class="form-group col-md-5">
+                  <diV>
                     <label class="col-form-label" for="descripcionEspecialidad">Nueva especialidad</label>
                     <input type="text" class="form-control" id="descripcionEspecialidad" [(ngModel)]="descripcionEspecialidad"
                         name="descripcionEspecialidad" placeholder="Ingrese el nombre de la especialidad">
+
+                    <button type="button" class="btn btn-primary btn-block" (click)="agregarNuevaEspecialidad()">Agregar Especialidad</button>
+                  </diV>
                 </div>
-                <button type="button" class="btn btn-primary btn-block" (click)="agregarNuevaEspecialidad()">Agregar Especialidad</button>
             </div>
         </div>
     </div>
