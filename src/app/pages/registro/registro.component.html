@@ -2,8 +2,8 @@
 <html lang="en">
 <head>
 <!--  <script src='https://www.google.com/recaptcha/api.js?hl=es'></script> -->
-  <script src='https://www.google.com/recaptcha/api.js'></script>
-
+  <!-- <script src='https://www.google.com/recaptcha/api.js'></script> -->
+  <!-- <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script> -->
 </head>
 <body class="container">
   <button class="btn fotoPaciente" (click)="elegirPerfil('paciente')" *ngIf="perfil!='paciente' && perfil!='especialista'">Paciente</button>
@@ -97,7 +97,7 @@
         </div>
       </div>
 
-      <div class="g-recaptcha" data-sitekey="6LdCCPMaAAAAAGknNFbHeXd8ZdYAYGTPUQD0GJMA"></div>
+      <div class="g-recaptcha" data-sitekey="6LdCCPMaAAAAAGknNFbHeXd8ZdYAYGTPUQD0GJMA">CAPTCHA</div>
     
       <div class="row container">
         <div class="col-md-12 d-grid gap-2 container2">
@@ -119,28 +119,23 @@
         <div class="card-body">
             <h4 class="d-flex justify-content-between align-items-center mb-3" *ngIf="listaEspecialidades != null">
                 <h4>Lista de especialidades</h4>
-                <span class="badge bg-primary rounded-pill">{{listaEspecialidades.length}}</span>
             </h4>
             <ul class="list-group mb-3 table-light">
-                <li class="list-group-item d-flex justify-content-between lh-sm" *ngFor="let especialidad of listaEspecialidades"
+                <li class="list-group-item d-flex justify-content-between" *ngFor="let especialidad of listaEspecialidades"
                   (click)="agregarEspecialidad(especialidad)">
-                    <div class="marco">
-                        <h6 class="my-0 text-info"><b>{{especialidad.descripcion}} </b></h6>
+                    <div>
+                        <h6 class="text-info">{{especialidad.descripcion}}</h6>
                     </div>
                 </li>
             </ul>
-            <br>
             <hr>
             <div>
-                <h5 class="blanco">Nueva especialidad</h5>
                 <div class="form-group">
-                    <label class="col-form-label" for="descripcionEspecialidad">Nombre</label>
+                    <label class="col-form-label" for="descripcionEspecialidad">Nueva especialidad</label>
                     <input type="text" class="form-control" id="descripcionEspecialidad" [(ngModel)]="descripcionEspecialidad"
                         name="descripcionEspecialidad" placeholder="Ingrese el nombre de la especialidad">
                 </div>
                 <button type="button" class="btn btn-primary btn-block" (click)="agregarNuevaEspecialidad()">Agregar Especialidad</button>
-                <!--<small class="invalid" name="errorEspecialidad" [(ngModel)]="errorEspecialidad"
-                    ngDefaultControl>{{errorEspecialidad}}</small> -->
             </div>
         </div>
     </div>

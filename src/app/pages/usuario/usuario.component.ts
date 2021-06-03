@@ -4,7 +4,10 @@ import { Router } from '@angular/router';
 import { Usuario } from 'src/app/clases/usuario';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
+
 import Swal from 'sweetalert2';
+import { ExcelService } from 'src/app/services/excel.service';
+
 
 @Component({
   selector: 'app-usuario',
@@ -12,6 +15,34 @@ import Swal from 'sweetalert2';
   styleUrls: ['./usuario.component.css']
 })
 export class UsuarioComponent implements OnInit {
+
+  title = 'exportExcelInAngular';
+  dataOfFootballers: any = [{
+    playerName: 'Cristiano Ronaldo',
+    playerCountry: 'Pourtgal',
+    playerClub: 'Juventus'
+  },
+  {
+    playerName: 'Lionel Messi',
+    playerCountry: 'Argentina',
+    playerClub: 'Barcelona'
+  },
+  {
+    playerName: 'Neymar Junior',
+    playerCountry: 'Brazil',
+    playerClub: 'PSG'
+  },
+  {
+  playerName: 'Tonni Kroos',
+  playerCountry: 'Germany',
+  playerClub: 'Real Madrid'
+  },
+  {
+    playerName: 'Paul Pogba',
+    playerCountry: 'France',
+    playerClub: 'Manchester United'
+  }];
+
 
   // email: string = '';
   // password: string = '';
@@ -29,7 +60,7 @@ export class UsuarioComponent implements OnInit {
   public listaUsuariosEspecialistas: Usuario[] = [];
   public usuarioAlta: Usuario = new Usuario();
 
-  constructor(private fb: FormBuilder, private usuarioService: UsuarioService, private router: Router, public auth: AuthService) {
+  constructor(private fb: FormBuilder, private usuarioService: UsuarioService, private excelService: ExcelService, private router: Router, public auth: AuthService) {
     // this.usuarioIngresado = this.authService.usuario;
     this.signup = false;
     this.registroUp = false;
@@ -121,4 +152,13 @@ export class UsuarioComponent implements OnInit {
         this.usuarioService.actualizarCuentaAprobada(documentoUsuario, usuario.cuentaAprobada);
     }
   }
+
+  exportAsXLSX():void {
+    this.excelService.exportAsExcelFile(this.dataOfFootballers, 'footballer_data');
+  }
+
+  exportAsXLSXEspecialistas():void {
+    this.excelService.exportAsExcelFile(this.listaUsuariosEspecialistas, 'especialistas_data');
+  }
+
 }

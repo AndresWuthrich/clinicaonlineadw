@@ -20,6 +20,9 @@ import { TurnoComponent } from './pages/turno/turno.component';
 import { EnvioEmailComponent } from './pages/envio-email/envio-email.component';
 import { MiPerfilComponent } from './pages/mi-perfil/mi-perfil.component';
 import { SolicitarTurnoComponent } from './pages/solicitar-turno/solicitar-turno.component';
+// import { Ng2GoogleRecaptchaModule } from 'ng2-google-recaptcha';
+import { ExcelService } from './services/excel.service';
+
 
 @NgModule({
   declarations: [
@@ -42,9 +45,10 @@ import { SolicitarTurnoComponent } from './pages/solicitar-turno/solicitar-turno
     FormsModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    // Ng2GoogleRecaptchaModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, ExcelService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

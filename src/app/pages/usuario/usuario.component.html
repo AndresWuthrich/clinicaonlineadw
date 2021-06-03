@@ -8,7 +8,7 @@
 <div class="row">
   <!-- <div class="col-md-4 mx-auto mt-4"> -->
 
-  <div class="col-md-5">
+  <div class="col-md-10">
     <div class="card">
         <div class="card-body">
 
@@ -78,21 +78,24 @@
       </div>
     </div>
 
-
-    <div class="col-md-8 col-lg-8 order-md-last" id="box">
+    <button (click)="exportAsXLSXEspecialistas()">
+      <i class="fa fa-file-excel-o" style="font-size:48px;color:blue"></i></button>
+  
+    <div class="col-md-12 col-lg-12" id="box">
       <div class="card">
           <div class="card-body">
-              <h2 class="mb-3 mt-3">Listado de Usuarios ESPECIALISTAS</h2>
+              <h2>Especialistas</h2>
               <table class="table table-hover">
                   <thead>
                       <tr>
-                          <th scope="col">Nombre</th>
-                          <th scope="col">Apellido</th>
-                          <th scope="col">Email</th>
-                          <th scope="col">Perfil</th>
-                          <th scope="col">Estado Actual</th>
-                          <th scope="col">Aprobar</th>
-                          <th scope="col">Rechazar</th>
+                          <th>Nombre</th>
+                          <th>Apellido</th>
+                          <th>Email</th>
+                          <th>Perfil</th>
+                          <th>Especialidad</th>
+                          <th>Estado</th>
+                          <th>Aprobar</th>
+                          <th>Desaprobar</th>
                       </tr>
                   </thead>
                   <tbody>
@@ -101,6 +104,7 @@
                           <td>{{usuario.apellido}}</td>
                           <td>{{usuario.email}}</td>
                           <td>{{usuario.perfil}}</td>
+                          <td>{{usuario.especialidad}}</td>
                           <td>{{usuario.cuentaAprobada}}</td>
                           <td><button class="btn btn-success" *ngIf="usuario.perfil=='especialista'"
                                   (click)="aprobarUsuario(usuario, true)">Aprobar</button></td>
@@ -115,6 +119,26 @@
           </div>
       </div>
   </div>
-</div>
 
+  <!-- <b>Exporting footballer data in excel by clicking below button</b><br>
+  
+  <button (click)="exportAsXLSX()">
+    <i class="fa fa-file-excel-o" style="font-size:48px;color:blue"></i></button>
+    
+  <table class="table table-striped">
+    <tr>
+      <td><b>Player Name</b></td>
+      <td><b>Player Country</b></td>
+      <td><b>Player Club</b></td>
+    </tr>
+    <tbody>
+    <tr *ngFor="let item of dataOfFootballers">
+      <td>{{item.playerName}}</td>
+      <td>{{item.playerCountry}}</td>
+      <td>{{item.playerClub}}</td>
+    </tr>
+    </tbody>
+  </table> -->
+
+</div>
 </div>

@@ -9,10 +9,19 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 
 @Component({
   selector: 'app-registro',
+
+  // template: `<ng2-google-recaptcha
+  // [siteKey]="recaptchaSiteKey"
+  // (onCaptchaComplete)="onCaptchaComplete($event)">
+  // </ng2-google-recaptcha>`,
+
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.css']
 })
 export class RegistroComponent implements OnInit {
+
+  title = 'captcha-example';
+  private recaptchaSiteKey = '6LdCCPMaAAAAAGknNFbHeXd8ZdYAYGTPUQD0GJMA';
 
   // email: string = '';
   // password: string = '';
@@ -65,6 +74,14 @@ export class RegistroComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
+  private onCaptchaComplete(response: any) {
+  console.log('reCAPTCHA response recieved:');
+  console.log(response.success);
+  console.log(response.token);
+}
+
+
 
   elegirPerfil(perfil: string){
     this.perfil = perfil;
