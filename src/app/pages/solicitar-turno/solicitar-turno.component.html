@@ -2,3 +2,47 @@
 <!-- <br>< br> -->
 <p>solicitar-turno works!</p>
 
+<div class="row">
+<!-- <div class="row" *ngIf="usuarioRegistrado != null"> -->
+    <div class="col-md-9 mx-auto mt-4">
+    <!-- <div class="col-md-9 mx-auto mt-4" *ngIf="usuarioRegistrado.perfil=='paciente'"> -->
+        <div class="card">
+            <div class="card-body">
+                <h1 class="text-center mb-3">Solicitar Turno</h1>
+                <div class="row formulario">
+                    <div class="form-group col-md-6 mb-3">
+                        <h4 class="d-flex justify-content-between align-items-center mb-3"
+                            *ngIf="listaEspecialidades != null">
+                            <h4 class="text-primary text-center">Especialidades</h4>
+                        </h4>
+                        <ul class="list-group mb-3 ">
+                            <li class="list-group-item d-flex justify-content-between lh-sm especialidad"
+                                *ngFor="let especialidad of listaEspecialidades let i=index"
+                                (click)="clickEspecialidad(especialidad)">
+                                <div class="marco">
+                                    <h6 class="my-0 text-info">{{especialidad.descripcion}}</h6>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="form-group col-md-6 mb-3" *ngIf="especialidadSeleccionada != null">
+                        <!-- <div class="form-group col-md-6 mb-3" *ngIf="listaEspecialistasCalificados != null"> -->
+                        <h4 class="d-flex justify-content-between align-items-center mb-3"
+                            *ngIf="listaEspecialistasCalificados != null">
+                            <h4 class="text-primary text-center">Lista de medicos calificados</h4>
+                        </h4>
+                        <ul class="list-group mb-3 ">
+                            <li class="list-group-item d-flex justify-content-between lh-sm especialidad"
+                                *ngFor="let especialista of listaEspecialistasCalificados let i=index"
+                                (click)="clickEspecialista(especialista)">
+                                <div class="marco">
+                                    <h6 class="my-0 text-info">{{especialista.nombre}} {{especialista.apellido}}</h6>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

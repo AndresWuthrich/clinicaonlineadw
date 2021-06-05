@@ -8,8 +8,8 @@ export class Usuario {
     perfil: string = '';
     email: string = '';
     password: string = '';
-    imagenPerfil: string = '';
-    imagenPerfil2?: string = '';
+    imagenPerfil?: string;
+    imagenPerfil2?: string;
     uid?: string = '';
     obraSocial?: string = '';
     // especialidad?: string = '';

@@ -98,37 +98,41 @@ export class RegistroComponent implements OnInit {
       this.signup = false;
     }, 3000);
 
-    this.auth.Registro(email, password);//.then(value => { console.log(value?.user?.uid)});
-    console.log(this.auth.usuario.uid);
+    this.auth.Registro(email, password).then(value => { 
+      console.log(value?.user?.uid);
 
-    this.usuarioAlta.nombre = this.formRegistro.controls['nombre'].value;
-    this.usuarioAlta.apellido = this.formRegistro.controls['apellido'].value;
-    this.usuarioAlta.edad = this.formRegistro.controls['edad'].value;
-    this.usuarioAlta.dni = this.formRegistro.controls['dni'].value;
-    this.usuarioAlta.perfil = this.perfil;
-    this.usuarioAlta.email = this.formRegistro.controls['email'].value;
-    this.usuarioAlta.password = this.formRegistro.controls['password'].value;
-    this.usuarioAlta.imagenPerfil = this.formRegistro.controls['imagen'].value;
-    this.usuarioAlta.uid = this.auth.usuario.uid;
-
-    if(this.perfil=='paciente'){
-      this.usuarioAlta.imagenPerfil2 = this.formRegistro.controls['imagen2'].value;
-      this.usuarioAlta.obraSocial = this.formRegistro.controls['obraSocial'].value;
-      this.usuarioAlta.cuentaAprobada = true;
-      
-      // console.log(this.imagenPerfil);
-      this.usuarioService.agregarPaciente(this.imagenPerfil, this.imagenPerfil2, this.usuarioAlta);
-      // this.email = this.password = '';
-
-    } else {
-      this.usuarioAlta.especialidad = this.formRegistro.controls['especialidad'].value;
-      
-      // console.log(this.imagenPerfil);
-      this.usuarioService.agregarEspecialista(this.imagenPerfil, this.usuarioAlta);
-      // this.email = this.password = '';
-    }
-    this.router.navigate(['verificacion-email']);
-    // this.router.navigate(['bienvenido']);
+      this.usuarioAlta.nombre = this.formRegistro.controls['nombre'].value;
+      this.usuarioAlta.apellido = this.formRegistro.controls['apellido'].value;
+      this.usuarioAlta.edad = this.formRegistro.controls['edad'].value;
+      this.usuarioAlta.dni = this.formRegistro.controls['dni'].value;
+      this.usuarioAlta.perfil = this.perfil;
+      this.usuarioAlta.email = this.formRegistro.controls['email'].value;
+      this.usuarioAlta.password = this.formRegistro.controls['password'].value;
+      this.usuarioAlta.imagenPerfil = this.formRegistro.controls['imagen'].value;
+      // this.usuarioAlta.uid = this.auth.usuario.uid;
+      this.usuarioAlta.uid = value?.user?.uid;
+ 
+      if(this.perfil=='paciente'){
+        this.usuarioAlta.imagenPerfil2 = this.formRegistro.controls['imagen2'].value;
+        this.usuarioAlta.obraSocial = this.formRegistro.controls['obraSocial'].value;
+        this.usuarioAlta.cuentaAprobada = true;
+        
+        console.log(this.imagenPerfil);
+        console.log(this.imagenPerfil2);
+        this.usuarioService.agregarPaciente(this.imagenPerfil, this.imagenPerfil2, this.usuarioAlta);
+        // this.email = this.password = '';
+  
+      } else {
+        this.usuarioAlta.especialidad = this.formRegistro.controls['especialidad'].value;
+        
+        // console.log(this.imagenPerfil);
+        this.usuarioService.agregarEspecialista(this.imagenPerfil, this.usuarioAlta);
+        // this.email = this.password = '';
+      }
+      this.router.navigate(['verificacion-email']);
+      // this.router.navigate(['bienvenido']);
+      });
+    // console.log(this.auth.usuario.uid);
   }
 
   cargarImagen(event: any): void {

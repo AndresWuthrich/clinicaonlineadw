@@ -31,13 +31,15 @@ export class AuthService {
   }
 
   async  Registro(email: string, password: string){
-    this.fireStoreAuth.createUserWithEmailAndPassword(email, password)
-    .then(value => {
+    try{
+    const usuarioRegistrado = await this.fireStoreAuth.createUserWithEmailAndPassword(email, password);
+    // .then(value => {
       console.log('Registro exitoso');
       this.sendVerificationEmail();
       // this.router.navigate(['bienvenido']);
-    })
-    .catch(error =>  {
+      return usuarioRegistrado;
+    // })
+    } catch(error)  {
       //this.errorRegistro = error.message;
 
       Swal.fire({
@@ -45,8 +47,9 @@ export class AuthService {
         text: error.message
       });
 
+      return null;
       // this.router.navigate(['error']);
-    });
+    }
   }
 
   async Ingresar(email: string, password: string){

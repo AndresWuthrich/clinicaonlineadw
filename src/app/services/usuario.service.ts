@@ -38,26 +38,77 @@ export class UsuarioService {
   }
 
   agregarEspecialista(imagen: any, usuario: Usuario){
-    this.filePath = `imagenes/${imagen.name}`;
-    console.log(imagen.name);
-    const fileRef = this.storage.ref(this.filePath);
-    console.log(this.filePath);
-    const task = this.storage.upload(this.filePath, imagen);
-    console.log(imagen);
-    task.snapshotChanges().pipe(finalize(()=>{
-      fileRef.getDownloadURL().subscribe(urlImagen =>{
-        console.log('URL_IMAGEN', urlImagen);
+
+    this.uploadImagen('imagenPerfil', imagen, usuario);
+        
+    // this.filePath = `imagenes/${imagen.name}`;
+    // console.log(imagen.name);
+    // const fileRef = this.storage.ref(this.filePath);
+    // console.log(this.filePath);
+    // const task = this.storage.upload(this.filePath, imagen);
+    // console.log(imagen);
+    // task.snapshotChanges().pipe(finalize(()=>{
+    //   fileRef.getDownloadURL().subscribe(urlImagen =>{
+    //     console.log('URL_IMAGEN', urlImagen);
 
         // this.guardarPeliculaConFoto(pelicula, urlImagen);
-        usuario.imagenPerfil = urlImagen;
-        console.log("hola" + usuario);
+        // usuario.imagenPerfil = urlImagen;
+        console.log("alta" + usuario);
         return this.itemsCollection.add(JSON.parse(JSON.stringify(usuario)));
-      })
-    })).subscribe();
+    //   })
+    // })).subscribe();
   }
 
   agregarPaciente(imagen: any, imagen2: any, usuario: Usuario){
-    this.filePath = `imagenes/${imagen.name}`;
+
+    this.uploadImagen('imagenPerfil', imagen, usuario);
+
+    // this.filePath = `imagenes/${imagen.name}`;
+    // console.log(imagen.name);
+    // const fileRef = this.storage.ref(this.filePath);
+    // console.log(this.filePath);
+    // const task = this.storage.upload(this.filePath, imagen);
+    // console.log(imagen);
+    // task.snapshotChanges().pipe(finalize(()=>{
+    //   fileRef.getDownloadURL().subscribe(urlImagen =>{
+    //     console.log('URL_IMAGEN', urlImagen);
+
+    //     // this.guardarPeliculaConFoto(pelicula, urlImagen);
+    //     usuario.imagenPerfil = urlImagen;
+        // console.log("hola" + usuario);
+        // return this.itemsCollection.add(JSON.parse(JSON.stringify(usuario)));
+    //   })
+    // })).subscribe();
+
+    this.uploadImagen('imagenPerfil2', imagen2, usuario);
+
+    // this.filePath = `imagenes/${imagen2.name}`;
+    // console.log(imagen2.name);
+    // const fileRef2 = this.storage.ref(this.filePath);
+    // console.log(this.filePath);
+    // const task2 = this.storage.upload(this.filePath, imagen2);
+    // console.log(imagen2);
+    // task2.snapshotChanges().pipe(finalize(()=>{
+    //   fileRef2.getDownloadURL().subscribe(urlImagen2 =>{
+    //     console.log('URL_IMAGEN2', urlImagen2);
+
+    //     // this.guardarPeliculaConFoto(pelicula, urlImagen);
+    //     usuario.imagenPerfil2 = urlImagen2;
+    //     // console.log("hola" + usuario);
+    //     // return this.itemsCollection.add(JSON.parse(JSON.stringify(usuario)));
+    //   })
+    // })).subscribe();
+
+    console.log("hola" + usuario.uid);
+    console.log("hola" + usuario.imagenPerfil);
+    console.log("hola" + usuario.imagenPerfil2);
+
+    this.agregarUsuario(usuario);
+    // return this.itemsCollection.add(JSON.parse(JSON.stringify(usuario)));
+  }
+
+  uploadImagen(imagenPerfil: string, imagen: any, usuario: Usuario){
+    this.filePath = `imagenes/${usuario.uid}/${imagen.name}`;
     console.log(imagen.name);
     const fileRef = this.storage.ref(this.filePath);
     console.log(this.filePath);
@@ -66,31 +117,15 @@ export class UsuarioService {
     task.snapshotChanges().pipe(finalize(()=>{
       fileRef.getDownloadURL().subscribe(urlImagen =>{
         console.log('URL_IMAGEN', urlImagen);
-
-        // this.guardarPeliculaConFoto(pelicula, urlImagen);
-        usuario.imagenPerfil = urlImagen;
-        // console.log("hola" + usuario);
-        // return this.itemsCollection.add(JSON.parse(JSON.stringify(usuario)));
-      })
+        if(imagenPerfil == 'imagenPerfil'){
+          usuario.imagenPerfil = urlImagen;
+          console.log("URL1" + usuario.imagenPerfil);
+        } else{
+          usuario.imagenPerfil2 = urlImagen;
+          console.log("URL2" + usuario.imagenPerfil2);
+        }
+        })
     })).subscribe();
-
-    this.filePath = `imagenes/${imagen2.name}`;
-    console.log(imagen2.name);
-    const fileRef2 = this.storage.ref(this.filePath);
-    console.log(this.filePath);
-    const task2 = this.storage.upload(this.filePath, imagen2);
-    console.log(imagen2);
-    task2.snapshotChanges().pipe(finalize(()=>{
-      fileRef2.getDownloadURL().subscribe(urlImagen2 =>{
-        console.log('URL_IMAGEN2', urlImagen2);
-
-        // this.guardarPeliculaConFoto(pelicula, urlImagen);
-        usuario.imagenPerfil2 = urlImagen2;
-        console.log("hola" + usuario);
-        return this.itemsCollection.add(JSON.parse(JSON.stringify(usuario)));
-      })
-    })).subscribe();
-
   }
 
   traerEspecialistas(){
