@@ -4,6 +4,8 @@ import { BienvenidoComponent } from './pages/bienvenido/bienvenido.component';
 import { EnvioEmailComponent } from './pages/envio-email/envio-email.component';
 import { LoginComponent } from './pages/login/login.component';
 import { MiPerfilComponent } from './pages/mi-perfil/mi-perfil.component';
+import { MisTurnosEspecialistaComponent } from './pages/mis-turnos-especialista/mis-turnos-especialista.component';
+import { MisTurnosComponent } from './pages/mis-turnos/mis-turnos.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 import { RegistroComponent } from './pages/registro/registro.component';
 import { SolicitarTurnoComponent } from './pages/solicitar-turno/solicitar-turno.component';
@@ -17,7 +19,8 @@ const routes: Routes = [
   {path: 'verificacion-email', component: EnvioEmailComponent},
   {path: 'usuarios', component: UsuarioComponent},
   {path: 'miperfil', component: MiPerfilComponent},
-  {path: 'misturnos', component: TurnoComponent},
+  {path: 'misturnos', component: MisTurnosComponent},
+  {path: 'misturnos-especialista', component: MisTurnosEspecialistaComponent},
   {path: 'solicitarturno', component: SolicitarTurnoComponent},
   // {path: 'turno', component: TurnoComponent},
   {path: '', redirectTo: 'bienvenido', pathMatch: 'full' },

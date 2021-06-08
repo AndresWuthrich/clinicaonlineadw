@@ -53,7 +53,7 @@
                 <li type="text" class="list-group-item d-flex justify-content"
                     *ngFor="let usuario of listaUsuariosAccesoRapido" disable>
 
-                    <input type="text" class="form-control" value="{{usuario.especialidad}} {{usuario.apellido}} {{usuario.nombre}}"disabled>
+                    <input type="text" class="form-control" value="{{usuario.perfil}} {{usuario.apellido}} {{usuario.nombre}}"disabled>
                     <button class="btn" (click)="cargarUsuariosAccesoRapido(usuario.email)"><img src="{{usuario.imagenPerfil}}"/></button>
                 </li>
             </ul>

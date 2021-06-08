@@ -10,8 +10,6 @@ import { AuthService } from 'src/app/services/auth.service';
 import { EspecialidadService } from 'src/app/services/especialidad.service';
 import { TurnoService } from 'src/app/services/turno.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
-// import { Dia } from 'src/Models/Dia';
-// import { Turno } from 'src/Models/Turno';
 
 
 @Component({
@@ -21,7 +19,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 })
 export class SolicitarTurnoComponent implements OnInit {
 
-  public usuarioRegistrado: Usuario | null = null;
+  public usuarioLogueado: Usuario | null = null;
 
   public especialidadSeleccionada: any = null;
   public especialidadDescripcion: string = "";
@@ -39,9 +37,8 @@ export class SolicitarTurnoComponent implements OnInit {
   public listaDias: Date[] = [];
   public listaObjetosDias: any[] = [];
 
-  // constructor() { }
-  // ngOnInit(): void {
-  // }
+  public listaHorariosDisponibles: any[] = [];
+  public listaTurnosDisponibles: any[] = [];
 
   constructor(private fb: FormBuilder, private auth: AuthService, private router: Router, private usuarioService: UsuarioService, private especialidadService: EspecialidadService, private turnoService: TurnoService) {
     this.especialidadService.traerTodas().subscribe((especialidades: Especialidad[]) => {
@@ -53,9 +50,9 @@ export class SolicitarTurnoComponent implements OnInit {
       this.listaEspecialistas = data;
     });
 
-    // this.usuarioService.obtenerPacientes().subscribe(data => {
-    //   this.listadoUsuariosPacientes = data;
-    // });
+    this.usuarioService.traerPacientes().subscribe(data => {
+      this.listaPacientes = data;
+    });
 
     this.turnoService.traerTodos().subscribe((turnos: Turno[]) => {
       this.listaTurnos = turnos;
@@ -71,8 +68,10 @@ export class SolicitarTurnoComponent implements OnInit {
       console.log(user.email);
       var dataUser: any = await this.usuarioService.obtenerUsuarioPorEmail(user.email);
       console.log(dataUser);
-      this.usuarioRegistrado = dataUser;
+      this.usuarioLogueado = dataUser;
     }
+
+    this.ObtenerTurnosDisponibles();
   }
 
   clickEspecialidad(data: any) {
@@ -83,15 +82,16 @@ export class SolicitarTurnoComponent implements OnInit {
   }
 
   filtrarListaEspecialistas() {
+    console.log(this.especialidadSeleccionada.descripcion);
+
     this.listaEspecialistas.forEach(especialista => {
-      console.log(this.especialidadSeleccionada.descripcion);
-      // especilista.especialidad?.forEach(especialidad => {
+      especialista.especialidad?.forEach(especialidad => {
       console.log(especialista.especialidad);
-      //if (especialidad.descripcion == this.especialidadSeleccionada.descripcion) {
-      if (especialista.especialidad == this.especialidadSeleccionada.descripcion) {
+      if (especialidad.descripcion == this.especialidadSeleccionada.descripcion) {
+      // if (especialista.especialidad == this.especialidadSeleccionada.descripcion) {
         this.listaEspecialistasCalificados.push(especialista);
       }
-      // });
+      });
     });
     console.log(this.listaEspecialistasCalificados);
   }
@@ -99,18 +99,22 @@ export class SolicitarTurnoComponent implements OnInit {
   clickEspecialista(data: any) {
     console.log(data);
     this.especialistaSeleccionado = data;
-    if (this.usuarioRegistrado?.perfil == 'paciente') {
+    console.log(this.usuarioLogueado?.perfil);
+
+    this.ArmarListaHorarios();
+
+    if (this.usuarioLogueado?.perfil == 'paciente') {
       if (this.especialidadSeleccionada != null && this.especialistaSeleccionado != null) {
-        // this.cargarListaDeTurnos();
+        this.cargarListaDeTurnos();
       }
     }
-    if (this.usuarioRegistrado?.perfil == 'admin') {
+    if (this.usuarioLogueado?.perfil == 'administrador') {
       console.log("ADMIN");
     }
   }
-  clickPaciente(paciente: any) {
-    this.pacienteSeleccionado = paciente;
-    // this.cargarListaDeTurnos();
+  clickPaciente(data: any) {
+    this.pacienteSeleccionado = data;
+    this.cargarListaDeTurnos();
   }
 
   // reservarTurno(horario: any, dia: any) {
@@ -166,11 +170,12 @@ export class SolicitarTurnoComponent implements OnInit {
 
 
   // }
-  // cargarListaDeTurnos() {
+
+  cargarListaDeTurnos() {
   //   this.cargar15dias();
   //   this.filtradoDeDias();
   //   // console.log("entra");
-  // }
+  }
 
   // filtradoDeDias() {
   //   if (this.especialistaElejido == undefined && this.listadoDias != []) {
@@ -347,4 +352,289 @@ export class SolicitarTurnoComponent implements OnInit {
 
   //   // console.log( this.listadoDias);
   // }
+
+  ObtenerTurnosDisponibles() {
+    let tLunes: any[] = [];
+    let tMartes: any[] = [];
+    let tMiercoles: any[] = [];
+    let tJueves: any[] = [];
+    let tViernes: any[] = [];
+    let tSabado: any[] = [];
+
+    this.listaEspecialistas.forEach((especialista) => {
+      if (especialista.uid == this.especialistaSeleccionado.uid) {
+        //LUNES
+        if (especialista.horarioAtencion != null && especialista.horarioAtencion[0].lunes.estado == true) {
+          let auxInicio: number = parseInt(especialista.horarioAtencion[0].lunes.inicio);
+          let auxFin: number = parseInt(especialista.horarioAtencion[0].lunes.fin);
+
+          for (let index = auxInicio; index <= auxFin; index += 100) {
+            let auxHora =
+              index.toString().slice(0, index.toString().length - 2) +
+              ':' +
+              index.toString().slice(index.toString().length - 2);
+            tLunes.push(auxHora);
+          }
+          this.listaHorariosDisponibles.push({
+            dia: 'LUNES',
+            fecha: '',
+            horarios: tLunes,
+            profesion: especialista.horarioAtencion[0].lunes.profesion,
+          });
+          }
+        // this.listaHorariosDisponibles.push({
+        //   dia: 'LUNES',
+        //   fecha: '',
+        //   horarios: tLunes,
+        //   profesion: especialista.horarioAtencion[0].lunes.profesion,
+        // });
+        //MARTES
+        if (especialista.horarioAtencion != null && especialista.horarioAtencion[0].martes.estado == true) {
+          let auxInicio: number = parseInt(especialista.horarioAtencion[0].martes.inicio);
+          let auxFin: number = parseInt(especialista.horarioAtencion[0].martes.fin);
+
+          for (let index = auxInicio; index <= auxFin; index += 100) {
+            let auxHora =
+              index.toString().slice(0, index.toString().length - 2) +
+              ':' +
+              index.toString().slice(index.toString().length - 2);
+            tMartes.push(auxHora);
+          }
+          this.listaHorariosDisponibles.push({
+            dia: 'MARTES',
+            fecha: '',
+            horarios: tMartes,
+            profesion: especialista.horarioAtencion[0].martes.profesion,
+          });
+          }
+        // this.listaHorariosDisponibles.push({
+        //   dia: 'MARTES',
+        //   fecha: '',
+        //   horarios: tMartes,
+        //   profesion: especialista.horarioAtencion[0].martes.profesion,
+        // });
+        //MIERCOLES
+        if (especialista.horarioAtencion != null && especialista.horarioAtencion[0].miercoles.estado == true) {
+          let auxInicio: number = parseInt(especialista.horarioAtencion[0].miercoles.inicio);
+          let auxFin: number = parseInt(especialista.horarioAtencion[0].miercoles.fin);
+
+          for (let index = auxInicio; index <= auxFin; index += 100) {
+            let auxHora =
+              index.toString().slice(0, index.toString().length - 2) +
+              ':' +
+              index.toString().slice(index.toString().length - 2);
+            tMiercoles.push(auxHora);
+          }
+          this.listaHorariosDisponibles.push({
+            dia: 'MIERCOLES',
+            fecha: '',
+            horarios: tMiercoles,
+            profesion: especialista.horarioAtencion[0].miercoles.profesion,
+          });
+  
+        }
+        // this.listaHorariosDisponibles.push({
+        //   dia: 'MIERCOLES',
+        //   fecha: '',
+        //   horarios: tMiercoles,
+        //   profesion: especialista.horarioAtencion[0].miercoles.profesion,
+        // });
+        //JUEVES
+        if (especialista.horarioAtencion != null && especialista.horarioAtencion[0].jueves.estado == true) {
+          let auxInicio: number = parseInt(especialista.horarioAtencion[0].jueves.inicio);
+          let auxFin: number = parseInt(especialista.horarioAtencion[0].jueves.fin);
+
+          for (let index = auxInicio; index <= auxFin; index += 100) {
+            let auxHora =
+              index.toString().slice(0, index.toString().length - 2) +
+              ':' +
+              index.toString().slice(index.toString().length - 2);
+            tJueves.push(auxHora);
+          }
+          this.listaHorariosDisponibles.push({
+            dia: 'JUEVES',
+            fecha: '',
+            horarios: tJueves,
+            profesion: especialista.horarioAtencion[0].jueves.profesion,
+          });
+  
+        }
+        // this.listaHorariosDisponibles.push({
+        //   dia: 'JUEVES',
+        //   fecha: '',
+        //   horarios: tJueves,
+        //   profesion: p.atiende[0].jueves.profesion,
+        // });
+        //VIERNES
+        if (especialista.horarioAtencion != null && especialista.horarioAtencion[0].viernes.estado == true) {
+          let auxInicio: number = parseInt(especialista.horarioAtencion[0].viernes.inicio);
+          let auxFin: number = parseInt(especialista.horarioAtencion[0].viernes.fin);
+
+          for (let index = auxInicio; index <= auxFin; index += 100) {
+            let auxHora =
+              index.toString().slice(0, index.toString().length - 2) +
+              ':' +
+              index.toString().slice(index.toString().length - 2);
+            tViernes.push(auxHora);
+          }
+          this.listaHorariosDisponibles.push({
+            dia: 'VIERNES',
+            fecha: '',
+            horarios: tViernes,
+            profesion: especialista.horarioAtencion[0].viernes.profesion,
+          });
+  
+        }
+        // this.listaHorariosDisponibles.push({
+        //   dia: 'VIERNES',
+        //   fecha: '',
+        //   horarios: tViernes,
+        //   profesion: especialista.horarioAtencion[0].viernes.profesion,
+        // });
+        //SABADO
+        if (especialista.horarioAtencion != null && especialista.horarioAtencion[0].sabado.estado == true) {
+          let auxInicio: number = parseInt(especialista.horarioAtencion[0].sabado.inicio);
+          let auxFin: number = parseInt(especialista.horarioAtencion[0].sabado.fin);
+
+          for (let index = auxInicio; index <= auxFin; index += 100) {
+            let auxHora =
+              index.toString().slice(0, index.toString().length - 2) +
+              ':' +
+              index.toString().slice(index.toString().length - 2);
+            tSabado.push(auxHora);
+          }
+          this.listaHorariosDisponibles.push({
+            dia: 'SABADO',
+            fecha: '',
+            horarios: tSabado,
+            profesion: especialista.horarioAtencion[0].sabado.profesion,
+          });
+  
+        }
+        // this.listaHorariosDisponibles.push({
+        //   dia: 'SABADO',
+        //   fecha: '',
+        //   horarios: tSabado,
+        //   profesion: especialista.horarioAtencion[0].sabado.profesion,
+        // });
+      }
+    });
+  }
+
+  ArmarListaHorarios() {
+    this.ObtenerTurnosDisponibles();
+
+    let auxLista: any[] = [...this.listaHorariosDisponibles];
+    for (let index = 0; index < this.listaHorariosDisponibles.length; index++) {
+      auxLista.push(this.listaHorariosDisponibles[index]);
+    }
+
+    let d = new Date();
+    let auxCorte: any[];
+    let auxCorte2: any[];
+
+    if (d.getDay() != 0) {
+      auxCorte = auxLista.slice(d.getDay() - 1, auxLista.length);
+      auxCorte2 = auxLista.slice(0, d.getDay() - 1);
+      auxLista = [...auxCorte];
+      for (let index = 0; index < auxCorte2.length; index++) {
+        auxLista.push(auxCorte2[index]);
+      }
+    }
+
+    this.listaHorariosDisponibles = [...auxLista];
+
+    //Coloco fecha
+    let cont: number = 0;
+    let auxFecha: string[] = [];
+
+    for (let index = 0; index < this.listaHorariosDisponibles.length; index++) {
+      auxFecha.push(this.SumarFecha(cont));
+      if (this.listaHorariosDisponibles[index].dia == 'SABADO') {
+        cont += 2;
+      } else {
+        cont++;
+      }
+    }
+
+    let nuevoArray: any[] = [];
+    for (let index = 0; index < this.listaHorariosDisponibles.length; index++) {
+      nuevoArray.push({
+        dia: this.listaHorariosDisponibles[index].dia,
+        fecha: auxFecha[index],
+        horarios: this.listaHorariosDisponibles[index].horarios,
+        profesion: this.listaHorariosDisponibles[index].profesion
+      });
+    }
+    this.listaHorariosDisponibles = [...nuevoArray];
+
+    // HASTA ACA TENGO LOS HORARIOS DISPONIBLES POR PROFESIONAL
+    // ACA FILTRO LOS NO DISPONIBLES
+
+    this.listaTurnosDisponibles.forEach((turno) => {
+      if (turno.uidEspecialista == this.especialistaSeleccionado.uid) {
+        for (
+          let index = 0;
+          index < this.listaHorariosDisponibles.length;
+          index++
+        ) {
+          if (this.listaHorariosDisponibles[index].fecha == turno.fecha) {
+            // this.listaHorariosDisponibles[index].horarios.forEach((horario) => {
+            //   if (horario == turno.hora) {
+            //     let indexHorario =
+            //       this.listaHorariosDisponibles[index].horarios.indexOf(
+            //         horario
+            //       );
+            //     this.listaHorariosDisponibles[index].horarios.splice(
+            //       indexHorario,
+            //       1
+            //     );
+            //  }
+            // });
+          }
+        }
+      }
+    });
+
+    let aux:any[] = [];
+    let flag = 0;
+    for (const item of this.listaHorariosDisponibles) {
+      if(aux.length < 12 && flag == 1){
+        aux.push(item);
+      }
+      flag = 1;
+    }
+
+    this.listaHorariosDisponibles = [];
+    this.listaHorariosDisponibles = aux;
+
+    console.log(this.listaHorariosDisponibles);
+  }
+
+  SumarFecha(cantDias: number): string {
+    var Fecha = new Date();
+    var sFecha =
+      fecha ||
+      Fecha.getDate() +
+        '/' +
+        (Fecha.getMonth() + 1) +
+        '/' +
+        Fecha.getFullYear();
+    var sep = sFecha.indexOf('/') != -1 ? '/' : '-';
+    var aFecha = sFecha.split(sep);
+    var fecha: any = aFecha[2] + '/' + aFecha[1] + '/' + aFecha[0];
+    fecha = new Date(fecha);
+    fecha.setDate(fecha.getDate() + cantDias);
+    var anno = fecha.getFullYear();
+    var mes = fecha.getMonth() + 1;
+    var dia = fecha.getDate();
+    mes = mes < 10 ? '0' + mes : mes;
+    dia = dia < 10 ? '0' + dia : dia;
+    let fechaFinal: string = dia + sep + mes + sep + anno;
+    return fechaFinal;
+  }
+
+
+
+
 }

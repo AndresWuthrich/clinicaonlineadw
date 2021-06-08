@@ -1,3 +1,9 @@
 .back{
     background-color: chocolate;
 }
+
+img{
+    width: 50%;
+    height: 50%;
+    border-radius: 5px;
+  }

@@ -1,0 +1,58 @@
+<p>historia-clinica works!</p>
+
+<div class="row" *ngIf="usuarioLogueado != null">
+
+  <div class="col-md-10 mx-auto mt-4" *ngIf="usuarioLogueado.perfil=='paciente'">
+
+      <div class="card">
+          <div class="card-body">
+              <h1 class="text-center mb-3">Historia Clínica</h1>
+
+              <table class="table table-hover">
+                  <thead>
+                      <tr>
+                          <th class="text-center">Nº</th>
+                          <th class="text-center">Fecha</th>
+                          <th class="text-center">Hora</th>
+                          <th class="text-center">Profesional</th>
+                          <th class="text-center">Especialidad</th>
+                          <!-- <th class="text-center">Paciente</th> -->
+                          <!-- <th class="text-center">Estado</th> -->
+                          <th class="text-center">Acciones</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                  <!-- <tbody *ngFor="let turno of listaTurnos let i=index"> -->
+                        <tr>
+                          <!-- <td class="text-left" class="text-center">{{i+1}}</td>
+                          <td class="text-left" class="text-center">{{turno.fecha}}</td>
+                          <td class="text-left" class="text-center">{{turno.hora | pipeHora}}</td>
+                          <td class="text-left" class="text-center">{{turno.profesional!.nombre}} </td>
+                          <td class="text-left" class="text-center">{{turno.especialidad!.nombre}} </td>
+                          <td class="text-left" class="text-center">{{turno.paciente!.nombre}}</td>
+                          <td class="text-left" class="text-center">{{turno.estado}}</td> -->
+                          <td class="text-left" class="text-center">
+                            <button type="button" class="btn btn-info">
+                                <!-- <button type="button" class="btn btn-info" data-bs-toggle="tooltip" data-bs-placement="top"
+                                  title="VER HISTORIA CLÍNICA" style="margin-left: 0.5%;"> -->
+                                  <!-- (click)="VerHistoriaClinica(t.turno.historiaClinica)">
+                                  <img src={{this.iconoHistoriaClinica}} style="width: 25px; height: 25px;"> -->
+                                </button>
+                            
+                                
+                          </td>
+                      </tr>
+                  </tbody>
+              </table>
+
+          </div>
+      </div>
+  
+</div>
+
+<app-detalle-historia-clinica></app-detalle-historia-clinica>
+
+<!-- <div *ngIf="this.verComponentHistoria">
+    <app-ver-historia-clinica [hClinica]='this.item' (Ver)="CerrarHistoriaClinica($event)"></app-ver-historia-clinica>
+  </div>
+   -->

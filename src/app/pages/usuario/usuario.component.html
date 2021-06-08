@@ -91,7 +91,7 @@
                           <th>Nombre</th>
                           <th>Apellido</th>
                           <th>Email</th>
-                          <th>Especialidad</th>
+                          <!-- <th>Especialidad</th> -->
                           <th>Estado</th>
                           <th>Aprobar</th>
                           <th>Desaprobar</th>
@@ -102,7 +102,13 @@
                           <td>{{usuario.nombre}}</td>
                           <td>{{usuario.apellido}}</td>
                           <td>{{usuario.email}}</td>
-                          <td>{{usuario.especialidad}}</td>
+                          <!-- <td>{{usuario.especialidad}}</td> -->
+                          
+                          <!-- <td *ngFor="let especialidad of listaEspecialidadesUsuario">
+                            <h6 class="text-info">{{especialidad.descripcion}}</h6>
+                          </td>
+                           -->
+                          
                           <td>{{usuario.cuentaAprobada}}</td>
                           <td><button class="btn btn-success" *ngIf="usuario.perfil=='especialista'"
                                   (click)="aprobarUsuario(usuario, true)">Aprobar</button></td>
@@ -118,6 +124,7 @@
       </div>
   </div>
 
+  <app-historia-clinica></app-historia-clinica>
   <!-- <b>Exporting footballer data in excel by clicking below button</b><br>
   
   <button (click)="exportAsXLSX()">

@@ -1,15 +1,15 @@
 <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
-    <h5 class="my-0 mr-md-auto font-weight-normal">Clínica online</h5>
+    <a class="my-0 mr-md-auto font-weight-normal" routerLink="/bienvenido"><h5>Clínica online</h5></a>
     <nav class="my-2 my-md-0 mr-md-3">
       <!-- <a class="p-2 text-dark" routerLink="/quiensoy">Quien soy?</a> -->
       <a class="p-2 text-dark" href="https://github.com/AndresWuthrich/clinicaonlineadw">en GitHub</a>
 
       <div *ngIf="userLogueado | async as user">
         <nav class="my-2 my-md-0 mr-md-3">
-          <a class="p-2 text-dark" routerLink="/usuarios">Usuarios</a>
-          <a class="p-2 text-dark" routerLink="/miperfil">Mi perfil</a>
-          <a class="p-2 text-dark" routerLink="/misturnos">Mis turnos</a>
-          <a class="p-2 text-dark" routerLink="/turno">Turnos</a>
+          <!-- <a class="p-2 text-dark" routerLink="/usuarios">Usuarios</a> -->
+          <!-- <a class="p-2 text-dark" routerLink="/miperfil">Mi perfil</a> -->
+          <!-- <a class="p-2 text-dark" routerLink="/misturnos">Mis turnos</a>
+          <a class="p-2 text-dark" routerLink="/turno">Turnos</a> -->
         </nav>
       </div>
     </nav>
@@ -19,12 +19,12 @@
       <nav class="my-2 my-md-0 mr-md-3">
         <a class="btn btn-outline-primary" (click)='Logout()'>Logout</a>
         <!-- <div *ngIf="perfil!='paciente' && perfil!='especialista'"> -->
-          <a class="btn btn-outline-primary" routerLink="/solicitarturno">Solicitar Turno</a>
+          <!-- <a class="btn btn-outline-primary" routerLink="/solicitarturno">Solicitar Turno</a> -->
         <!-- </div>   -->
       </nav> 
     </div>
     <ng-template #login>
-      <a class="btn btn-outline-primary" routerLink="/login">Login</a>
-      <a class="btn btn-outline-primary" routerLink="/registro">Registrarse</a>
+      <!-- <a class="btn btn-outline-primary" routerLink="/login">Login</a>
+      <a class="btn btn-outline-primary" routerLink="/registro">Registrarse</a> -->
     </ng-template>
   </div>

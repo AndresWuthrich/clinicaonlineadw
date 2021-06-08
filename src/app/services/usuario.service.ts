@@ -19,6 +19,8 @@ export class UsuarioService {
   // private downloadURL: Observable<string>;
   itemsCollection: AngularFirestoreCollection<Usuario>;
   public usuarios: Observable<Usuario[]>;
+  img1: any;
+  img2: any;
 
   constructor(private afs: AngularFirestore, private storage: AngularFireStorage, public auth: AuthService) {
     this.itemsCollection = this.afs.collection(this.dbPath);
@@ -31,7 +33,6 @@ export class UsuarioService {
     }));
    }
 
-  //  agregarUsuario(nombre: string, apellido: string, edad: number, dni: number, perfil: string, email: string, password: string, imagen: string, imagen2: string, obraSocial: string, especialidad: string){
   agregarUsuario(usuario: Usuario){
 
     return this.itemsCollection.add(JSON.parse(JSON.stringify(usuario)));
@@ -53,13 +54,13 @@ export class UsuarioService {
 
         // this.guardarPeliculaConFoto(pelicula, urlImagen);
         // usuario.imagenPerfil = urlImagen;
-        console.log("alta" + usuario);
-        return this.itemsCollection.add(JSON.parse(JSON.stringify(usuario)));
+        // console.log("alta" + usuario);
+        // return this.itemsCollection.add(JSON.parse(JSON.stringify(usuario)));
     //   })
     // })).subscribe();
   }
 
-  agregarPaciente(imagen: any, imagen2: any, usuario: Usuario){
+  async  agregarPaciente(imagen: any, imagen2: any, usuario: Usuario){
 
     this.uploadImagen('imagenPerfil', imagen, usuario);
 
@@ -98,12 +99,13 @@ export class UsuarioService {
     //     // return this.itemsCollection.add(JSON.parse(JSON.stringify(usuario)));
     //   })
     // })).subscribe();
+    // usuario.imagenPerfil = this.img1;
+    // usuario.imagenPerfil2 = this.img2;
+    // console.log("hola" + usuario.uid);
+    // console.log("hola" + usuario.imagenPerfil);
+    // console.log("hola" + usuario.imagenPerfil2);
 
-    console.log("hola" + usuario.uid);
-    console.log("hola" + usuario.imagenPerfil);
-    console.log("hola" + usuario.imagenPerfil2);
-
-    this.agregarUsuario(usuario);
+    // this.agregarUsuario(usuario);
     // return this.itemsCollection.add(JSON.parse(JSON.stringify(usuario)));
   }
 
@@ -118,20 +120,44 @@ export class UsuarioService {
       fileRef.getDownloadURL().subscribe(urlImagen =>{
         console.log('URL_IMAGEN', urlImagen);
         if(imagenPerfil == 'imagenPerfil'){
+          this.img1 = urlImagen;
+          console.log("URL1" + this.img1);
+          console.log("perf" + usuario.perfil);
+
           usuario.imagenPerfil = urlImagen;
-          console.log("URL1" + usuario.imagenPerfil);
+          if(usuario.perfil == 'especialista' || usuario.perfil == 'administrador'){
+            this.agregarUsuario(usuario);
+          }
+          // usuario.imagenPerfil = urlImagen;
+          // console.log("URL1" + usuario.imagenPerfil);
         } else{
+          this.img2 = urlImagen;
+          console.log("URL2" + this.img2);
+          console.log("perf" + usuario.perfil);
+
           usuario.imagenPerfil2 = urlImagen;
-          console.log("URL2" + usuario.imagenPerfil2);
+          if(usuario.perfil == 'paciente'){
+            this.agregarUsuario(usuario);
+          }
+          // usuario.imagenPerfil2 = urlImagen;
+          // console.log("URL2" + usuario.imagenPerfil2);
         }
         })
     })).subscribe();
   }
 
   traerEspecialistas(){
-    return this.usuarios.pipe(map(value => { return value.filter(user => { return user.perfil == "especialista";
-  });
-  }));
+    return this.usuarios.pipe(map(value => 
+      { return value.filter(user => 
+       { return user.perfil == "especialista"; });
+    }));
+  }
+
+  traerPacientes(){
+    return this.usuarios.pipe(map(value => 
+      { return value.filter(user => 
+       { return user.perfil == "paciente"; });
+    }));
   }
 
   traerTodos(){

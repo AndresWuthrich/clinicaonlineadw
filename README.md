@@ -17,7 +17,10 @@ TP Final Laboratorio IV 2021 - UTNFRA - Técnico superior en programación.
 * Visualizar novedades de la clínica.
 * Ingresar a las siguientes funcionalidades:
     * Login.
-    * Registro.
+    * Registro
+![principal](http://AndresWuthrich.github.io/clinicaonlineadw/src/assets/imagenes/readme1.png)
+
+
     * Administración de usuarios (sólo Administrador).
     * Turnos.
 

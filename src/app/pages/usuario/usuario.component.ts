@@ -7,6 +7,7 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 
 import Swal from 'sweetalert2';
 import { ExcelService } from 'src/app/services/excel.service';
+import { Especialidad } from 'src/app/clases/especialidad';
 
 
 @Component({
@@ -58,6 +59,7 @@ export class UsuarioComponent implements OnInit {
   
   public formAdmin: FormGroup;
   public listaUsuariosEspecialistas: Usuario[] = [];
+  public listaEspecialidadesUsuario: Especialidad[] = [];
   public usuarioAlta: Usuario = new Usuario();
 
   constructor(private fb: FormBuilder, private usuarioService: UsuarioService, private excelService: ExcelService, private router: Router, public auth: AuthService) {
@@ -106,36 +108,40 @@ export class UsuarioComponent implements OnInit {
     }, 3000);
 
 
-    this.auth.Registro(email, password);//.then(value => { console.log(value?.user?.uid)});
-    console.log(this.auth.usuario.uid);
-
-    try{  
-      this.usuarioAlta.nombre = this.formAdmin.controls['nombre'].value;
-      this.usuarioAlta.apellido = this.formAdmin.controls['apellido'].value;
-      this.usuarioAlta.edad = this.formAdmin.controls['edad'].value;
-      this.usuarioAlta.dni = this.formAdmin.controls['dni'].value;
-      this.usuarioAlta.perfil = "administrador";// this.perfil;
-      this.usuarioAlta.email = this.formAdmin.controls['email'].value;
-      this.usuarioAlta.password = this.formAdmin.controls['password'].value;
-      this.usuarioAlta.imagenPerfil = this.formAdmin.controls['imagen'].value;
-      this.usuarioAlta.uid = this.auth.usuario.uid;
-      this.usuarioAlta.cuentaAprobada = true;
-  
-        // console.log(this.imagenPerfil);
-      this.usuarioService.agregarEspecialista(this.imagenPerfil, this.usuarioAlta);
-        // this.email = this.password = '';
-      // this.router.navigate(['verificacion-email']);
-      // this.router.navigate(['bienvenido']);
-      Swal.fire({
-        title: 'Alta exitosa de administrador'
-      });
-    }
-    catch(error){
-      Swal.fire({
-        title: error.code,
-        text: error.message
-      });
-    }
+    this.auth.Registro(email, password).then(value => { 
+      console.log(value?.user?.uid);
+    // console.log(this.auth.usuario.uid);
+    
+      // try{  
+        this.usuarioAlta.nombre = this.formAdmin.controls['nombre'].value;
+        this.usuarioAlta.apellido = this.formAdmin.controls['apellido'].value;
+        this.usuarioAlta.edad = this.formAdmin.controls['edad'].value;
+        this.usuarioAlta.dni = this.formAdmin.controls['dni'].value;
+        this.usuarioAlta.perfil = "administrador";// this.perfil;
+        this.usuarioAlta.email = this.formAdmin.controls['email'].value;
+        this.usuarioAlta.password = this.formAdmin.controls['password'].value;
+        this.usuarioAlta.imagenPerfil = this.formAdmin.controls['imagen'].value;
+        // this.usuarioAlta.uid = this.auth.usuario.uid;
+        this.usuarioAlta.uid = value?.user?.uid;
+        this.usuarioAlta.cuentaAprobada = true;
+    
+          // console.log(this.imagenPerfil);
+        this.usuarioService.agregarEspecialista(this.imagenPerfil, this.usuarioAlta);
+          // this.email = this.password = '';
+        // this.router.navigate(['verificacion-email']);
+        // this.router.navigate(['bienvenido']);
+        Swal.fire({
+          title: 'Alta exitosa de administrador'
+        });
+      // }
+      // catch(error){
+      //   Swal.fire({
+      //     title: error.code,
+      //     text: error.message
+      //   });
+      // }
+ 
+    });
   }
 
   cargarImagen(event: any): void {

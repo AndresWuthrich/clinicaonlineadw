@@ -3,7 +3,7 @@
 <head>
 <!--  <script src='https://www.google.com/recaptcha/api.js?hl=es'></script> -->
   <!-- <script src='https://www.google.com/recaptcha/api.js'></script> -->
-  <!-- <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script> -->
+  <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
 </head>
 <body class="container">
   <button class="btn fotoPaciente" (click)="elegirPerfil('paciente')" *ngIf="perfil!='paciente' && perfil!='especialista'">Paciente</button>
@@ -11,7 +11,6 @@
 
   <div *ngIf="perfil=='paciente' || perfil=='especialista'" class="paciente" [ngClass]="{especialista: perfil=='especialista'}">
     <form [formGroup]="formRegistro" (ngSubmit)="registro()" *ngIf="perfil=='paciente' || perfil=='especialista'">
-    <!-- <form class="form" [formGroup]="formRegistro" (ngSubmit)="registro()" *ngIf="perfil=='paciente' || perfil=='especialista'"> -->
       <div class="row">
         <div class="col-md-12 mb-3">
           <h2>Registro</h2>
@@ -48,30 +47,45 @@
           <small class="invalid" *ngIf="formRegistro.get('obraSocial')?.errors?.required && formRegistro.get('obraSocial')?.touched">La obra social es requerida</small>
         </div>
 
-
-        <div class="col-md-12 mb-2" *ngIf="perfil=='especialista'">
+        <!-- <div class="col-md-12 mb-2" *ngIf="perfil=='especialista'">
           <label for="especialidad" class="form-label">Especialidad</label>
           <input type="text" class="form-control" id="especialidad" placeholder="Ingrese especialidad" formControlName='especialidad'>
           <small class="invalid" *ngIf="formRegistro.get('especialidad')?.errors?.required && formRegistro.get('especialidad')?.touched">La especialidad es requerida</small>
         </div>
-
-        <div class="col-md-12" *ngIf="perfil=='especialista'">
-          <label class="mb-2">Especialidad/es. Seleccione especialidad/es de la lista o genere una nueva</label>
-          <div class="col-md-12 mb-2" *ngIf="!banderaEspecialidadSeleccionada">
-              <ul class="list-group card-body overflow-auto" id="boxConScroll"
-                  style="height: 130px;" #scrollMe [scrollTop]="scrollMe">
-                  <li type="text"
-                      class="list-group-item d-flex justify-content-between lh-condensed"
-                      *ngFor="let especialidad of listaEspecialidadesSeleccionadas" disable>
-
-                      <input type="text" class="form-control" value="{{especialidad.descripcion}}" disabled>
-                          <!-- value="{{especialidad.nombre}} {{especialidad.duracion}}" disabled> -->
-                      <!-- <button class="btn btn-danger"
-                          (click)="eliminarEspecialidad(especialidad)"><b>X</b></button> -->
-                  </li>
-              </ul>
+ -->
+        <div class="col-md-12" id="box" *ngIf="perfil=='especialista'">
+          <div class="card">
+              <div class="card-body">
+                  <h4 class="d-flex justify-content-between align-items-center mb-3" *ngIf="listaEspecialidades != null">
+                      <h4>Lista de especialidades</h4>
+                  </h4>
+                  <ul class="list-group mb-3">
+                      <li class="list-group-item d-flex justify-content-between" *ngFor="let especialidad of listaEspecialidades"
+                        (click)="agregarEspecialidad(especialidad)">
+                          <div>
+                              <h6 class="text-info">{{especialidad.descripcion}}</h6>
+                          </div>
+                      </li>
+                  </ul>
+                  <hr>
+                  <label class="mb-2">Especialidad/es. Seleccione especialidad/es de la lista o genere una nueva</label>
+                  <div class="col-md-12 mb-2" *ngIf="!banderaEspecialidadSeleccionada">
+                      <ul class="list-group card-body overflow-auto" id="boxConScroll"
+                          style="height: 130px;" #scrollMe [scrollTop]="scrollMe">
+                          <li type="text"
+                              class="list-group-item d-flex justify-content-between lh-condensed"
+                              *ngFor="let especialidad of listaEspecialidadesSeleccionadas" disable>
+        
+                              <input type="text" class="form-control" value="{{especialidad.descripcion}}" disabled>
+                                  <!-- value="{{especialidad.nombre}} {{especialidad.duracion}}" disabled> -->
+                              <!-- <button class="btn btn-danger"
+                                  (click)="eliminarEspecialidad(especialidad)"><b>X</b></button> -->
+                          </li>
+                      </ul>
+                  </div>
+              </div>
           </div>
-      </div>
+        </div>
 
         <div class="col-md-12 mb-2">
           <label for="email" class="form-label">Email</label>
@@ -101,7 +115,6 @@
     
       <div class="row container">
         <div class="col-md-12 d-grid gap-2 container2">
-          <!-- <button type="submit" class="btn btn-primary btn-block" [disabled]="signup"  [disabled]='formRegistro.invalid'> -->
           <button type="submit" class="btn btn-primary btn-block" [disabled]="signup">
               <span *ngIf="signup" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
             Registro
@@ -117,28 +130,12 @@
   <div class="col-md-12" id="box" *ngIf="perfil=='especialista'">
     <div class="card">
         <div class="card-body">
-            <h4 class="d-flex justify-content-between align-items-center mb-3" *ngIf="listaEspecialidades != null">
-                <h4>Lista de especialidades</h4>
-            </h4>
-            <ul class="list-group mb-3">
-                <li class="list-group-item d-flex justify-content-between" *ngFor="let especialidad of listaEspecialidades"
-                  (click)="agregarEspecialidad(especialidad)">
-                    <div>
-                        <h6 class="text-info">{{especialidad.descripcion}}</h6>
-                    </div>
-                </li>
-            </ul>
-            <hr>
-            <div>
-                <div class="form-group col-md-5">
-                  <diV>
-                    <label class="col-form-label" for="descripcionEspecialidad">Nueva especialidad</label>
-                    <input type="text" class="form-control" id="descripcionEspecialidad" [(ngModel)]="descripcionEspecialidad"
-                        name="descripcionEspecialidad" placeholder="Ingrese el nombre de la especialidad">
+            <div class="form-group col-md-5">
+                <label class="col-form-label" for="descripcionEspecialidad">Nueva especialidad</label>
+                <input type="text" class="form-control" id="descripcionEspecialidad" [(ngModel)]="descripcionEspecialidad"
+                    name="descripcionEspecialidad" placeholder="Ingrese el nombre de la especialidad">
 
-                    <button type="button" class="btn btn-primary btn-block" (click)="agregarNuevaEspecialidad()">Agregar Especialidad</button>
-                  </diV>
-                </div>
+                <button type="button" class="btn btn-primary btn-block" (click)="agregarNuevaEspecialidad()">Agregar Especialidad</button>
             </div>
         </div>
     </div>

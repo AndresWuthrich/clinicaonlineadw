@@ -1,45 +1,45 @@
 <app-navbar></app-navbar>
 <!-- <br>< br> -->
 
-<div class="row">
+<div class="row" *ngIf="usuarioLogueado != null">
     <div class="col-md-10 mx-auto">
         <div class="back"><!--<div class="card">-->
             <div class="card-body">
                 <h1 class="text-center mb-3">Mi perfil</h1>
-                <div class="row" *ngIf="usuario != null">
+                <div class="row">
 
                     <div class="col-md-6 mx-auto mt-2 text-center">
                     <!-- <div class="col-md-6 mx-auto mt-2 text-center" *ngIf="usuario.perfil=='paciente'"> -->
                         <h4>imagen Perfil:</h4>
-                        <img src="{{usuario.imagenPerfil}}" class="tamanio" alt="foto 1 del usuario">
+                        <img src="{{usuarioLogueado.imagenPerfil}}" class="tamanio" alt="foto 1 del usuario">
                     </div>
 
                     <div class="col-md-3 mx-auto mt-2 text-center">
-                        <h4>Nombre: {{usuario.nombre}}</h4>
+                        <h4>Nombre: {{usuarioLogueado.nombre}}</h4>
                     </div>
                     <div class="col-md-3 mx-auto mt-2 text-center">
-                        <h4>Apellido: {{usuario.apellido}}</h4>
+                        <h4>Apellido: {{usuarioLogueado.apellido}}</h4>
                     </div>
                     <div class="col-md-6 mx-auto mt-2 text-center">
-                        <h4>Edad: {{usuario.edad}}</h4>
+                        <h4>Edad: {{usuarioLogueado.edad}}</h4>
                     </div>
                     <div class="col-md-6 mx-auto mt-2 text-center">
-                        <h4>DNI: {{usuario.dni}}</h4>
+                        <h4>DNI: {{usuarioLogueado.dni}}</h4>
                     </div>
                     <div class="col-md-6 mx-auto mt-2 text-center">
-                        <h4>Email: {{usuario.email}}</h4>
+                        <h4>Email: {{usuarioLogueado.email}}</h4>
                     </div>
                     <div class="col-md-6 mx-auto mt-2 text-center"> 
-                        <h4>Perfil: {{usuario.perfil}}</h4>
+                        <h4>Perfil: {{usuarioLogueado.perfil}}</h4>
                     </div>
-                    <div class="col-md-6 mx-auto mt-2 text-center" *ngIf="usuario.perfil=='paciente'">
+                    <div class="col-md-6 mx-auto mt-2 text-center" *ngIf="usuarioLogueado.perfil=='paciente'">
                         <h4>imagen Perfil 2:</h4>
-                        <img src="{{usuario.imagenPerfil2}}" class="tamanio" alt="foto 2 del usuario">
+                        <img src="{{usuarioLogueado.imagenPerfil2}}" class="tamanio" alt="foto 2 del usuario">
                     </div>
 
                     <!-- <button (click)="actualizacion()">Actualizar especialistas</button> -->
 
-                    <!-- <div class="col-md-12 mx-auto mt-2 text-center" *ngIf="usuario.perfil=='especialista'">
+                     <div class="col-md-12 mx-auto mt-2 text-center" *ngIf="usuarioLogueado.perfil=='especialista'">
                         <hr>
                         <h2>Mis horarios de atención al publico</h2>
 
@@ -53,7 +53,7 @@
                                     <th scope="col">Fin de jornada</th>
                                 </tr>
                             </thead>
-                            <tbody> -->
+                            <tbody>
                                 <!-- <tr *ngFor="let data of usuario.diasDeAtencion let i=index">
                                     <td><input type="checkbox" name="" [(ngModel)]="data.trabaja" [value]="data.trabaja"
                                             id=""></td>
@@ -68,12 +68,15 @@
                                         <h6>{{data.finaliza | pipeHora}}</h6>
                                     </td>
                                 </tr> -->
-                            <!-- </tbody>
+                            </tbody>
                         </table>
-                        <button class="btn btn-primary btn-block">Guardar</button> -->
+                        <button class="btn btn-primary btn-block">Guardar</button>
                         <!-- <button class="btn btn-primary btn-block" (click)="guardar()">Guardar</button> -->
 
-                    <!-- </div> -->
+                     </div> 
+                </div>
+                <div *ngIf="usuarioLogueado.perfil == 'paciente'">
+                    <app-historia-clinica></app-historia-clinica>
                 </div>
             </div>
         </div>

@@ -100,7 +100,8 @@ export class AuthService {
 
   Logout(){
     this.fireStoreAuth.signOut();
-    this.router.navigate(['login']);
+    this.router.navigate(['bienvenido']);
+
   }
 
   obtenerUsuarioActual() {

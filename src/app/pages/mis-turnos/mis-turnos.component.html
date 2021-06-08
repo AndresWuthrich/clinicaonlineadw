@@ -1,0 +1,94 @@
+<app-navbar></app-navbar>
+<!-- <br>< br> -->
+<p>mis-turnos works!</p>
+
+<div class="row" *ngIf="usuarioLogueado != null">
+<!-- <div class="row" *ngIf="usuarioLogueado != null && verTabla == true"> -->
+  <div class="col-md-10 mx-auto mt-4" *ngIf="usuarioLogueado.perfil=='paciente'">
+
+      <div class="card">
+          <div class="card-body">
+              <h1 class="text-center mb-3">Mis turnos</h1>
+
+              <table class="table table-hover">
+                  <thead>
+                      <tr>
+                          <th class="text-center">Nº</th>
+                          <th class="text-center">Fecha</th>
+                          <th class="text-center">Hora</th>
+                          <th class="text-center">Profesional</th>
+                          <th class="text-center">Especialidad</th>
+                          <th class="text-center">Paciente</th>
+                          <th class="text-center">Estado</th>
+                          <th class="text-center">Acciones</th>
+                      </tr>
+                  </thead>
+                  <tbody *ngFor="let turno of listaTurnos let i=index">
+                      <tr>
+                          <!-- <td class="text-left" class="text-center">{{i+1}}</td> -->
+                          <td class="text-left" class="text-center">{{turno.diaTurno}}</td>
+                          <!-- <td class="text-left" class="text-center">{{turno.horarioTurno | pipeHora}}</td> -->
+                          <td class="text-left" class="text-center">{{turno.horarioTurno}}</td>
+                          <td class="text-left" class="text-center">{{turno.especialista!.nombre}} </td>
+                          <td class="text-left" class="text-center">{{turno.especialidad!.descripcion}} </td>
+                          <td class="text-left" class="text-center">{{turno.paciente!.nombre}}</td>
+                          <td class="text-left" class="text-center">{{turno.estado}}</td>
+                          <td class="text-left" class="text-center">
+                              <button type="button" class="btn btn-danger" title="Cancelar turno"
+                                  (click)="cancelarTurno(turno)">
+                                  <i class="far fa-calendar-times"></i>
+                              </button>
+
+                              <!-- <ng-container *ngIf="item.turno.comentarioPaciente != '' || item.turno.comentarioProfesional != '';">
+                                <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top"
+                                  title="VER RESEÑA" style="margin-left: 0.5%;" (click)="Resenia(item)">
+                                  <img src={{this.iconoResenia}} style="width: 25px; height: 25px;">
+                                </button>
+                              </ng-container>
+                  
+                              <ng-container
+                                *ngIf="item.turno.estado == 'FINALIZADO' && (item.turno.comentarioPaciente != '' || item.turno.comentarioProfesional != '') && item.turno.encuesta.atencionRecibida == '';">
+                                <button type="button" class="btn btn-info" data-bs-toggle="tooltip" data-bs-placement="top"
+                                  title="REALIZAR ENCUESTA" style="margin-left: 0.5%;" (click)="Encuesta(item)">
+                                  <img src={{this.iconoEncuesta}} style="width: 25px; height: 25px;">
+                                </button>
+                              </ng-container>
+                  
+                              <ng-container *ngIf="item.turno.comentarioPaciente == '';">
+                                <ng-container *ngIf="item.turno.estado == 'FINALIZADO';">
+                                  <button type="button" class="btn btn-success" data-bs-toggle="tooltip" data-bs-placement="top"
+                                    title="CALIFICAR ATENCIÓN" style="margin-left: 0.5%;" (click)="Atencion(item)">
+                                    <img src={{this.iconoCalificar}} style="width: 25px; height: 25px;">
+                                  </button>
+                                </ng-container>
+                              </ng-container> -->
+                          </td>
+                      </tr>
+                  </tbody>
+              </table>
+
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- <div *ngIf="cancelarTurnoPantalla">
+  <app-cancelar (OpcionEvent)="eventoCancelarTurno($event)" (mensajeEvent)="eventoMensaje($event)">
+  </app-cancelar>
+</div> -->
+
+<!-- <div *ngIf="verReseniaTurno">
+  <app-mostrar-informacion-de-turno [Titulo]="'RESEÑA'" [subTitulo]="'OBSERVACIONES'" [Turno]='this.itemActual.turno'
+    (eOpcion)="eventReseniaTurno($event)"></app-mostrar-informacion-de-turno>
+</div>
+
+<div *ngIf="verAtencionTurno">
+  <app-confirmar-con-mensaje [Titulo]="'DEJAR LA ATENCIÓN RECIBIDA de'"
+    [subTitulo]="'DEJAR LA ATENCIÓN RECIBIDA POR EL PROFESIONAL'" (eOpcion)="eventAtencionTurno($event)"
+    (eMensaje)="setMsj($event)"></app-confirmar-con-mensaje>
+</div>
+
+<div *ngIf="verEncuestaTurno">
+  <app-encuesta-paciente (eOpcion)="eventEncuestaTurno($event)" (eMensaje)="GetEncuesta($event)">
+  </app-encuesta-paciente>
+</div> -->

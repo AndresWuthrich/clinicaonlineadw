@@ -11,7 +11,7 @@ import { UsuarioComponent } from '../usuario/usuario.component';
 })
 export class MiPerfilComponent implements OnInit {
 
-  public usuario: Usuario | null = null;
+  public usuarioLogueado: Usuario | null = null;
   
   constructor(public auth: AuthService, private usuarioService: UsuarioService) {
    }
@@ -24,7 +24,7 @@ export class MiPerfilComponent implements OnInit {
     if(usuarioActual?.email != null){
       var datosUsuario: any = await this.usuarioService.obtenerUsuarioPorEmail(usuarioActual?.email);
       console.log(datosUsuario);
-      this.usuario = datosUsuario;
+      this.usuarioLogueado = datosUsuario;
     }
   }
 

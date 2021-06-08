@@ -22,6 +22,10 @@ import { MiPerfilComponent } from './pages/mi-perfil/mi-perfil.component';
 import { SolicitarTurnoComponent } from './pages/solicitar-turno/solicitar-turno.component';
 // import { Ng2GoogleRecaptchaModule } from 'ng2-google-recaptcha';
 import { ExcelService } from './services/excel.service';
+import { MisTurnosComponent } from './pages/mis-turnos/mis-turnos.component';
+import { HistoriaClinicaComponent } from './pages/historia-clinica/historia-clinica.component';
+import { DetalleHistoriaClinicaComponent } from './pages/detalle-historia-clinica/detalle-historia-clinica.component';
+import { MisTurnosEspecialistaComponent } from './pages/mis-turnos-especialista/mis-turnos-especialista.component';
 
 
 @NgModule({
@@ -37,7 +41,11 @@ import { ExcelService } from './services/excel.service';
     TurnoComponent,
     EnvioEmailComponent,
     MiPerfilComponent,
-    SolicitarTurnoComponent
+    SolicitarTurnoComponent,
+    MisTurnosComponent,
+    HistoriaClinicaComponent,
+    DetalleHistoriaClinicaComponent,
+    MisTurnosEspecialistaComponent
   ],
   imports: [
     BrowserModule,

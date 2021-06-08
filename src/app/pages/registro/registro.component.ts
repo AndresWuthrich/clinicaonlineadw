@@ -76,12 +76,10 @@ export class RegistroComponent implements OnInit {
   }
 
   private onCaptchaComplete(response: any) {
-  console.log('reCAPTCHA response recieved:');
-  console.log(response.success);
-  console.log(response.token);
-}
-
-
+    console.log('reCAPTCHA response recieved:');
+    console.log(response.success);
+    console.log(response.token);
+  }
 
   elegirPerfil(perfil: string){
     this.perfil = perfil;
@@ -123,7 +121,8 @@ export class RegistroComponent implements OnInit {
         // this.email = this.password = '';
   
       } else {
-        this.usuarioAlta.especialidad = this.formRegistro.controls['especialidad'].value;
+        // this.usuarioAlta.especialidad = this.formRegistro.controls['especialidad'].value;
+        this.usuarioAlta.especialidad = this.listaEspecialidadesSeleccionadas;
         
         // console.log(this.imagenPerfil);
         this.usuarioService.agregarEspecialista(this.imagenPerfil, this.usuarioAlta);

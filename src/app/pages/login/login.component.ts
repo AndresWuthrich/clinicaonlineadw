@@ -34,35 +34,41 @@ export class LoginComponent implements OnInit {
 
     try{
       const usuarioLogin = await this.auth.Ingresar(this.email, this.password);
-    //   if (usuarioLogin && usuarioLogin.user?.emailVerified){
-    //     console.log('USER', usuarioLogin);
-    //     this.router.navigate(['bienvenido']);
-    //   }else if (usuarioLogin && usuarioLogin.user?.emailVerified==false){
-    //     this.router.navigate(['verificacion-email']);
-    //   } else {
-    //     this.router.navigate(['registro']);    
-    //   } 
+      console.log('IN!!!', usuarioLogin);
 
-    //   this.usuarioService.traerTodos().subscribe((usuarios: Usuario[]) => {
-    //     console.log(usuarios);
-    //     usuarios.forEach(usuario => {
-
-    //     })
-    //   });
-  
-  
 
       if (usuarioLogin && usuarioLogin.user?.emailVerified){
         console.log('USER', usuarioLogin);
-        this.router.navigate(['bienvenido']);
+
+        this.usuarioService.traerTodos().subscribe((usuarios: Usuario[]) => {
+          // console.log(usuarios);
+          usuarios.forEach(usuario => {
+            if(usuario.uid == usuarioLogin.user.uid){
+              if(usuario.perfil == 'especialista' && usuario.cuentaAprobada == false ){
+
+                console.log('HOLA', usuarioLogin);
+                console.log('HOLA2', usuario);
+
+                this.auth.Logout();
+
+                Swal.fire({
+                  title: 'Cuenta de usuario especialista debe ser aprobada por administrador'
+                });
+
+                this.router.navigate(['bienvenido']);
+              } else {
+
+                this.router.navigate(['bienvenido']);
+              }
+            }
+          })
+        });
+        // this.router.navigate(['bienvenido']);
       }else if (usuarioLogin && usuarioLogin.user?.emailVerified==false){
         this.router.navigate(['verificacion-email']);
       } else {
         this.router.navigate(['registro']);    
       } 
-
-
-
     }catch (error){
     console.log('error');
     }

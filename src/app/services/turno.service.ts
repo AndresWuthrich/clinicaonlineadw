@@ -27,7 +27,23 @@ export class TurnoService {
    agregarTurno(turno: Turno){
      return this.itemsCollection.add(JSON.parse(JSON.stringify(turno)));
    }
-  
+ 
+   traerTurnosPacientePorUid(uid:string) {
+    return this.turnos.pipe(map(dato => {
+      return dato.filter(turno => {
+        return turno.paciente!.uid == uid;
+      });
+    }));
+  }
+ 
+  traerTurnosEspecialistaPorUid(uid:string) {
+    return this.turnos.pipe(map(dato => {
+      return dato.filter(turno => {
+        return turno.especialista!.uid == uid;
+      });
+    }));
+  }
+
   traerTodos(){
     return this.turnos;
   }
