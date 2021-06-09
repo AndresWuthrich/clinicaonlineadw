@@ -81,7 +81,9 @@ export class UsuarioService {
     //   })
     // })).subscribe();
 
-    this.uploadImagen('imagenPerfil2', imagen2, usuario);
+    this.agregarImagenPerfil2(usuario, imagen2);
+
+    // this.uploadImagen('imagenPerfil2', imagen2, usuario);
 
     // this.filePath = `imagenes/${imagen2.name}`;
     // console.log(imagen2.name);
@@ -120,30 +122,40 @@ export class UsuarioService {
       fileRef.getDownloadURL().subscribe(urlImagen =>{
         console.log('URL_IMAGEN', urlImagen);
         if(imagenPerfil == 'imagenPerfil'){
-          this.img1 = urlImagen;
-          console.log("URL1" + this.img1);
-          console.log("perf" + usuario.perfil);
 
           usuario.imagenPerfil = urlImagen;
-          if(usuario.perfil == 'especialista' || usuario.perfil == 'administrador'){
-            this.agregarUsuario(usuario);
-          }
-          // usuario.imagenPerfil = urlImagen;
-          // console.log("URL1" + usuario.imagenPerfil);
-        } else{
-          this.img2 = urlImagen;
-          console.log("URL2" + this.img2);
+
+          console.log("URL1" + urlImagen);
           console.log("perf" + usuario.perfil);
 
-          usuario.imagenPerfil2 = urlImagen;
-          if(usuario.perfil == 'paciente'){
+          // if(usuario.perfil == 'especialista' || usuario.perfil == 'administrador'){
             this.agregarUsuario(usuario);
-          }
+          // }
+        } 
+        // else{
+        //   this.img2 = urlImagen;
+        //   console.log("URL2" + this.img2);
+        //   console.log("perf" + usuario.perfil);
+
+        //   usuario.imagenPerfil2 = urlImagen;
+        //   if(usuario.perfil == 'paciente'){
+        //     this.agregarUsuario(usuario);
+        //   }
           // usuario.imagenPerfil2 = urlImagen;
           // console.log("URL2" + usuario.imagenPerfil2);
-        }
+        // }
         })
     })).subscribe();
+  }
+
+  async agregarImagenPerfil2(usuario: Usuario, imagen: any){
+    usuario.imagenPerfil2 = imagen;
+    console.log(imagen);
+    var documentoUsuario = await this.obtenerDocumentoUsuario(usuario);
+    console.log(documentoUsuario);
+    if (documentoUsuario != null) {
+        this.actualizarImagenPerfil2(usuario.imagenPerfil2, documentoUsuario);
+    }
   }
 
   traerEspecialistas(){
@@ -180,6 +192,23 @@ export class UsuarioService {
       resolve(doc?.data());
       console.log(doc);
     })
+    });
+  }
+
+  async actualizarImagenPerfil2(imagen: any, documento: any){
+    var usuario = this.afs.collection(this.dbPath).doc(documento);
+
+    return usuario.update({
+      imagenPerfil2: imagen
+    }).then(() => {
+      Swal.fire({
+        title: 'Agregado de imagen 2 exitoso'
+      });
+    }).catch((error) => {
+      Swal.fire({
+        title: error.code,
+        text: error.message
+      });
     });
   }
 

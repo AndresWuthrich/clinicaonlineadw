@@ -1,10 +1,4 @@
-<!doctype html>
-<html lang="en">
-<head>
-<!--  <script src='https://www.google.com/recaptcha/api.js?hl=es'></script> -->
-  <!-- <script src='https://www.google.com/recaptcha/api.js'></script> -->
-  <script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit" async defer></script>
-</head>
+<form  #captchaProtectedForm="ngForm">
 <body class="container">
   <button class="btn fotoPaciente" (click)="elegirPerfil('paciente')" *ngIf="perfil!='paciente' && perfil!='especialista'">Paciente</button>
   <button class="btn fotoEspecialista" (click)="elegirPerfil('especialista')" *ngIf="perfil!='paciente' && perfil!='especialista'">Especialista</button>
@@ -111,8 +105,27 @@
         </div>
       </div>
 
-      <div class="g-recaptcha" data-sitekey="6LdCCPMaAAAAAGknNFbHeXd8ZdYAYGTPUQD0GJMA">CAPTCHA</div>
-    
+      <!-- <div class="g-recaptcha" data-sitekey="6LdCCPMaAAAAAGknNFbHeXd8ZdYAYGTPUQD0GJMA">CAPTCHA</div>
+ -->
+      <re-captcha [(ngModel)]="formModel.captcha" name="captcha" required
+        siteKey="6LdCCPMaAAAAAGknNFbHeXd8ZdYAYGTPUQD0GJMA"
+        #captchaControl="ngModel">
+      </re-captcha>
+      <div [hidden]="captchaControl.valid || captchaControl.pristine" class="error">
+        Captcha must be solved
+      </div>
+      <div [hidden]="!captchaControl.valid" class="success">
+        Captcha válido
+      </div>
+      <div [hidden]="captchaProtectedForm.form.valid" class="error">
+        The form must be filled out
+      </div>
+      <div [hidden]="!captchaProtectedForm.form.valid" class="success">
+        El formulario es válido
+      </div>
+      <button (click)="formModel.captcha = ''">Reset Captcha</button>
+
+
       <div class="row container">
         <div class="col-md-12 d-grid gap-2 container2">
           <button type="submit" class="btn btn-primary btn-block" [disabled]="signup">
@@ -141,4 +154,4 @@
     </div>
   </div>
 </body>
-</html>
+</form>

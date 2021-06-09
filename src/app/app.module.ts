@@ -20,7 +20,7 @@ import { TurnoComponent } from './pages/turno/turno.component';
 import { EnvioEmailComponent } from './pages/envio-email/envio-email.component';
 import { MiPerfilComponent } from './pages/mi-perfil/mi-perfil.component';
 import { SolicitarTurnoComponent } from './pages/solicitar-turno/solicitar-turno.component';
-// import { Ng2GoogleRecaptchaModule } from 'ng2-google-recaptcha';
+import { RecaptchaModule, RecaptchaFormsModule } from "ng-recaptcha";
 import { ExcelService } from './services/excel.service';
 import { MisTurnosComponent } from './pages/mis-turnos/mis-turnos.component';
 import { HistoriaClinicaComponent } from './pages/historia-clinica/historia-clinica.component';
@@ -54,7 +54,8 @@ import { MisTurnosEspecialistaComponent } from './pages/mis-turnos-especialista/
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireDatabaseModule,
     ReactiveFormsModule,
-    // Ng2GoogleRecaptchaModule
+    RecaptchaModule,
+    RecaptchaFormsModule
   ],
   providers: [AuthService, ExcelService],
   bootstrap: [AppComponent]
