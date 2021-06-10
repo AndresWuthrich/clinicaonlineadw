@@ -111,21 +111,20 @@
         siteKey="6LdCCPMaAAAAAGknNFbHeXd8ZdYAYGTPUQD0GJMA"
         #captchaControl="ngModel">
       </re-captcha>
+
       <div [hidden]="captchaControl.valid || captchaControl.pristine" class="error">
         Captcha must be solved
       </div>
-      <div [hidden]="!captchaControl.valid" class="success">
-        Captcha válido
-      </div>
+      <div [hidden]="!captchaControl.valid" class="success">Captcha is valid</div>
       <div [hidden]="captchaProtectedForm.form.valid" class="error">
         The form must be filled out
       </div>
       <div [hidden]="!captchaProtectedForm.form.valid" class="success">
-        El formulario es válido
+        The form is valid
       </div>
       <button (click)="formModel.captcha = ''">Reset Captcha</button>
 
-
+      
       <div class="row container">
         <div class="col-md-12 d-grid gap-2 container2">
           <button type="submit" class="btn btn-primary btn-block" [disabled]="signup">

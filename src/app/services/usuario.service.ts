@@ -7,7 +7,6 @@ import { AuthService } from './auth.service';
 import { finalize } from 'rxjs/operators';
 import { map } from 'rxjs/operators';
 import Swal from 'sweetalert2';
-import { resolve } from '@angular/compiler-cli/src/ngtsc/file_system';
 
 @Injectable({
   providedIn: 'root'
@@ -17,10 +16,11 @@ export class UsuarioService {
   private filePath: any;
   private dbPath = '/usuarios';
   // private downloadURL: Observable<string>;
-  itemsCollection: AngularFirestoreCollection<Usuario>;
+  public itemsCollection: AngularFirestoreCollection<Usuario>;
   public usuarios: Observable<Usuario[]>;
   img1: any;
   img2: any;
+  public usuarioLogueado: Usuario | null = null;
 
   constructor(private afs: AngularFirestore, private storage: AngularFireStorage, public auth: AuthService) {
     this.itemsCollection = this.afs.collection(this.dbPath);
@@ -31,6 +31,16 @@ export class UsuarioService {
         return data;
       });
     }));
+
+    var usuarioActual = this.auth.obtenerUsuarioActual();
+
+    // if(usuarioActual?.email != null){
+    //   var datosUsuario: any = this.obtenerUsuarioPorEmail(usuarioActual?.email);
+    //   console.log('DATO USER' + datosUsuario);
+    //   this.usuarioLogueado = datosUsuario;
+    // }
+    console.log('data' + this.usuarioLogueado?.horarioAtencion);
+
    }
 
   agregarUsuario(usuario: Usuario){
@@ -228,4 +238,31 @@ export class UsuarioService {
       });
     });
   }
+  
+  async actualizarDiasAtencion(user: Usuario) {
+      var usuario = this.afs.collection(this.dbPath).doc(user.uid);
+      console.log(usuario);
+      return usuario.update({
+        horarioAtencion: user.horarioAtencion,
+      })
+        .then(() => {
+          Swal.fire({
+            title: 'Agregado de día de atención exitoso'
+          });
+        }).catch((error) => {
+          Swal.fire({
+            title: error.code,
+            text: error.message
+          });
+        });
+    
+
+
+        //   console.log("Documento actualizado!");
+        // })
+        // .catch((error) => {
+        //   console.error("Error en la actualizacion: ", error);
+        // });
+    }
+
 }

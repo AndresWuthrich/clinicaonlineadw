@@ -40,41 +40,58 @@
                     <!-- <button (click)="actualizacion()">Actualizar especialistas</button> -->
 
                      <div class="col-md-12 mx-auto mt-2 text-center" *ngIf="usuarioLogueado.perfil=='especialista'">
+
+                        <div class="col-md-8">
+                            <div class="btn-group">
+                              <button type="button" class="btn btn-outline-info" routerLink="/solicitarturno">MIS TURNOS</button>
+                              <!-- <button type="button" class="btn btn-outline-info" routerLink="/mishorarios">Mis horarios</button> -->
+                              <button type="button" class="btn btn-outline-info" routerLink="/solicitarturno">PACIENTES</button>
+                            </div>
+                          </div>
+                      
                         <hr>
-                        <h2>Mis horarios de atención al publico</h2>
+                        <h2>Mis horarios de atención a pacientes</h2>
 
                         <table class="table table-hover">
                             <thead>
                                 <tr>
-                                    <th scope="col">Trabajo este dia ?</th>
-                                    <th scope="col">Dias</th>
-                                    <th scope="col">Rango prueba</th>
-                                    <th scope="col">Comienzo de jornada</th>
-                                    <th scope="col">Fin de jornada</th>
+                                    <th>Laborable</th>
+                                    <th>Dias</th>
+                                    <th>Inicio jornada</th>
+                                    <th>Fin jornada</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <!-- <tr *ngFor="let data of usuario.diasDeAtencion let i=index">
-                                    <td><input type="checkbox" name="" [(ngModel)]="data.trabaja" [value]="data.trabaja"
-                                            id=""></td>
-                                    <td>{{data.dia}}</td>
-                                    <td><input type="range" min="8" max="11" [(ngModel)]="data.inicia">
-                                        <h6>{{data.inicia | pipeHora}}</h6>
+                                <tr *ngFor="let data of usuarioLogueado.horarioAtencion let i=index">
+                                    <td><input type="checkbox" name="" [(ngModel)]="data.estado" [value]="data.estado" id=""></td>
+                                    <!-- <td>{{data.literal}}</td> -->
+                                    <!-- <td><input type="range" min="8" max="11" [(ngModel)]="data.inicio"> -->
+                                    <td><input type="number" [(ngModel)]="data.inicio">
+                                        <!-- <h6>{{data.inicio}}</h6> -->
+                                        <!-- <h6>{{data.inicia | pipeHora}}</h6> -->
                                     </td>
-                                    <td><input type="range" min="14" max="19" *ngIf="data.dia != 'SABADO'"
-                                            [(ngModel)]="data.finaliza">
-                                        <input type="range" min="12" max="14" *ngIf="data.dia == 'SABADO'"
-                                            [(ngModel)]="data.finaliza">
-                                        <h6>{{data.finaliza | pipeHora}}</h6>
+                                    <!-- <td><input type="range" min="14" max="19" *ngIf="data.literal != 'Sabado'" -->
+                                    <td><input type="number" *ngIf="data.literal != 'Sabado'"
+                                            [(ngModel)]="data.fin">
+                                            <!-- <input type="range" min="12" max="14" *ngIf="data.literal == 'Sabado'" -->
+                                            <input type="number" *ngIf="data.literal == 'Sabado'"
+                                            [(ngModel)]="data.fin">
+                                        <!-- <h6>{{data.fin}}</h6> -->
+                                        <!-- <h6>{{data.finaliza | pipeHora}}</h6> -->
                                     </td>
-                                </tr> -->
+                                </tr>
                             </tbody>
                         </table>
-                        <button class="btn btn-primary btn-block">Guardar</button>
-                        <!-- <button class="btn btn-primary btn-block" (click)="guardar()">Guardar</button> -->
+                        <!-- <button class="btn btn-primary btn-block">Guardar</button> -->
+                        <button class="btn btn-primary btn-block" (click)="guardar()">Guardar</button>
+
 
                      </div> 
                 </div>
+                <!-- <div *ngIf="usuarioLogueado.perfil == 'especialista'">
+                  <app-mis-horarios></app-mis-horarios>
+                </div> -->
+
                 <div *ngIf="usuarioLogueado.perfil == 'paciente'">
                     <app-historia-clinica></app-historia-clinica>
                 </div>

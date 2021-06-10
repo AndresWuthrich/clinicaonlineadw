@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
       this.loading = false;
     }, 3000);
 
-    try{
+    // try{
       const usuarioLogin = await this.auth.Ingresar(this.email, this.password);
       console.log('IN!!!', usuarioLogin);
 
@@ -69,9 +69,9 @@ export class LoginComponent implements OnInit {
       } else {
         this.router.navigate(['registro']);    
       } 
-    }catch (error){
-    console.log('error');
-    }
+    // }catch (error){
+    // console.log('error');
+    // }
 
     // this.email=this.password="";
 

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { DiasAtencion } from 'src/app/clases/dias-atencion';
 import { Especialidad } from 'src/app/clases/especialidad';
 import { Usuario } from 'src/app/clases/usuario';
 import { AuthService } from 'src/app/services/auth.service';
@@ -32,6 +33,7 @@ export class RegistroComponent implements OnInit {
 
   // title = 'captcha-example';
   // private recaptchaSiteKey = '6LdCCPMaAAAAAGknNFbHeXd8ZdYAYGTPUQD0GJMA';
+
   public formModel: FormModel = {};
 
   // email: string = '';
@@ -49,6 +51,7 @@ export class RegistroComponent implements OnInit {
   public banderaEspecialidadSeleccionada = true;
   public listaEspecialidadesSeleccionadas: Array<Especialidad> = new Array<Especialidad>();
   public descripcionEspecialidad: string = '';
+  public listaDiasSeleccionadas: Array<DiasAtencion> = new Array<DiasAtencion>();  
 
   private dbpath = '/usuarios';
 
@@ -84,6 +87,18 @@ export class RegistroComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.agregarDias();
+  }
+
+  agregarDias() {
+
+    this.listaDiasSeleccionadas.push(new DiasAtencion(true, 'Lunes', 8, 19));
+    this.listaDiasSeleccionadas.push(new DiasAtencion(true, 'Martes', 8, 19));
+    this.listaDiasSeleccionadas.push(new DiasAtencion(true, 'Miercoles', 8, 19));
+    this.listaDiasSeleccionadas.push(new DiasAtencion(true, 'Jueves', 8, 19));
+    this.listaDiasSeleccionadas.push(new DiasAtencion(true, 'Viernes', 8, 19));
+    this.listaDiasSeleccionadas.push(new DiasAtencion(true, 'Sabado', 8, 14));
+
   }
 
   // private onCaptchaComplete(response: any) {
@@ -134,7 +149,16 @@ export class RegistroComponent implements OnInit {
       } else {
         // this.usuarioAlta.especialidad = this.formRegistro.controls['especialidad'].value;
         this.usuarioAlta.especialidad = this.listaEspecialidadesSeleccionadas;
-        
+
+        // this.listaDiasSeleccionadas.push(new DiasAtencion(true, 'Lunes', 8, 19));
+        // this.listaDiasSeleccionadas.push(new DiasAtencion(true, 'Martes', 8, 19));
+        // this.listaDiasSeleccionadas.push(new DiasAtencion(true, 'Miercoles', 8, 19));
+        // this.listaDiasSeleccionadas.push(new DiasAtencion(true, 'Jueves', 8, 19));
+        // this.listaDiasSeleccionadas.push(new DiasAtencion(true, 'Viernes', 8, 19));
+        // this.listaDiasSeleccionadas.push(new DiasAtencion(true, 'Sabado', 8, 14));
+
+        this.usuarioAlta.horarioAtencion = this.listaDiasSeleccionadas;
+
         // console.log(this.imagenPerfil);
         this.usuarioService.agregarEspecialista(this.imagenPerfil, this.usuarioAlta);
         // this.email = this.password = '';

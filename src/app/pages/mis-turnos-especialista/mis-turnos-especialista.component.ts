@@ -36,9 +36,9 @@ export class MisTurnosEspecialistaComponent implements OnInit {
       console.log(dataUser);
       this.usuarioLogueado = dataUser;
 
-      // this.turnoService.traerTurnosEspecialistaPorUid(this.usuarioLogueado?.uid).subscribe(data => {
-      //   this.listadoTurnos = data;
-      // });
+      this.turnoService.traerTurnosEspecialistaPorUid(dataUser.uid).subscribe(data => {
+        this.listadoTurnos = data;
+      });
     }
   }
 

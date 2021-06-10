@@ -26,6 +26,7 @@ import { MisTurnosComponent } from './pages/mis-turnos/mis-turnos.component';
 import { HistoriaClinicaComponent } from './pages/historia-clinica/historia-clinica.component';
 import { DetalleHistoriaClinicaComponent } from './pages/detalle-historia-clinica/detalle-historia-clinica.component';
 import { MisTurnosEspecialistaComponent } from './pages/mis-turnos-especialista/mis-turnos-especialista.component';
+import { MisHorariosComponent } from './pages/mis-horarios/mis-horarios.component';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { MisTurnosEspecialistaComponent } from './pages/mis-turnos-especialista/
     MisTurnosComponent,
     HistoriaClinicaComponent,
     DetalleHistoriaClinicaComponent,
-    MisTurnosEspecialistaComponent
+    MisTurnosEspecialistaComponent,
+    MisHorariosComponent
   ],
   imports: [
     BrowserModule,
