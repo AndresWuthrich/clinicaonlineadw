@@ -71,7 +71,7 @@ export class MiPerfilComponent implements OnInit {
     if (this.usuarioLogueado != null) {
       var uidUser = await this.usuarioService.obtenerDocumentoUsuario(this.usuarioLogueado);
       if (uidUser != null) {
-        this.usuarioService.actualizarDiasAtencion(this.usuarioLogueado);
+        this.usuarioService.actualizarDiasAtencion(uidUser, this.usuarioLogueado);
       }
     }
   }

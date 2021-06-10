@@ -207,6 +207,7 @@ export class UsuarioService {
 
   async actualizarImagenPerfil2(imagen: any, documento: any){
     var usuario = this.afs.collection(this.dbPath).doc(documento);
+    console.log(imagen);
 
     return usuario.update({
       imagenPerfil2: imagen
@@ -239,8 +240,8 @@ export class UsuarioService {
     });
   }
   
-  async actualizarDiasAtencion(user: Usuario) {
-      var usuario = this.afs.collection(this.dbPath).doc(user.uid);
+  async actualizarDiasAtencion(documento: any, user: Usuario) {
+      var usuario = this.afs.collection(this.dbPath).doc(documento);
       console.log(usuario);
       return usuario.update({
         horarioAtencion: user.horarioAtencion,

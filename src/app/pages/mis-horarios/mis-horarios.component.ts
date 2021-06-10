@@ -131,18 +131,18 @@ export class MisHorariosComponent implements OnInit {
         // }
         if(this.usuarioLogueado != null){
 
-          this.diaAlta.estado = true;
-          this.diaAlta.inicio = parseInt(this.inicio);
-          this.diaAlta.fin = parseInt(this.fin);
-          // this.diaAlta.literal = this.sDia.toUpperCase();
-          this.diaAlta.literal = this.sDia;
-          // this.diaService.agregarDia(this.diaAlta);
-          console.log(this.diaAlta);
+          // this.diaAlta.estado = true;
+          // this.diaAlta.inicio = parseInt(this.inicio);
+          // this.diaAlta.fin = parseInt(this.fin);
+          // // this.diaAlta.literal = this.sDia.toUpperCase();
+          // this.diaAlta.literal = this.sDia;
+          // // this.diaService.agregarDia(this.diaAlta);
+          // console.log(this.diaAlta);
 
-          this.listaDiasAtencion.push(this.diaAlta);
-          this.usuarioLogueado.horarioAtencion = this.listaDiasAtencion;
+          // this.listaDiasAtencion.push(this.diaAlta);
+          // this.usuarioLogueado.horarioAtencion = this.listaDiasAtencion;
 
-          this.usuarioService.actualizarDiasAtencion(this.usuarioLogueado);
+          // this.usuarioService.actualizarDiasAtencion(this.usuarioLogueado);
           console.log(this.usuarioLogueado);
         }
     //   }else{

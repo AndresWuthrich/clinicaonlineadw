@@ -41,13 +41,13 @@
 
                      <div class="col-md-12 mx-auto mt-2 text-center" *ngIf="usuarioLogueado.perfil=='especialista'">
 
-                        <div class="col-md-8">
+                        <!-- <div class="col-md-8">
                             <div class="btn-group">
                               <button type="button" class="btn btn-outline-info" routerLink="/solicitarturno">MIS TURNOS</button>
-                              <!-- <button type="button" class="btn btn-outline-info" routerLink="/mishorarios">Mis horarios</button> -->
+                              <button type="button" class="btn btn-outline-info" routerLink="/mishorarios">Mis horarios</button>
                               <button type="button" class="btn btn-outline-info" routerLink="/solicitarturno">PACIENTES</button>
                             </div>
-                          </div>
+                          </div> -->
                       
                         <hr>
                         <h2>Mis horarios de atención a pacientes</h2>
@@ -64,7 +64,7 @@
                             <tbody>
                                 <tr *ngFor="let data of usuarioLogueado.horarioAtencion let i=index">
                                     <td><input type="checkbox" name="" [(ngModel)]="data.estado" [value]="data.estado" id=""></td>
-                                    <!-- <td>{{data.literal}}</td> -->
+                                    <td>{{data.literal}}</td> 
                                     <!-- <td><input type="range" min="8" max="11" [(ngModel)]="data.inicio"> -->
                                     <td><input type="number" [(ngModel)]="data.inicio">
                                         <!-- <h6>{{data.inicio}}</h6> -->
