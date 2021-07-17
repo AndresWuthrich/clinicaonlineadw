@@ -2,6 +2,11 @@ body{
     height: 100%;
 }
 
+.registro{
+    max-width: 70%;
+    max-height: 30%;
+}
+
 div{ font-family:'Gill Sans'; }
 
 .container {

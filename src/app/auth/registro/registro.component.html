@@ -1,0 +1,156 @@
+<!-- <form  #captchaProtectedForm="ngForm"> -->
+    <body class="container">
+        <button class="btn fotoPaciente" (click)="elegirPerfil('paciente')" *ngIf="perfil!='paciente' && perfil!='especialista'">Paciente</button>
+        <button class="btn fotoEspecialista" (click)="elegirPerfil('especialista')" *ngIf="perfil!='paciente' && perfil!='especialista'">Especialista</button>
+      
+        <div *ngIf="perfil=='paciente' || perfil=='especialista'" class="paciente" [ngClass]="{especialista: perfil=='especialista'}">
+          <form [formGroup]="formRegistro" (ngSubmit)="registro()" *ngIf="perfil=='paciente' || perfil=='especialista'">
+            <div class="row">
+              <div class="col-md-12 mb-3">
+                <h2>Registro</h2>
+              </div>
+            </div>
+            <div class="row formulario container">
+              <div class="col-md-6 mb-2">
+                <label for="nombre" class="form-label">Nombre</label>
+                <input type="text" class="form-control" id="nombre" placeholder="Ingrese nombre" formControlName='nombre'>
+                <small class="invalid" *ngIf="formRegistro.get('nombre')?.errors?.required && formRegistro.get('nombre')?.touched">El nombre es requerido</small>
+              </div>
+              <div class="col-md-6 mb-2">
+                <label for="apellido" class="form-label">Apellido</label>
+                <input type="text" class="form-control" id="apellido" placeholder="Ingrese apellido" formControlName='apellido'>
+                <small class="invalid" *ngIf="formRegistro.get('apellido')?.errors?.required && formRegistro.get('apellido')?.touched">El apellido es requerido</small>
+              </div>
+              <div class="col-md-6 mb-2">
+                <label for="edad" class="form-label">Edad</label>
+                <input type="number" class="form-control" id="edad" placeholder="Ingrese edad" formControlName='edad'>
+                <small class="invalid" *ngIf="formRegistro.get('edad')?.errors?.required && formRegistro.get('edad')?.touched">La edad es requerida</small>
+                <small class="invalid" *ngIf="formRegistro.get('edad')?.errors?.min || formRegistro.get('edad')?.errors?.max && formRegistro.get('edad')?.touched ">La edad debe ser entre 18 a 99 años</small>
+              </div>
+      
+              <div class="col-md-6 mb-2">
+                <label for="dni" class="form-label">DNI</label>
+                <input type="number" class="form-control" id="dni" placeholder="Ingrese dni" formControlName='dni'>
+                <small class="invalid" *ngIf="formRegistro.get('dni')?.errors?.required && formRegistro.get('dni')?.touched">El dni es requerido</small>
+                <small class="invalid" *ngIf="formRegistro.get('dni')?.errors?.min && formRegistro.get('dni')?.touched">El dni debe ser mayor a 1.000.000</small>
+              </div>
+      
+              <div class="col-md-12 mb-2" *ngIf="perfil=='paciente'">
+                <label for="obraSocial" class="form-label">Obra social</label>
+                <input type="text" class="form-control" id="obraSocial" placeholder="Ingrese obra social" formControlName='obraSocial'>
+                <small class="invalid" *ngIf="formRegistro.get('obraSocial')?.errors?.required && formRegistro.get('obraSocial')?.touched">La obra social es requerida</small>
+              </div>
+      
+              <!-- <div class="col-md-12 mb-2" *ngIf="perfil=='especialista'">
+                <label for="especialidad" class="form-label">Especialidad</label>
+                <input type="text" class="form-control" id="especialidad" placeholder="Ingrese especialidad" formControlName='especialidad'>
+                <small class="invalid" *ngIf="formRegistro.get('especialidad')?.errors?.required && formRegistro.get('especialidad')?.touched">La especialidad es requerida</small>
+              </div>
+       -->
+              <div class="col-md-12" id="box" *ngIf="perfil=='especialista'">
+                <div class="card">
+                    <div class="card-body">
+                        <h4 class="d-flex justify-content-between align-items-center mb-3" *ngIf="listaEspecialidades != null">
+                            <h4>Lista de especialidades</h4>
+                        </h4>
+                        <ul class="list-group mb-3">
+                            <li class="list-group-item d-flex justify-content-between" *ngFor="let especialidad of listaEspecialidades"
+                              (click)="agregarEspecialidad(especialidad)">
+                                <div>
+                                    <h6 class="text-info">{{especialidad.descripcion}}</h6>
+                                </div>
+                            </li>
+                        </ul>
+                        <hr>
+                        <label class="mb-2">Especialidad/es. Seleccione especialidad/es de la lista o genere una nueva</label>
+                        <div class="col-md-12 mb-2" *ngIf="!banderaEspecialidadSeleccionada">
+                            <ul class="list-group card-body overflow-auto" id="boxConScroll"
+                                style="height: 130px;" #scrollMe [scrollTop]="scrollMe">
+                                <li type="text"
+                                    class="list-group-item d-flex justify-content-between lh-condensed"
+                                    *ngFor="let especialidad of listaEspecialidadesSeleccionadas" disable>
+              
+                                    <input type="text" class="form-control" value="{{especialidad.descripcion}}" disabled>
+                                        <!-- value="{{especialidad.nombre}} {{especialidad.duracion}}" disabled> -->
+                                    <!-- <button class="btn btn-danger"
+                                        (click)="eliminarEspecialidad(especialidad)"><b>X</b></button> -->
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+              </div>
+      
+              <div class="col-md-12 mb-2">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="Ingrese email" formControlName='email'>
+                <small class="invalid" *ngIf="formRegistro.get('email')?.errors?.required && formRegistro.get('email')?.touched">El email es requerido</small>
+              </div>
+              <div class="col-md-12 mb-2">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Ingrese password" formControlName='password'>
+                <small class="invalid" *ngIf="formRegistro.get('password')?.errors?.required && formRegistro.get('password')?.touched">La password es requerida</small>
+                <small class="invalid" *ngIf="formRegistro.get('password')?.errors?.minLength && formRegistro.get('password')?.touched">La password debe tener mínimo 6 caracteres</small>
+              </div>
+      
+              <div class="col-md-12 mb-2">
+                <label for="imagen" class="form-label">Imagen de perfil</label>
+                <input type="file" class="form-control" id="imagen" placeholder="Ingrese imagen de perfil" formControlName='imagen' (change)="cargarImagen($event)">
+                <small class="invalid" *ngIf="formRegistro.get('imagen')?.errors?.required && formRegistro.get('imagen')?.touched">La imagen de perfil es requerida</small>
+              </div>
+              <div class="col-md-12 mb-2" *ngIf="perfil=='paciente'">
+                <label for="imagen2" class="form-label">2da imagen de perfil</label>
+                <input type="file" class="form-control" id="imagen2" placeholder="Ingrese 2da imagen de perfil" formControlName='imagen2' (change)="cargarImagen2($event)">
+                <small class="invalid" *ngIf="formRegistro.get('imagen2')?.errors?.required && formRegistro.get('imagen2')?.touched">La 2da imagen de perfil es requerida</small>
+              </div>
+            </div>
+      
+            <!-- <div class="g-recaptcha" data-sitekey="6LdCCPMaAAAAAGknNFbHeXd8ZdYAYGTPUQD0GJMA">CAPTCHA</div>
+       -->
+            <!-- <re-captcha [(ngModel)]="formModel.captcha" name="captcha" required
+              siteKey="6LdCCPMaAAAAAGknNFbHeXd8ZdYAYGTPUQD0GJMA"
+              #captchaControl="ngModel">
+            </re-captcha>
+      
+            <div [hidden]="captchaControl.valid || captchaControl.pristine" class="error"> -->
+              <!-- Captcha must be solved -->
+            <!-- </div> -->
+            <!-- <div [hidden]="!captchaControl.valid" class="success">Captcha is valid</div> -->
+            <!-- <div [hidden]="captchaProtectedForm.form.valid" class="error"> -->
+              <!-- The form must be filled out -->
+            <!-- </div>
+            <div [hidden]="!captchaProtectedForm.form.valid" class="success"> -->
+              <!-- The form is valid -->
+            <!-- </div>
+            <button (click)="formModel.captcha = ''">Reset Captcha</button> -->
+      
+            
+            <div class="row container">
+              <div class="col-md-12 d-grid gap-2 container2">
+                <button type="submit" class="btn btn-primary btn-block" [disabled]="signup" [disabled]="formRegistro.invalid">
+                    <span *ngIf="signup" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                  Registro
+                </button>
+              </div>
+              <div class="col-md-12 d-grid gap-2 container2">
+                <button class="btn btn-danger btn-block" routerLink="/">Me arrepentí</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      
+        <div class="col-md-12" id="box" *ngIf="perfil=='especialista'">
+          <div class="card">
+              <div class="card-body">
+                  <div class="form-group col-md-5">
+                      <label class="col-form-label" for="descripcionEspecialidad">Nueva especialidad</label>
+                      <input type="text" class="form-control" id="descripcionEspecialidad" [(ngModel)]="descripcionEspecialidad"
+                          name="descripcionEspecialidad" placeholder="Ingrese el nombre de la especialidad">
+      
+                      <button type="button" class="btn btn-primary btn-block" (click)="agregarNuevaEspecialidad()">Agregar Especialidad</button>
+                  </div>
+              </div>
+          </div>
+        </div>
+      </body>
+      <!-- </form> -->

@@ -10,7 +10,13 @@
 
   <div class="col-md-10">
     <div class="card">
+      <div class="card-body registro">
+        <app-registro></app-registro>
+      </div>
+    </div>
+    <div class="card">
         <div class="card-body">
+
 
           <!-- <form class="form" [formGroup]="formAdmin" (ngSubmit)="registroAdmin()" *ngIf="perfil=='paciente' || perfil=='especialista'"> -->
         <form class="form" [formGroup]="formAdmin" (ngSubmit)="registro()">
@@ -64,8 +70,7 @@
           </div>
           <div class="row">
             <div class="col-md-12 d-grid gap-2">
-              <!-- <button type="submit" class="btn btn-primary btn-block" [disabled]="signup"  [disabled]='formRegistro.invalid'> -->
-              <button type="submit" class="btn btn-primary btn-block" [disabled]="signup">
+              <button type="submit" class="btn btn-primary btn-block" [disabled]="signup" [disabled]="formAdmin.invalid">
                   <span *ngIf="signup" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
                 Registro
               </button>

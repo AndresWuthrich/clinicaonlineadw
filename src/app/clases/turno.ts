@@ -2,7 +2,7 @@ import { Especialidad } from "./especialidad";
 import { Usuario } from "./usuario";
 
 export class Turno {
-    uidEspecialista: string = '';
+    // uidEspecialista: string = '';
     paciente: Usuario | null = null;
     especialista: Usuario | null = null;
     especialidad: Especialidad | null = null;
@@ -11,16 +11,16 @@ export class Turno {
     horarioTurno: string = '';
     // comentario: string = '';
     // encuesta: string = '';
-    encuesta: any = {
+    encuesta?: any = {
         atencionRecibida: ''//,
         // servicioOnline: '',
         // estadoEstablecimiento: '',
         // recomiendaClinida: ''
     };
-    comentarioAdmin: string = '';
-    comentarioPaciente: string = '';
-    comentarioEspecialista: string = '';
-    historiaClinica: any = {
+    comentarioAdmin?: string = '';
+    comentarioPaciente?: string = '';
+    comentarioEspecialista?: string = '';
+    historiaClinica?: any = {
         altura: '',
         peso: '',
         temperatura: '',

@@ -76,7 +76,7 @@ export class RegistroComponent implements OnInit {
 
       'imagen2':['', Validators.required],      
       'obraSocial':['', Validators.required],
-      'especialidad':['', Validators.required],          
+      // 'especialidad':['', Validators.required],          
     });
 
     this.especialidadService.traerTodas().subscribe((especialidades: Especialidad[]) => {
@@ -88,6 +88,7 @@ export class RegistroComponent implements OnInit {
 
   ngOnInit(): void {
     this.agregarDias();
+    console.log(this.formRegistro);
   }
 
   agregarDias() {

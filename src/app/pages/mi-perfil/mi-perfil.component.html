@@ -11,7 +11,7 @@
                     <div class="col-md-6 mx-auto mt-2 text-center">
                     <!-- <div class="col-md-6 mx-auto mt-2 text-center" *ngIf="usuario.perfil=='paciente'"> -->
                         <h4>imagen Perfil:</h4>
-                        <img src="{{usuarioLogueado.imagenPerfil}}" class="tamanio" alt="foto 1 del usuario">
+                        <img src="{{usuarioLogueado.imagenPerfil}}">
                     </div>
 
                     <div class="col-md-3 mx-auto mt-2 text-center">
@@ -88,9 +88,9 @@
 
                      </div> 
                 </div>
-                <!-- <div *ngIf="usuarioLogueado.perfil == 'especialista'">
+                <div *ngIf="usuarioLogueado.perfil == 'especialista'">
                   <app-mis-horarios></app-mis-horarios>
-                </div> -->
+                </div>
 
                 <div *ngIf="usuarioLogueado.perfil == 'paciente'">
                     <app-historia-clinica></app-historia-clinica>
