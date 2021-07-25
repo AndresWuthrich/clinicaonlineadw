@@ -2,21 +2,20 @@ import { Especialidad } from "./especialidad";
 import { Usuario } from "./usuario";
 
 export class Turno {
-    // uidEspecialista: string = '';
+    id: string = '';
     paciente: Usuario | null = null;
     especialista: Usuario | null = null;
     especialidad: Especialidad | null = null;
-    estado: string = ''; //aceptado - realizado - rechazado - cancelado
+    estado: string = ''; //pendiente - aceptado - realizado - rechazado - cancelado
     diaTurno: string = '';
     horarioTurno: string = '';
-    // comentario: string = '';
-    // encuesta: string = '';
     encuesta?: any = {
-        atencionRecibida: ''//,
-        // servicioOnline: '',
-        // estadoEstablecimiento: '',
-        // recomiendaClinida: ''
+        //atencionRecibida: ''//,
+        recomendar: '',
+        sugerencia: ''
     };
+    calificacionAtencion?: string = '';
+    mensajeCalificacionAtencion?: string = '';
     comentarioAdmin?: string = '';
     comentarioPaciente?: string = '';
     comentarioEspecialista?: string = '';

@@ -48,45 +48,6 @@
                               <button type="button" class="btn btn-outline-info" routerLink="/solicitarturno">PACIENTES</button>
                             </div>
                           </div> -->
-                      
-                        <hr>
-                        <h2>Mis horarios de atención a pacientes</h2>
-
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Laborable</th>
-                                    <th>Dias</th>
-                                    <th>Inicio jornada</th>
-                                    <th>Fin jornada</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr *ngFor="let data of usuarioLogueado.horarioAtencion let i=index">
-                                    <td><input type="checkbox" name="" [(ngModel)]="data.estado" [value]="data.estado" id=""></td>
-                                    <td>{{data.literal}}</td> 
-                                    <!-- <td><input type="range" min="8" max="11" [(ngModel)]="data.inicio"> -->
-                                    <td><input type="number" [(ngModel)]="data.inicio">
-                                        <!-- <h6>{{data.inicio}}</h6> -->
-                                        <!-- <h6>{{data.inicia | pipeHora}}</h6> -->
-                                    </td>
-                                    <!-- <td><input type="range" min="14" max="19" *ngIf="data.literal != 'Sabado'" -->
-                                    <td><input type="number" *ngIf="data.literal != 'Sabado'"
-                                            [(ngModel)]="data.fin">
-                                            <!-- <input type="range" min="12" max="14" *ngIf="data.literal == 'Sabado'" -->
-                                            <input type="number" *ngIf="data.literal == 'Sabado'"
-                                            [(ngModel)]="data.fin">
-                                        <!-- <h6>{{data.fin}}</h6> -->
-                                        <!-- <h6>{{data.finaliza | pipeHora}}</h6> -->
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        <!-- <button class="btn btn-primary btn-block">Guardar</button> -->
-                        <button class="btn btn-primary btn-block" (click)="guardar()">Guardar</button>
-
-
-                     </div> 
                 </div>
                 <div *ngIf="usuarioLogueado.perfil == 'especialista'">
                   <app-mis-horarios></app-mis-horarios>

@@ -1,6 +1,6 @@
 <div class="card" *ngIf="user | async as user; else loading">
     <div class="card-body">
-        <span class="close" title="Close Modal" routerLink="/login">×</span>
+        <span class="close" title="Close Modal" routerLink="/auth/login">×</span>
 
         {{ user | async | json }}
         <h3 class="card-title text-center">Gracias por registrarse</h3>

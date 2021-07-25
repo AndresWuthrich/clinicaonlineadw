@@ -24,11 +24,10 @@ export class HistoriaClinicaComponent implements OnInit {
   cancelarTurnoPantalla: boolean = false;
 
   constructor(public auth: AuthService, private usuarioService: UsuarioService, private turnoService: TurnoService) {
-    // this._Tservice.traerTodos().subscribe((turnos: Turno[]) => {
-    //   this.listadoTurnos = turnos;
-    //   console.log(this.listadoTurnos);
-    // });
-
+    this.turnoService.traerTodos().subscribe((turnos: Turno[]) => {
+      this.listaTurnos = turnos;
+      console.log(this.listaTurnos);
+    });
 
   }
 
@@ -42,9 +41,13 @@ export class HistoriaClinicaComponent implements OnInit {
       console.log(dataUser);
       this.usuarioLogueado = dataUser;
 
-      // this.turnoService.obtenerTurnoDe(this.usuarioLogueado?.uid).subscribe(data => {
-      //   this.listaTurnos = data;
-      // });
+
+      if(this.usuarioLogueado != null){
+        this.turnoService.traerTurnosPacientePorUid(dataUser.uid).subscribe(data => {
+          this.listaTurnos = data;
+        });
+      }
+
     }
   }
 

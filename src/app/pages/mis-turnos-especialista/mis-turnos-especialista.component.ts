@@ -23,6 +23,8 @@ export class MisTurnosEspecialistaComponent implements OnInit {
   //Pantallas
   verTabla: boolean = true;
   cancelarTurnoPantalla: boolean = false;
+  finalizarTurnoPantalla: boolean = false;
+  rechazarTurnoPantalla: boolean = false;
 
   constructor(public auth: AuthService, private usuarioService: UsuarioService, private turnoService: TurnoService) { }
 
@@ -42,7 +44,6 @@ export class MisTurnosEspecialistaComponent implements OnInit {
     }
   }
 
-
   cancelarTurno(turno: Turno) {
     this.turnoActual = turno;
     this.verTabla = false;
@@ -55,17 +56,60 @@ export class MisTurnosEspecialistaComponent implements OnInit {
       console.log(this.mensaje);
       if (event$) {
 
-        // this.turnoActual!.comentarioProfesional = this.mensaje;
-        this.turnoActual!.estado = 'CANCELADO';
+        this.turnoActual!.comentarioEspecialista = this.mensaje;
+        this.turnoActual!.estado = 'Cancelado';
 
-        // var idTurno = await this._Tservice.obtenerKeyTurno(this.turnoActual!);
-        // console.log(this.turnoActual);
-        // console.log(idTurno);
-        // if (idTurno != null) {
-        //   this._Tservice.updateTurnoCancelar(idTurno, this.turnoActual!);
-        // }
+        var idTurno = await this.turnoService.obtenerDocumentoTurno(this.turnoActual!);
+        console.log(this.turnoActual);
+        console.log(idTurno);
+        if (idTurno != null) {
+          this.turnoService.updateComentario(idTurno, this.turnoActual!);
+        }
       }
       this.cancelarTurnoPantalla = false;
+      this.verTabla = true;
+
+      this.turnoActual = null;
+      this.mensaje = '';
+    }, 100);
+  }
+
+  async aceptarTurno(turno: Turno) {
+    this.turnoActual = turno;
+    this.turnoActual!.estado = 'Aceptado';
+
+    var idTurno = await this.turnoService.obtenerDocumentoTurno(this.turnoActual!);
+    console.log(this.turnoActual);
+    console.log(idTurno);
+    if (idTurno != null) {
+      this.turnoService.updateComentario(idTurno, this.turnoActual!);
+    }
+    console.log("entro");
+  }
+  
+  finalizarTurno(turno: Turno) {
+    this.turnoActual = turno;
+    this.verTabla = false;
+    this.finalizarTurnoPantalla = true;
+  }
+
+  eventoFinalizarTurno($event: any) {
+    setTimeout(async () => {
+      console.log($event);
+      console.log(this.mensaje);
+      if ($event) {
+
+        this.turnoActual!.comentarioEspecialista = this.mensaje;
+        this.turnoActual!.estado = 'Finalizado';
+
+        var idTurno = await this.turnoService.obtenerDocumentoTurno(this.turnoActual!);
+        console.log(this.turnoActual);
+        console.log(idTurno);
+        if (idTurno != null) {
+          this.turnoService.updateComentario(idTurno, this.turnoActual!);
+        }
+      }
+      this.finalizarTurnoPantalla = false;
       this.verTabla = true;
 
       this.turnoActual = null;
@@ -77,5 +121,33 @@ export class MisTurnosEspecialistaComponent implements OnInit {
     this.mensaje = event$;
   }
 
+  rechazarTurno(turno: Turno) {
+    this.turnoActual = turno;
+    this.verTabla = false;
+    this.rechazarTurnoPantalla = true;
+  }
 
+  eventoRechazarTurno(event$: any) {
+    setTimeout(async () => {
+      console.log(event$);
+      console.log(this.mensaje);
+      if (event$) {
+
+        this.turnoActual!.comentarioEspecialista = this.mensaje;
+        this.turnoActual!.estado = 'Rechazado';
+
+        var idTurno = await this.turnoService.obtenerDocumentoTurno(this.turnoActual!);
+        console.log(this.turnoActual);
+        console.log(idTurno);
+        if (idTurno != null) {
+          this.turnoService.updateComentario(idTurno, this.turnoActual!);
+        }
+      }
+      this.cancelarTurnoPantalla = false;
+      this.verTabla = true;
+
+      this.turnoActual = null;
+      this.mensaje = '';
+    }, 100);
+  }
 }

@@ -29,6 +29,12 @@ import { HistoriaClinicaComponent } from './pages/historia-clinica/historia-clin
 import { DetalleHistoriaClinicaComponent } from './pages/detalle-historia-clinica/detalle-historia-clinica.component';
 import { MisTurnosEspecialistaComponent } from './pages/mis-turnos-especialista/mis-turnos-especialista.component';
 import { MisHorariosComponent } from './pages/mis-horarios/mis-horarios.component';
+import { TurnoCancelarComponent } from './componentes/turno-cancelar/turno-cancelar.component';
+import { TurnoReseniaComponent } from './componentes/turno-resenia/turno-resenia.component';
+import { TurnoCalificarAtencionComponent } from './componentes/turno-calificar-atencion/turno-calificar-atencion.component';
+import { TurnoEncuestaComponent } from './componentes/turno-encuesta/turno-encuesta.component';
+import { TurnoFinalizarComponent } from './componentes/turno-finalizar/turno-finalizar.component';
+import { TurnoRechazarComponent } from './componentes/turno-rechazar/turno-rechazar.component';
 
 
 @NgModule({
@@ -49,7 +55,13 @@ import { MisHorariosComponent } from './pages/mis-horarios/mis-horarios.componen
     HistoriaClinicaComponent,
     DetalleHistoriaClinicaComponent,
     MisTurnosEspecialistaComponent,
-    MisHorariosComponent
+    MisHorariosComponent,
+    TurnoCancelarComponent,
+    TurnoReseniaComponent,
+    TurnoCalificarAtencionComponent,
+    TurnoEncuestaComponent,
+    TurnoFinalizarComponent,
+    TurnoRechazarComponent
   ],
   imports: [
     BrowserModule,

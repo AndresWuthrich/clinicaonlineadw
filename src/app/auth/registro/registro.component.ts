@@ -74,8 +74,8 @@ export class RegistroComponent implements OnInit {
       'password':['', [Validators.required, Validators.minLength(6)]],
       'imagen':['', Validators.required],      
 
-      'imagen2':['', Validators.required],      
-      'obraSocial':['', Validators.required],
+      // 'imagen2':['', Validators.required],      
+      // 'obraSocial':['', Validators.required],
       // 'especialidad':['', Validators.required],          
     });
 
@@ -93,12 +93,12 @@ export class RegistroComponent implements OnInit {
 
   agregarDias() {
 
-    this.listaDiasSeleccionadas.push(new DiasAtencion(true, 'Lunes', 8, 19));
-    this.listaDiasSeleccionadas.push(new DiasAtencion(true, 'Martes', 8, 19));
-    this.listaDiasSeleccionadas.push(new DiasAtencion(true, 'Miercoles', 8, 19));
-    this.listaDiasSeleccionadas.push(new DiasAtencion(true, 'Jueves', 8, 19));
-    this.listaDiasSeleccionadas.push(new DiasAtencion(true, 'Viernes', 8, 19));
-    this.listaDiasSeleccionadas.push(new DiasAtencion(true, 'Sabado', 8, 14));
+    this.listaDiasSeleccionadas.push(new DiasAtencion(true, 'LUNES', 8, 19));
+    this.listaDiasSeleccionadas.push(new DiasAtencion(true, 'MARTES', 8, 19));
+    this.listaDiasSeleccionadas.push(new DiasAtencion(true, 'MIERCOLES', 8, 19));
+    this.listaDiasSeleccionadas.push(new DiasAtencion(true, 'JUEVES', 8, 19));
+    this.listaDiasSeleccionadas.push(new DiasAtencion(true, 'VIERNES', 8, 19));
+    this.listaDiasSeleccionadas.push(new DiasAtencion(true, 'SABADO', 8, 14));
 
   }
 

@@ -33,6 +33,7 @@ export class MisHorariosComponent implements OnInit {
   public listaUsuarios: any = [];
   usuarioAux:any;
 
+  horariosProfesional:any = '';
 
   constructor(private router: Router, public auth: AuthService, private usuarioService: UsuarioService, private diaService: DiaService) {}
 
@@ -47,28 +48,61 @@ export class MisHorariosComponent implements OnInit {
       console.log('DATO USER' + datosUsuario);
       this.usuarioLogueado = datosUsuario;
     }
-    console.log('data' + this.usuarioLogueado?.horarioAtencion);
-
+     console.log('data' + this.usuarioLogueado?.horarioAtencion);
 
     if(this.usuarioLogueado?.perfil == 'especialista'){
       this.usuarioLogueado?.especialidad?.forEach(e => {
-        this.listaEspecialidades === '' ? this.listaEspecialidades = e : this.listaEspecialidades += ', ' + e;
+        // this.listaEspecialidades === '' ? this.listaEspecialidades = e : this.listaEspecialidades += ', ' + e;
       });
 
-    if (this.usuarioLogueado != undefined) {
-      this.usuarioLogueado?.especialidad?.forEach((element) => {
-        // this.listaEspecialidades.push(element);
-        console.log(element);
-      });
-      // this.profesion = this.listaEspecialidades[0];
-      // this.profesion = this.listaEspecialidades;
+      // this.horariosProfesional = this.usuarioLogueado?.horarioAtencion?[0];
+      // if(this.usuarioLogueado != undefined && this.usuarioLogueado?.horarioAtencion[0].lunes.estado)
+      if(this.horariosProfesional.lunes.estado){
+        this.horariosProfesional.lunes.inicio = (this.horariosProfesional.lunes.inicio/100).toString() + ':' + '00';
+        this.horariosProfesional.lunes.fin = (this.horariosProfesional.lunes.fin/100).toString() + ':' + '00';
+      }
+      if(this.horariosProfesional.martes.estado){
+        this.horariosProfesional.martes.inicio = (this.horariosProfesional.martes.inicio/100).toString() + ':' + '00';
+        this.horariosProfesional.martes.fin = (this.horariosProfesional.martes.fin/100).toString() + ':' + '00';
+      }
+      if(this.horariosProfesional.miercoles.estado){
+        this.horariosProfesional.miercoles.inicio = (this.horariosProfesional.miercoles.inicio/100).toString() + ':' + '00';
+        this.horariosProfesional.miercoles.fin = (this.horariosProfesional.miercoles.fin/100).toString() + ':' + '00';
+      }
+      if(this.horariosProfesional.jueves.estado){
+        this.horariosProfesional.jueves.inicio = (this.horariosProfesional.jueves.inicio/100).toString() + ':' + '00';
+        this.horariosProfesional.jueves.fin = (this.horariosProfesional.jueves.fin/100).toString() + ':' + '00';
+      }
+      if(this.horariosProfesional.viernes.estado){
+        this.horariosProfesional.viernes.inicio = (this.horariosProfesional.viernes.inicio/100).toString() + ':' + '00';
+        this.horariosProfesional.viernes.fin = (this.horariosProfesional.viernes.fin/100).toString() + ':' + '00';
+      }
+      if(this.horariosProfesional.sabado.estado){
+        this.horariosProfesional.sabado.inicio = (this.horariosProfesional.sabado.inicio/100).toString() + ':' + '00';
+        this.horariosProfesional.sabado.fin = (this.horariosProfesional.sabado.fin/100).toString() + ':' + '00';
+      }
     }
 
 
-    this.usuarioService.traerTodos().subscribe((usuarios: Usuario[]) => {
-      console.log(usuarios);
-      this.listaUsuarios = usuarios;
-    });
+    // if(this.usuarioLogueado?.perfil == 'especialista'){
+    //   this.usuarioLogueado?.especialidad?.forEach(e => {
+    //     this.listaEspecialidades === '' ? this.listaEspecialidades = e : this.listaEspecialidades += ', ' + e;
+    //   });
+
+    // if (this.usuarioLogueado != undefined) {
+    //   this.usuarioLogueado?.especialidad?.forEach((element) => {
+        // this.listaEspecialidades.push(element);
+      //   console.log(element);
+      // });
+      // this.profesion = this.listaEspecialidades[0];
+      // this.profesion = this.listaEspecialidades;
+    // }
+
+
+    // this.usuarioService.traerTodos().subscribe((usuarios: Usuario[]) => {
+    //   console.log(usuarios);
+    //   this.listaUsuarios = usuarios;
+    // });
 
     // this.listaUsuarios = this.context.list('usuarios').valueChanges();
     // this.listaUsuarios.subscribe(
@@ -80,15 +114,16 @@ export class MisHorariosComponent implements OnInit {
     //   },
     //   (error) => {
     //     console.log(error);
-       }
+      //  }
     // );
+
   }
 
-  habilitarDeshabilitar() {
-    !this.checked
-      ? (this.habDes = 'Deshabilitar')
-      : (this.habDes = 'Habilitar');
-  }
+  // habilitarDeshabilitar() {
+  //   !this.checked
+  //     ? (this.habDes = 'Deshabilitar')
+  //     : (this.habDes = 'Habilitar');
+  // }
 
   SetHorario(cond: boolean) {
 
@@ -150,6 +185,16 @@ export class MisHorariosComponent implements OnInit {
     //   }
     // } else {
     //   this.router.navigate(['profesional/mi-perfil']);
+    }
+  }
+  
+  async guardar() {
+    console.log(this.usuarioLogueado);
+    if (this.usuarioLogueado != null) {
+      var uidUser = await this.usuarioService.obtenerDocumentoUsuario(this.usuarioLogueado);
+      if (uidUser != null) {
+        this.usuarioService.actualizarDiasAtencion(uidUser, this.usuarioLogueado);
+      }
     }
   }
 }

@@ -10,7 +10,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { EspecialidadService } from 'src/app/services/especialidad.service';
 import { TurnoService } from 'src/app/services/turno.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
-
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-solicitar-turno',
@@ -116,9 +116,11 @@ export class SolicitarTurnoComponent implements OnInit {
 
   reservarTurno(horario: any, dia: any) {
     var auxTurno: Turno
-    // console.log("H", horario);
-    // console.log("d", dia);
-    // console.log(this.usuarioRegistrado);
+
+    console.log("H", horario);
+    console.log("d", dia);
+    console.log(this.usuarioLogueado);
+
     if (this.usuarioLogueado?.perfil == "paciente") {
 
       // var dataUser: any = this.usuarioService.obtenerUsuarioPorEmail(user.email);
@@ -126,7 +128,7 @@ export class SolicitarTurnoComponent implements OnInit {
       // this.usuarioLogueado = dataUser;
 
       auxTurno = {
-        // uidEspecialista: this.usuarioLogueado?.uid,
+        id: uuidv4(),
         paciente: this.usuarioLogueado,
         especialista: this.especialistaSeleccionado,
         estado: 'pendiente',
@@ -136,10 +138,9 @@ export class SolicitarTurnoComponent implements OnInit {
         comentarioEspecialista: '',
         comentarioPaciente: '',
         encuesta: {
-          atencionRecibida: '',
-          // servicioOnline: '',
-          // estadoEstablecimiento: '',
-          // recomiendaClinida: ''
+          //atencionRecibida: 'Prueba',
+          recomendar: '',
+          sugerencia: ''
         }
       }
       console.log(auxTurno);
@@ -149,16 +150,17 @@ export class SolicitarTurnoComponent implements OnInit {
 
     if (this.usuarioLogueado?.perfil == "administrador") {
       auxTurno = {
+        id: uuidv4(),
         paciente: this.pacienteSeleccionado,
         especialista: this.especialistaSeleccionado,
-        estado: 'pendiente',
+        estado: 'Pendiente',
         horarioTurno: horario,
         diaTurno : dia.diaExacto,
         especialidad: this.especialidadSeleccionada,
         comentarioEspecialista: '',
         comentarioPaciente: '',
         encuesta: {
-          atencionRecibida: '',
+          atencionRecibida: 'Prueba',
           // servicioOnline: '',
           // estadoEstablecimiento: '',
           // recomiendaClinida: ''
@@ -169,8 +171,6 @@ export class SolicitarTurnoComponent implements OnInit {
       // this._Mservice.mensajeExitoso("Le cargaste el turno a " + auxTurno.paciente?.nombre + " con exito! (ADMIN)");
       this.router.navigate(['/home']);
     }
-
-
   }
 
   cargarListaDeTurnos() {
@@ -193,11 +193,13 @@ export class SolicitarTurnoComponent implements OnInit {
       // console.log(this.listaDias[0].getFullYear()); // 2021
       // console.log(this.listaDias[0].toDateString()); // Thu May 27 2021
       console.log('3', this.listaDias[0].toLocaleDateString());// 27/5/2021
-      console.log('4', this.especialistaSeleccionado.diasAtencion[0]);
+      // console.log('4', this.especialistaSeleccionado.diasAtencion[0]);
+      console.log('4', this.especialistaSeleccionado.horarioAtencion[0]);
       this.listaDias.forEach(dia => {
         var diaSemana = this.queDiaEs(dia);
         console.log('5', diaSemana);
         var d = this.queDiaDeEspecialistaDevuelvo(diaSemana);
+        console.log('6', d);
 
         aux = {
           dia: dia,
@@ -207,10 +209,11 @@ export class SolicitarTurnoComponent implements OnInit {
           turnos: this.calculaTurnos(d),
         }
         this.listaObjetosDias.push(aux);
-      });
+      }); 
       console.log("inicial", this.listaObjetosDias);
 
       this.listaObjetosDias.forEach(dia => {
+        console.log("dia", dia);
         if (dia.diaSemana == "DOMINGO" || dia.data == undefined) {
           this.listaObjetosDias.splice(this.listaObjetosDias.indexOf(dia), 1);
         }
@@ -230,13 +233,13 @@ export class SolicitarTurnoComponent implements OnInit {
             if (turno.diaTurno == dia.diaExacto) {
               dia.turnos.forEach((hturno: any) => {
                 if (hturno == turno.horarioTurno) {
-                  // console.log("aca x3");
+                  console.log("aca x3");
                   dia.turnos.splice(dia.turnos.indexOf(hturno), 1);
                 } else {
-                  // console.log("aca x4");
+                  console.log("aca x4");
                 }
               });
-              // console.log("aca x2");
+              console.log("aca x2");
             }
           });
         }
@@ -247,17 +250,21 @@ export class SolicitarTurnoComponent implements OnInit {
   }
 
   calculaTurnos(data: any) {
+    console.log("data",data);
     if (data != null) {
       var arrayTurnosPosibles = [];
-      var auxMax = data.finaliza;
-      var auxMin = data.inicia;
+      var auxMax = data.fin;
+      var auxMin = data.inicio;
 
       // while(auxMax != data.inicia){
-      while (auxMin != data.finaliza) {
+        console.log("dataFIN",data.fin);
+        console.log("dataMIN",auxMin);
+
+      while (auxMin != data.fin) {
         arrayTurnosPosibles.push(auxMin);
         auxMin = auxMin + 1;
       }
-      // console.log("turnos posibles", arrayTurnosPosibles);
+      console.log("turnos posibles", arrayTurnosPosibles);
       return arrayTurnosPosibles;
     } else {
       return null;
@@ -266,7 +273,12 @@ export class SolicitarTurnoComponent implements OnInit {
 
   queDiaDeEspecialistaDevuelvo(diaSemana: string) {
     var retorno;
-    this.especialistaSeleccionado.diasAtencion.forEach((d: DiasAtencion) => {
+    console.log("ret",retorno);
+
+    // this.especialistaSeleccionado.diasAtencion.forEach((d: DiasAtencion) => {
+    this.especialistaSeleccionado.horarioAtencion.forEach((d: DiasAtencion) => {
+      console.log("diaSemana",diaSemana);
+      console.log("literal",d.literal);
       if (diaSemana == d.literal) {
         retorno = d;
       }
@@ -302,7 +314,6 @@ export class SolicitarTurnoComponent implements OnInit {
     }
     return retorno;
   }
-
 
   cargar15dias() {
     var fecha1 = new Date(Date.now());
