@@ -6,7 +6,6 @@ import { AdminComponent } from './admin.component';
 const routes: Routes = [
   // { path: '', component: AdminComponent }
   { path: 'turnos', component: TurnoComponent },
-  // { path: 'resultados', component: ResultadosComponent },
   { path: '', redirectTo: 'turnos', pathMatch: 'full' }
 
 ];

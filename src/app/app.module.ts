@@ -25,7 +25,6 @@ import { SolicitarTurnoComponent } from './pages/solicitar-turno/solicitar-turno
 import { RecaptchaModule, RecaptchaFormsModule } from "ng-recaptcha";
 import { ExcelService } from './services/excel.service';
 import { MisTurnosComponent } from './pages/mis-turnos/mis-turnos.component';
-import { HistoriaClinicaComponent } from './pages/historia-clinica/historia-clinica.component';
 import { DetalleHistoriaClinicaComponent } from './pages/detalle-historia-clinica/detalle-historia-clinica.component';
 import { MisTurnosEspecialistaComponent } from './pages/mis-turnos-especialista/mis-turnos-especialista.component';
 import { MisHorariosComponent } from './pages/mis-horarios/mis-horarios.component';
@@ -35,6 +34,9 @@ import { TurnoCalificarAtencionComponent } from './componentes/turno-calificar-a
 import { TurnoEncuestaComponent } from './componentes/turno-encuesta/turno-encuesta.component';
 import { TurnoFinalizarComponent } from './componentes/turno-finalizar/turno-finalizar.component';
 import { TurnoRechazarComponent } from './componentes/turno-rechazar/turno-rechazar.component';
+import { HistoriaClinicaComponent } from './componentes/historia-clinica/historia-clinica.component';
+import { TurnoInformesComponent } from './componentes/turno-informes/turno-informes.component';
+import { InformesComponent } from './pages/informes/informes.component';
 
 
 @NgModule({
@@ -61,7 +63,9 @@ import { TurnoRechazarComponent } from './componentes/turno-rechazar/turno-recha
     TurnoCalificarAtencionComponent,
     TurnoEncuestaComponent,
     TurnoFinalizarComponent,
-    TurnoRechazarComponent
+    TurnoRechazarComponent,
+    TurnoInformesComponent,
+    InformesComponent
   ],
   imports: [
     BrowserModule,

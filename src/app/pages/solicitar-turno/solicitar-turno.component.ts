@@ -131,7 +131,7 @@ export class SolicitarTurnoComponent implements OnInit {
         id: uuidv4(),
         paciente: this.usuarioLogueado,
         especialista: this.especialistaSeleccionado,
-        estado: 'pendiente',
+        estado: 'Pendiente',
         horarioTurno: horario,
         diaTurno : dia.diaExacto,
         especialidad: this.especialidadSeleccionada,

@@ -1,0 +1,56 @@
+<p>turno-informes works!</p>
+
+<!-- <div class="row" *ngIf="usuarioLogueado != null"> -->
+    <!-- <div class="row" *ngIf="usuarioLogueado != null && verTabla == true"> -->
+      <!-- <div class="col-md-10 mx-auto mt-4" *ngIf="usuarioLogueado.perfil=='paciente'"> -->
+    
+          <div class="card">
+              <div class="card-body">
+                  <h1 class="text-center mb-3">Mis turnos</h1>
+    <!-- cantidad por especialista-->
+                  <table class="table table-hover">
+                      <thead>
+                          <tr>
+                              <!-- <th class="text-center">Nº</th> -->
+                              <th class="text-center">Fecha</th>
+                              <th class="text-center">Hora</th>
+                              <th class="text-center">Profesional</th>
+                              <th class="text-center">Especialidad</th>
+                              <th class="text-center">Paciente</th>
+                              <th class="text-center">Estado</th>
+                              <th class="text-center">Acciones</th>
+                          </tr>
+                      </thead>
+                      <tbody *ngFor="let turno of listaTurnos let i=index">
+                          <tr>
+                              <!-- <td class="text-left" class="text-center">{{i+1}}</td> -->
+                              <td class="text-left" class="text-center">{{turno.diaTurno}}</td>
+                              <!-- <td class="text-left" class="text-center">{{turno.horarioTurno | pipeHora}}</td> -->
+                              <td class="text-left" class="text-center">{{turno.horarioTurno}}</td>
+                              <td class="text-left" class="text-center">{{turno.especialista!.nombre}} </td>
+                              <td class="text-left" class="text-center">{{turno.especialidad!.descripcion}} </td>
+                              <td class="text-left" class="text-center">{{turno.paciente!.nombre}}</td>
+                              <td class="text-left" class="text-center">{{turno.estado}}</td>
+                              <td class="text-left" class="text-center">
+                                  <button type="button" class="btn btn-danger"
+                                      (click)="cancelarTurno(turno)" *ngIf="turno.estado != 'Cancelado' && turno.estado != 'Finalizado'  && turno.estado != 'Aceptado'">
+                                      Cancelar
+                                  </button>
+    
+                                  <!-- <ng-container *ngIf="item.turno.comentarioPaciente != '' || item.turno.comentarioProfesional != '';">
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top"
+                                      title="VER RESEÑA" style="margin-left: 0.5%;" (click)="Resenia(item)">
+                                      <img src={{this.iconoResenia}} style="width: 25px; height: 25px;">
+                                    </button>
+                                  </ng-container>-->
+
+                                </td>
+                          </tr>
+                      </tbody>
+                  </table>
+    
+              </div>
+          <!-- </div>
+      </div>
+    </div> -->
+    

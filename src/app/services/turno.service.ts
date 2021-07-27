@@ -45,6 +45,14 @@ export class TurnoService {
       });
     }));
   }
+ 
+  traerTurnosAdmin() {
+    return this.turnos.pipe(map(dato => {
+      return dato.filter(turno => {
+        return turno.estado == "Pendiente";
+      });
+    }));
+  }
 
   traerTodos(){
     return this.turnos;

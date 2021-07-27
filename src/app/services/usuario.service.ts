@@ -256,14 +256,25 @@ export class UsuarioService {
             text: error.message
           });
         });
-    
+    }
+  
+    async actualizarHistoriaClinica(documento: any, user: Usuario) {
+      var usuario = this.afs.collection(this.dbPath).doc(documento);
+      console.log(usuario);
 
-
-        //   console.log("Documento actualizado!");
-        // })
-        // .catch((error) => {
-        //   console.error("Error en la actualizacion: ", error);
-        // });
+      return usuario.update({
+        historiaClinica: user.historiaClinica
+      })
+        .then(() => {
+          Swal.fire({
+            title: 'Agregado de historia clínica exitoso'
+          });
+        }).catch((error) => {
+          Swal.fire({
+            title: error.code,
+            text: error.message
+          });
+        });
     }
 
 }

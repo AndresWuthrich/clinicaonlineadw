@@ -24,6 +24,7 @@ export class MisTurnosEspecialistaComponent implements OnInit {
   verTabla: boolean = true;
   cancelarTurnoPantalla: boolean = false;
   finalizarTurnoPantalla: boolean = false;
+  historiaClinicaPantalla: boolean = false;
   rechazarTurnoPantalla: boolean = false;
 
   constructor(public auth: AuthService, private usuarioService: UsuarioService, private turnoService: TurnoService) { }
@@ -41,6 +42,12 @@ export class MisTurnosEspecialistaComponent implements OnInit {
       this.turnoService.traerTurnosEspecialistaPorUid(dataUser.uid).subscribe(data => {
         this.listadoTurnos = data;
       });
+
+      if(this.usuarioLogueado?.perfil == 'administrador'){
+        this.turnoService.traerTurnosAdmin().subscribe(data => {
+          this.listadoTurnos = data;
+        });
+      }
     }
   }
 
@@ -150,4 +157,49 @@ export class MisTurnosEspecialistaComponent implements OnInit {
       this.mensaje = '';
     }, 100);
   }
+
+  historiaClinica(turno: Turno) {
+    this.turnoActual = turno;
+    this.verTabla = false;
+    this.historiaClinicaPantalla = true;
+  }
+
+  eventoHistoriaClinica($event: any) {
+    setTimeout(async () => {
+      console.log('2',$event);
+      // console.log(this.mensaje);
+      if ($event) {
+        console.log('2.1',this.turnoActual);
+        console.log('2.3',$event.altura);
+        console.log('2.3',this.turnoActual?.paciente);
+        // this.turnoActual!.comentarioEspecialista = this.mensaje;
+        this.turnoActual!.paciente!.historiaClinica.altura = $event.altura;
+        this.turnoActual!.paciente!.historiaClinica!.peso = $event.peso;
+        this.turnoActual!.paciente!.historiaClinica!.temperatura = $event.temperatura;
+        this.turnoActual!.paciente!.historiaClinica!.presion = $event.presion;
+
+        // this.turnoActual!.estado = 'Finalizado';
+
+        // var idTurno = await this.turnoService.obtenerDocumentoTurno(this.turnoActual!);
+        // console.log(this.turnoActual);
+        // console.log(idTurno);
+        // if (idTurno != null) {
+        //   this.turnoService.updateComentario(idTurno, this.turnoActual!);
+        // }
+
+        var idUsuario = await this.usuarioService.obtenerDocumentoUsuario(this.turnoActual!.paciente!);
+        console.log('3',this.turnoActual!.paciente);
+        console.log('4',idUsuario);
+        if (idUsuario != null) {
+          this.usuarioService.actualizarHistoriaClinica(idUsuario, this.turnoActual!.paciente!);
+        }
+      }
+      this.finalizarTurnoPantalla = false;
+      this.verTabla = true;
+
+      this.turnoActual = null;
+      this.mensaje = '';
+    }, 100);
+  }
+
 }

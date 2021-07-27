@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BienvenidoComponent } from './pages/bienvenido/bienvenido.component';
 import { EnvioEmailComponent } from './pages/envio-email/envio-email.component';
+import { InformesComponent } from './pages/informes/informes.component';
 // import { LoginComponent } from './pages/login/login.component';
 import { MiPerfilComponent } from './pages/mi-perfil/mi-perfil.component';
 import { MisHorariosComponent } from './pages/mis-horarios/mis-horarios.component';
@@ -19,6 +20,7 @@ const routes: Routes = [
   // {path: 'registro', component: RegistroComponent},
   {path: 'verificacion-email', component: EnvioEmailComponent},
   {path: 'usuarios', component: UsuarioComponent},
+  {path: 'informes', component: InformesComponent },
   {path: 'miperfil', component: MiPerfilComponent},
   {path: 'misturnos', component: MisTurnosComponent},
   {path: 'misturnos-especialista', component: MisTurnosEspecialistaComponent},
