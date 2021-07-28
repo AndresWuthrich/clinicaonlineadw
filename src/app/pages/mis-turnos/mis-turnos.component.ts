@@ -26,6 +26,7 @@ export class MisTurnosComponent implements OnInit {
   cancelarTurnoPantalla: boolean = false;
   encuestaTurnoPantalla: boolean = false;
   calificarAtencionTurnoPantalla: boolean = false;
+  verReseniaTurnoPantalla: boolean = false;
 
   constructor(public auth: AuthService, private usuarioService: UsuarioService, private turnoService: TurnoService) {
     this.turnoService.traerTodos().subscribe((turnos: Turno[]) => {
@@ -152,5 +153,12 @@ export class MisTurnosComponent implements OnInit {
 
     this.turnoActual = null;
 
+  }
+
+  verResenia(turno: Turno) {
+    this.turnoActual = turno;
+    this.verTabla = false;
+    this.verReseniaTurnoPantalla = true;
+    // this.verMiHCPantalla = false;
   }
 }

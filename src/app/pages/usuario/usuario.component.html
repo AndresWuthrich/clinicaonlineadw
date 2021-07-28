@@ -83,13 +83,19 @@
       </div>
     </div>
 
+    <hr>
     <button (click)="exportAsXLSXEspecialistas()">
-      <i class="fa fa-file-excel-o" style="font-size:48px;color:blue"></i></button>
-  
-    <div class="col-md-12 col-lg-12" id="box">
-      <div class="card">
-          <div class="card-body">
-              <h2>Especialistas</h2>
+      <i class="fa fa-file-excel-o" style="font-size:48px;color:blue"></i>
+      Descargue lista de usuarios
+    </button>
+ 
+    <hr>  
+    <div class="col-md-10 mx-auto mt-4">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="text-center">Especialistas</h3>
+            </div>
+            <div class="card-body">
               <table class="table table-hover">
                   <thead>
                       <tr>
@@ -129,7 +135,70 @@
       </div>
   </div>
 
-  <!-- <app-historia-clinica></app-historia-clinica> -->
+  <hr>  
+  <div class="col-md-10 mx-auto mt-4">
+      <div class="card">
+          <div class="card-header">
+              <h3 class="text-center">Pacientes</h3>
+          </div>
+          <div class="card-body">
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let usuario of listaUsuariosPacientes ">
+                        <td>{{usuario.nombre}}</td>
+                        <td>{{usuario.apellido}}</td>
+                        <td>{{usuario.email}}</td>
+
+                        <td>
+                          <button type="button" class="btn btn-info"
+                          (click)="historiaClinica(usuario)" 
+                          *ngIf="usuario.historiaClinica.altura != null && usuario.historiaClinica.altura != ''" >
+                          Historia clínica</button>
+
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div *ngIf="usuarioActual != null">
+  <hr>
+  <div class="row">
+      <div class="col-md-10 mx-auto mt-4">
+          <div class="card">
+              <div class="card-header">
+                  <h3 class="text-center">Historia clínica</h3>
+              </div>
+              <div class="card-body">
+                  <div class="mb-3">
+                      
+                      <!-- <h6 class="text-center">Por favor ingrese un comentario/reseña del turno </h6> -->
+                      <div class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="300">
+                          Altura: {{usuarioActual.historiaClinica.altura}}</div>
+                      <div class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="300">
+                          Peso: {{usuarioActual.historiaClinica.peso}}</div>
+                      <div class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="300">
+                          Temperatura: {{usuarioActual.historiaClinica.temperatura}}</div>
+                      <div class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="300">
+                          Presión: {{usuarioActual.historiaClinica.presion}}</div>
+                      </div>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <!-- <app-detalle-historia-clinica></app-detalle-historia-clinica> -->
+</div>
+
   <!-- <b>Exporting footballer data in excel by clicking below button</b><br>
   
   <button (click)="exportAsXLSX()">

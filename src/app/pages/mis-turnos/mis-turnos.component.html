@@ -27,7 +27,6 @@
                       <tr>
                           <!-- <td class="text-left" class="text-center">{{i+1}}</td> -->
                           <td class="text-left" class="text-center">{{turno.diaTurno}}</td>
-                          <!-- <td class="text-left" class="text-center">{{turno.horarioTurno | pipeHora}}</td> -->
                           <td class="text-left" class="text-center">{{turno.horarioTurno}}</td>
                           <td class="text-left" class="text-center">{{turno.especialista!.nombre}} </td>
                           <td class="text-left" class="text-center">{{turno.especialidad!.descripcion}} </td>
@@ -39,24 +38,22 @@
                                   Cancelar
                               </button>
 
-                              <!-- <ng-container *ngIf="item.turno.comentarioPaciente != '' || item.turno.comentarioProfesional != '';">
-                                <button type="button" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top"
-                                  title="VER RESEÑA" style="margin-left: 0.5%;" (click)="Resenia(item)">
-                                  <img src={{this.iconoResenia}} style="width: 25px; height: 25px;">
-                                </button>
-                              </ng-container>-->
+                              <button type="button" class="btn btn-info"
+                                (click)="verResenia(turno)" *ngIf="turno.comentarioEspecialista != '' || turno.comentarioPaciente != ''">
+                                Ver reseña
+                              </button>
                   
-                              <button type="button" class="btn btn-warning" title="Completar Encuesta"
+                              <button type="button" class="btn btn-warning"
                                 (click)="completarEncuesta(turno)" *ngIf="turno.estado == 'Finalizado'">
                                 Encuesta
                               </button>
                   
-                              <button type="button" class="btn btn-success" title="Calificar Atención"
+                              <button type="button" class="btn btn-success"
                                  (click)="calificarAtencion(turno)" *ngIf="turno.estado == 'Finalizado'">
-                                 Calificar
+                                 Calificar atención
                           </button>
                           </td>
-                      </tr>
+                      </tr>                      
                   </tbody>
               </table>
 
@@ -70,16 +67,34 @@
   </app-turno-cancelar>
 </div>
 
-<!-- <div *ngIf="verReseniaTurno">
-  <app-mostrar-informacion-de-turno [Titulo]="'RESEÑA'" [subTitulo]="'OBSERVACIONES'" [Turno]='this.itemActual.turno'
-    (eOpcion)="eventReseniaTurno($event)"></app-mostrar-informacion-de-turno>
-</div>-->
+<div *ngIf="verReseniaTurnoPantalla && turnoActual != null">
+
+  <div class="row">
+    <div class="col-md-10 mx-auto mt-4">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="text-center">Reseña / comentario</h3>
+            </div>
+            <div class="card-body">
+                <div class="mb-3">
+                    
+                    <!-- <h6 class="text-center">Por favor ingrese un comentario/reseña del turno </h6> -->
+                    <div class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="300">
+                      Comentario especialista: {{turnoActual.comentarioEspecialista}}</div>
+                    <div class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="300">
+                      Comentario paciente: {{turnoActual.comentarioPaciente}}</div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  <!-- <app-turno-resenia (reseniaEvent)="eventoVerResenia($event)" ></app-turno-resenia> -->
+</div>
 
 <div *ngIf="calificarAtencionTurnoPantalla">
   <app-turno-calificar-atencion (calificacionEvent)="eventoCalificarAtencion($event)" ></app-turno-calificar-atencion>
 </div>
 
 <div *ngIf="encuestaTurnoPantalla">
-  <app-turno-encuesta (encuestaEvent)="eventoEncuesta($event)">
-  </app-turno-encuesta>
+  <app-turno-encuesta (encuestaEvent)="eventoEncuesta($event)"></app-turno-encuesta>
 </div>

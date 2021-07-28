@@ -40,18 +40,22 @@
                                         (click)="rechazarTurno(turno)" *ngIf="turno.estado != 'Rechazado' && turno.estado != 'Cancelado' && turno.estado != 'Aceptado' && turno.estado != 'Finalizado'">
                                         Rechazar
                                     </button>
+
                                     <button type="button" class="btn btn-success"
                                         (click)="aceptarTurno(turno)" *ngIf="turno.estado != 'Cancelado' && turno.estado != 'Aceptado' && turno.estado != 'Finalizado'">
                                         Aceptar
                                     </button>
+
                                     <button type="button" class="btn btn-primary"
                                         (click)="finalizarTurno(turno)" *ngIf="turno.estado == 'Aceptado'">
                                         Finalizar
                                     </button>
-                                    <!-- <button type="button" class="btn btn-info btnmio" title="Ver Reseña"
-                                        (click)="resenaTurno(turno)" *ngIf="turno.estado == 'Finalizado'">
-                                        <i class="fas fa-paperclip"></i>
-                                    </button>-->
+
+                                    <button type="button" class="btn btn-info"
+                                        (click)="verResenia(turno)" *ngIf="turno.comentarioEspecialista != '' || turno.comentarioPaciente != ''">
+                                        Ver reseña
+                                    </button>
+
                                     <button type="button" class="btn btn-info"
                                         (click)="historiaClinica(turno)" *ngIf="turno.estado == 'Finalizado'">
                                         Historia clínica
@@ -86,3 +90,29 @@
     <app-historia-clinica (historiaEvent)="eventoHistoriaClinica($event)" (mensajeEvent)="eventoMensaje($event)">
     </app-historia-clinica>
 </div>
+
+<div *ngIf="verReseniaTurnoPantalla && turnoActual != null">
+
+    <div class="row">
+      <div class="col-md-10 mx-auto mt-4">
+          <div class="card">
+              <div class="card-header">
+                  <h3 class="text-center">Reseña / comentario</h3>
+              </div>
+              <div class="card-body">
+                  <div class="mb-3">
+                      
+                      <!-- <h6 class="text-center">Por favor ingrese un comentario/reseña del turno </h6> -->
+                      <div class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="300">
+                        Comentario especialista: {{turnoActual.comentarioEspecialista}}</div>
+                      <div class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="300">
+                        Comentario paciente: {{turnoActual.comentarioPaciente}}</div>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+    <!-- <app-turno-resenia (reseniaEvent)="eventoVerResenia($event)" ></app-turno-resenia> -->
+</div>
+  
+  

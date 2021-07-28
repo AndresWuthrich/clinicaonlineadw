@@ -32,9 +32,9 @@ TP Final Laboratorio IV 2021 - UTNFRA - Técnico superior en programación.
 >Todos los usuarios podrán ver su perfil.
 
 * Administrador:
-    * Solicitar Turno
-    * Usuarios
-    * Turnos
+    * Solicitar Turno.
+    * Administrar usuarios especialistas.
+    * Ver/ cancelar turnos.
     * Informes:
         * Log de ingresos al sistema
         * Cantidad de turnos por especialidad
@@ -43,8 +43,13 @@ TP Final Laboratorio IV 2021 - UTNFRA - Técnico superior en programación.
         * Cantidad de turnos finalizados por médico en un lapso de tiempo      
 
 * Especialista:
-    * Turnos asignados
+    * Ver/Aceptar/Rechazar/Cancelar turnos asignados.
+    * Cargar historia clínica de turnos realizados.
 
 * Paciente:
     * Solicitar Turno
-    * Turnos solicitados  
+    * Ver/Cancelar turnos solicitados.
+    * Calificar atención.
+    * Completar encuesta.
+    * Ver historia clínica. 
+

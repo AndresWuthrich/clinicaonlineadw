@@ -26,6 +26,7 @@ export class MisTurnosEspecialistaComponent implements OnInit {
   finalizarTurnoPantalla: boolean = false;
   historiaClinicaPantalla: boolean = false;
   rechazarTurnoPantalla: boolean = false;
+  verReseniaTurnoPantalla: boolean = false;
 
   constructor(public auth: AuthService, private usuarioService: UsuarioService, private turnoService: TurnoService) { }
 
@@ -202,4 +203,10 @@ export class MisTurnosEspecialistaComponent implements OnInit {
     }, 100);
   }
 
+  verResenia(turno: Turno) {
+    this.turnoActual = turno;
+    this.verTabla = false;
+    this.verReseniaTurnoPantalla = true;
+    // this.verMiHCPantalla = false;
+  }
 }

@@ -59,8 +59,11 @@ export class UsuarioComponent implements OnInit {
   
   public formAdmin: FormGroup;
   public listaUsuariosEspecialistas: Usuario[] = [];
+  public listaUsuariosPacientes: Usuario[] = [];
+  public listaUsuarios: Usuario[] = [];
   public listaEspecialidadesUsuario: Especialidad[] = [];
   public usuarioAlta: Usuario = new Usuario();
+  usuarioActual: Usuario | null = null;
 
   constructor(private fb: FormBuilder, private usuarioService: UsuarioService, private excelService: ExcelService, private router: Router, public auth: AuthService) {
     // this.usuarioIngresado = this.authService.usuario;
@@ -87,7 +90,15 @@ export class UsuarioComponent implements OnInit {
       this.listaUsuariosEspecialistas = usuarios;
     });
 
-  }
+    this.usuarioService.traerTodos().subscribe((usuarios: Usuario[]) => {
+      console.log(usuarios);
+      this.listaUsuarios = usuarios;
+    });
+
+    this.usuarioService.traerPacientes().subscribe((usuarios: Usuario[]) => {
+      console.log(usuarios);
+      this.listaUsuariosPacientes = usuarios;
+    });  }
 
   ngOnInit(): void {
   }
@@ -164,7 +175,11 @@ export class UsuarioComponent implements OnInit {
   }
 
   exportAsXLSXEspecialistas():void {
-    this.excelService.exportAsExcelFile(this.listaUsuariosEspecialistas, 'especialistas_data');
+    // this.excelService.exportAsExcelFile(this.listaUsuariosEspecialistas, 'especialistas_data');
+    this.excelService.exportAsExcelFile(this.listaUsuarios, 'usuarios_data');
   }
 
+  historiaClinica(usuario: Usuario){
+    this.usuarioActual = usuario;
+  }
 }
