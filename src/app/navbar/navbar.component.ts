@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
+import { UpperPipe } from 'src/app/pipes/upper.pipe';
 
 @Component({
   selector: 'app-navbar',

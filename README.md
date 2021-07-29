@@ -20,7 +20,6 @@ TP Final Laboratorio IV 2021 - UTNFRA - Técnico superior en programación.
 
 ![principal](http://octaviovillegas.github.io/CursoIngresoJS/img/principal.gif)
 
-
 -----
 ## Perfiles 
 >Se permiten los sig. perfiles:

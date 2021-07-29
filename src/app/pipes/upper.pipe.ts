@@ -5,8 +5,19 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 export class UpperPipe implements PipeTransform {
 
-  transform(value: unknown, ...args: unknown[]): unknown {
-    return null;
+  transform(value: any, arg: any): any {
+    const resultado=[];
+
+    for(const user of value){
+      if(user.perfil.toUpperCase().indexOf(arg.toUpperCase()) > -1){
+        resultado.push(user);
+      } else{
+        if(user.email.toUpperCase().indexOf(arg.toUpperCase()) > -1){
+          resultado.push(user);
+        }
+      }
+    }
+    return resultado;
   }
 
 }
