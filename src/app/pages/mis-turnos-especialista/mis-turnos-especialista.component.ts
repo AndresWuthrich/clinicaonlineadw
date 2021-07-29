@@ -174,10 +174,14 @@ export class MisTurnosEspecialistaComponent implements OnInit {
         console.log('2.3',$event.altura);
         console.log('2.3',this.turnoActual?.paciente);
         // this.turnoActual!.comentarioEspecialista = this.mensaje;
-        this.turnoActual!.paciente!.historiaClinica.altura = $event.altura;
+        this.turnoActual!.paciente!.historiaClinica!.altura = $event.altura;
         this.turnoActual!.paciente!.historiaClinica!.peso = $event.peso;
         this.turnoActual!.paciente!.historiaClinica!.temperatura = $event.temperatura;
         this.turnoActual!.paciente!.historiaClinica!.presion = $event.presion;
+        this.turnoActual!.paciente!.historiaClinica!.clave1 = $event.clave1;
+        this.turnoActual!.paciente!.historiaClinica!.valor1 = $event.valor1;
+        this.turnoActual!.paciente!.historiaClinica!.clave2 = $event.clave2;
+        this.turnoActual!.paciente!.historiaClinica!.valor2 = $event.valor2;
 
         // this.turnoActual!.estado = 'Finalizado';
 

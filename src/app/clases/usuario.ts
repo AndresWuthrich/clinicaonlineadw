@@ -23,10 +23,9 @@ export class Usuario {
         peso: '',
         temperatura: '',
         presion: '',
-        datosDinamicos: [
-            {clave: '', valor: ''},
-            {clave: '', valor: ''},
-            {clave: '', valor: ''}
-        ]
+        clave1: '', 
+        valor1: '',
+        clave2: '', 
+        valor2: ''
     };
 }

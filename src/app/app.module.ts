@@ -37,6 +37,9 @@ import { TurnoRechazarComponent } from './componentes/turno-rechazar/turno-recha
 import { HistoriaClinicaComponent } from './componentes/historia-clinica/historia-clinica.component';
 import { TurnoInformesComponent } from './componentes/turno-informes/turno-informes.component';
 import { InformesComponent } from './pages/informes/informes.component';
+import { PacientesComponent } from './pages/pacientes/pacientes.component';
+import { ResaltarDirective } from './directivas/resaltar.directive';
+import { UpperPipe } from './pipes/upper.pipe';
 
 
 @NgModule({
@@ -65,7 +68,10 @@ import { InformesComponent } from './pages/informes/informes.component';
     TurnoFinalizarComponent,
     TurnoRechazarComponent,
     TurnoInformesComponent,
-    InformesComponent
+    InformesComponent,
+    PacientesComponent,
+    ResaltarDirective,
+    UpperPipe
   ],
   imports: [
     BrowserModule,

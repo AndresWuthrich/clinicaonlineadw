@@ -6,7 +6,7 @@
         <h2 class="text-center">Informes</h2>
         <div class="row">
             <button class="btn btn-outline-primary">Log de ingresos al sistema</button>
-            <button class="btn btn-outline-primary">Cantidad de turnos por especialidad</button>
+            <button class="btn btn-outline-primary" (click)="informe2()">Cantidad de turnos por especialidad</button>
             <button class="btn btn-outline-primary">Cantidad de turnos por día</button>
             <button class="btn btn-outline-primary">Cantidad de turnos solicitado por médico en un lapso de tiempo</button>
             <button class="btn btn-outline-primary">Cantidad de turnos finalizados por médico en un lapso de tiempo</button>
@@ -26,4 +26,24 @@
     </div>
 </div>
 
-<!-- <app-turno-informes></app-turno-informes> -->
+<div *ngIf="info2 == true">
+    <hr>
+    <div class="row">
+        <div class="col-md-10 mx-auto mt-4">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center">Cantidad de turnos por especialidad</h3>
+                </div>
+                <div class="card-body">
+                    <div [appResaltar]="info.cantidad" class="mb-3" *ngFor="let info of arrayCantidadTurnoEspecialidad let i=index">
+                        
+                        <!-- <h6 class="text-center">Por favor ingrese un comentario/reseña del turno </h6> -->
+                        <!-- <div class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="300"> -->
+                        <div class="text-info">
+                             {{info.descripcion}} {{info.cantidad}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

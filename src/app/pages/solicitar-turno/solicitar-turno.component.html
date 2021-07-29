@@ -70,21 +70,21 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th>Dia del turno</th>
-                            <th class="text-center">Horario del turno</th>
+                            <th>Dia</th>
+                            <th class="text-center">Horario/s</th>
                         </tr>
                     </thead>
                     <tbody *ngFor="let dia of listaObjetosDias">
                         <tr>
                         <tr *ngIf="dia.diaSemana != 'DOMINGO' && dia.data.trabaja != false ">
                             <td class="text-left">{{dia.dia}}</td>
-                            <td class="text-center"><button class="btn btn-success hora"
-                                    *ngFor="let horario of dia.turnos let i=index"
-                                    (click)="reservarTurno(horario, dia)">{{horario}}</button>X</td>
+                            <td class="text-center"><button class="btn btn-outline-success"
+                                *ngFor="let horario of dia.turnos let i=index"
+                                (click)="reservarTurno(horario, dia)">{{horario}}</button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
-
             </div>
         </div>
     </div>

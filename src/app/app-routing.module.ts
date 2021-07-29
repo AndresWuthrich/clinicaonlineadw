@@ -8,6 +8,7 @@ import { MiPerfilComponent } from './pages/mi-perfil/mi-perfil.component';
 import { MisHorariosComponent } from './pages/mis-horarios/mis-horarios.component';
 import { MisTurnosEspecialistaComponent } from './pages/mis-turnos-especialista/mis-turnos-especialista.component';
 import { MisTurnosComponent } from './pages/mis-turnos/mis-turnos.component';
+import { PacientesComponent } from './pages/pacientes/pacientes.component';
 import { PageNotFoundComponent } from './pages/page-not-found/page-not-found.component';
 // import { RegistroComponent } from './pages/registro/registro.component';
 import { SolicitarTurnoComponent } from './pages/solicitar-turno/solicitar-turno.component';
@@ -26,6 +27,7 @@ const routes: Routes = [
   {path: 'misturnos-especialista', component: MisTurnosEspecialistaComponent},
   {path: 'mishorarios', component: MisHorariosComponent},
   {path: 'solicitarturno', component: SolicitarTurnoComponent},
+  {path: 'pacientes', component: PacientesComponent},
   // {path: 'turno', component: TurnoComponent},
   {path: '', redirectTo: 'bienvenido', pathMatch: 'full' },
   { path: 'admin', loadChildren: () => import('./admin/admin.module').then(m => m.AdminModule) },
