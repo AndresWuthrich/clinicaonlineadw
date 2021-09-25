@@ -32,7 +32,8 @@
                             <td class="text-left" class="text-center">{{turno.estado}}</td>
                             <td class="text-left" class="text-center">
                                 <button type="button" class="btn btn-danger"
-                                    (click)="cancelarTurno(turno)" *ngIf="turno.estado != 'Cancelado' && turno.estado != 'Rechazado' && turno.estado != 'Finalizado' && turno.estado != 'Aceptado'">
+                                    (click)="cancelarTurno(turno)" *ngIf="turno.estado != 'Cancelado' && turno.estado != 'Rechazado' && turno.estado != 'Finalizado'"> 
+                                    <!-- && turno.estado != 'Aceptado'"> -->
                                     Cancelar
                                 </button>
                                 <div *ngIf="usuarioLogueado.perfil == 'especialista'">
@@ -106,7 +107,7 @@
                       <div class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="300">
                         Comentario especialista: {{turnoActual.comentarioEspecialista}}</div>
                       <div class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="300">
-                        Comentario paciente: {{turnoActual.comentarioPaciente}}</div>
+                        Comentario paciente: {{turnoActual.mensajeCalificacionAtencion}}</div>
                   </div>
               </div>
           </div>

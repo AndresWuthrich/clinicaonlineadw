@@ -151,7 +151,7 @@ export class MisTurnosEspecialistaComponent implements OnInit {
           this.turnoService.updateComentario(idTurno, this.turnoActual!);
         }
       }
-      this.cancelarTurnoPantalla = false;
+      this.rechazarTurnoPantalla = false;
       this.verTabla = true;
 
       this.turnoActual = null;
@@ -163,6 +163,7 @@ export class MisTurnosEspecialistaComponent implements OnInit {
     this.turnoActual = turno;
     this.verTabla = false;
     this.historiaClinicaPantalla = true;
+    this.verReseniaTurnoPantalla = false;
   }
 
   eventoHistoriaClinica($event: any) {
@@ -199,7 +200,7 @@ export class MisTurnosEspecialistaComponent implements OnInit {
           this.usuarioService.actualizarHistoriaClinica(idUsuario, this.turnoActual!.paciente!);
         }
       }
-      this.finalizarTurnoPantalla = false;
+      this.historiaClinicaPantalla = false;
       this.verTabla = true;
 
       this.turnoActual = null;
@@ -211,6 +212,7 @@ export class MisTurnosEspecialistaComponent implements OnInit {
     this.turnoActual = turno;
     this.verTabla = false;
     this.verReseniaTurnoPantalla = true;
+    this.historiaClinicaPantalla = false;
     // this.verMiHCPantalla = false;
   }
 }

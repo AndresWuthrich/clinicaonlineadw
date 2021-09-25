@@ -7,21 +7,10 @@
         <div class="row">
             <button class="btn btn-outline-primary">Log de ingresos al sistema</button>
             <button class="btn btn-outline-primary" (click)="informe2()">Cantidad de turnos por especialidad</button>
-            <button class="btn btn-outline-primary">Cantidad de turnos por día</button>
-            <button class="btn btn-outline-primary">Cantidad de turnos solicitado por médico en un lapso de tiempo</button>
+            <button class="btn btn-outline-primary" (click)="informe3()">Cantidad de turnos por día</button>
+            <button class="btn btn-outline-primary" (click)="informe4()">Cantidad de turnos solicitado por médico en un lapso de tiempo</button>
             <button class="btn btn-outline-primary">Cantidad de turnos finalizados por médico en un lapso de tiempo</button>
 
-                <!-- <button class="btn btn-primary btn-block mt-3" (click)="descargar(1)">Descargar logs de ingresos
-                    al sistema &nbsp;&nbsp; <i class="fa fa-download"></i></button>
-                <button class="btn btn-primary btn-block mt-3" (click)="ver(2)">Cantidad de turnos por
-                    especialidad</button>
-                <button class="btn btn-primary btn-block mt-3" (click)="ver(3)">Cantidad de turnos por
-                    día</button>
-                <button class="btn btn-primary btn-block mt-3">Cantidad de turnos solicitado por médico en un
-                    lapso de tiempo</button>
-                <button class="btn btn-primary btn-block mt-3">Cantidad de turnos finalizados por médico en un
-                    lapso de tiempo</button>
-     -->
             </div>
     </div>
 </div>
@@ -41,6 +30,50 @@
                         <!-- <div class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="300"> -->
                         <div class="text-info">
                              {{info.descripcion}} {{info.cantidad}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<div *ngIf="info3 == true">
+    <hr>
+    <div class="row">
+        <div class="col-md-10 mx-auto mt-4">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center">Cantidad de turnos por dia</h3>
+                </div>
+                <div class="card-body">
+                    <div [appResaltar]="info.cantidad" class="mb-3" *ngFor="let info of arrayCantidadTurnoEspecialidad let i=index">
+                        
+                        <!-- <h6 class="text-center">Por favor ingrese un comentario/reseña del turno </h6> -->
+                        <!-- <div class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="300"> -->
+                        <div class="text-info">
+                                {{info.descripcion}} {{info.cantidad}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+<div *ngIf="info4 == true">
+    <hr>
+    <div class="row">
+        <div class="col-md-10 mx-auto mt-4">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center">Cantidad de turnos solicitado por médico en un lapso de tiempo</h3>
+                </div>
+                <div class="card-body">
+                    <div [appResaltar]="info.cantidad" class="mb-3" *ngFor="let info of arrayCantidadTurnoEspecialista let i=index">
+                        
+                        <!-- <h6 class="text-center">Por favor ingrese un comentario/reseña del turno </h6> -->
+                        <!-- <div class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="300"> -->
+                        <div class="text-info">
+                                {{info.apellido}} {{info.cantidad}}
                         </div>
                     </div>
                 </div>

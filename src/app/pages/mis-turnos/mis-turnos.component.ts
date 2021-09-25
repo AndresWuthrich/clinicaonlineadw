@@ -97,6 +97,8 @@ export class MisTurnosComponent implements OnInit {
     this.turnoActual = turno;
     this.verTabla = false;
     this.encuestaTurnoPantalla = true;
+    this.verReseniaTurnoPantalla = false;
+    this.calificarAtencionTurnoPantalla = false;    
     // this.verMiHCPantalla = false;
   }
 
@@ -127,6 +129,7 @@ export class MisTurnosComponent implements OnInit {
     this.verTabla = false;
     // this.verMiHCPantalla = false;
     this.encuestaTurnoPantalla = false;
+    this.verReseniaTurnoPantalla = false;
     this.calificarAtencionTurnoPantalla = true;    
   }
 
@@ -147,7 +150,6 @@ export class MisTurnosComponent implements OnInit {
       }
     }
     // this.verMiHCPantalla = false;
-    this.encuestaTurnoPantalla = false;
     this.calificarAtencionTurnoPantalla = false; 
     this.verTabla = true;
 

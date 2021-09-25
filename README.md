@@ -10,12 +10,15 @@ TP Final Laboratorio IV 2021 - UTNFRA - Técnico superior en programación.
 ## Ingreso a la Web 
 
 **Bienvenida**
-<!-- >Desde la pantalla de bienvenida podrás: -->
+![Bienvenido](src/assets/imagenes/bienvenido.png "Bienvenido")
+
 >Desde la pantalla de bienvenida podrás:
 * Visualizar links vinculados a la clínica (carrousel).
 * Ingresar a las siguientes opciones:
     * Login
+    ![Login](src/assets/imagenes/login.png "Login")
     * Registro
+    ![Registro](src/assets/imagenes/registro.png "Registro")
 
 
 ![principal](http://octaviovillegas.github.io/CursoIngresoJS/img/principal.gif)
