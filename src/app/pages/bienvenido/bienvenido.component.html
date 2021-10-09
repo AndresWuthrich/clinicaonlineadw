@@ -3,7 +3,7 @@
 <!-- <img src="../../../assets/imagenes/back3.jpg" /> -->
 <!-- <p>bienvenido works!</p> -->
 
-<main class="foto">
+<main>
 
     <!-- <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-indicators">
@@ -60,8 +60,8 @@
     ================================================== -->
     <!-- Wrap the rest of the page in another container to center all the content. -->
   
-    <div class="container marketing">
-        <div *ngIf="userLogueado | async as user; else login ">
+    <div>
+        <div class="foto" *ngIf="userLogueado | async as user; else login ">
             <div class="row" *ngIf="usuarioLogueado != null">
 
                 
@@ -180,23 +180,21 @@
                     </div> -->
                 <!-- </div> -->
              </div> 
-
-
-
         </div>
     
        
       </div><!-- /.row -->
       <ng-template #login>
+      <div class="container">
 
-        <div class="container">
+        <div>
             <!-- <div class="carousel-caption"> -->
               <h1>Bienvenido/a. Agendá tu turno online, rápido y fácil.</h1>
               <!-- <p>Bienvenido/a. Agendá tu turno online, rápido y fácil.</p> -->
               <!-- <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p> -->
-            </div>
+        </div>
 
-            <div class="row align-items-md-stretch">
+        <div class="row align-items-md-stretch">
             <div class="col-md-6">
                 <div class="p-5 mb-4 ">
                     <a class="btn btn-outline-dark" routerLink="/auth/login">
@@ -222,16 +220,16 @@
                 </div>
             </div>
         </div>
+            <!-- FOOTER -->
+            <footer>
+                
+                <p>&copy; 2021 Andrés Wüthrich</p>
+            </footer>
+      
+        </div>
         </ng-template>
 
     </div><!-- /.container -->
-  
-  
-    <!-- FOOTER -->
-    <footer class="container">
-      <p class="float-end"><a href="#">Back to top</a></p>
-      <p>&copy; 2021 Andrés Wüthrich</p>
-    </footer>
   </main>
   
 

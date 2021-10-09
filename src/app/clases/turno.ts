@@ -10,9 +10,10 @@ export class Turno {
     diaTurno: string = '';
     horarioTurno: string = '';
     encuesta?: any = {
-        //atencionRecibida: ''//,
+        prestaciones: '',
         recomendar: '',
-        sugerencia: ''
+        sugerencia: '',
+        canal: ''
     };
     calificacionAtencion?: string = '';
     mensajeCalificacionAtencion?: string = '';

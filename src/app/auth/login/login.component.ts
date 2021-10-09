@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Log } from 'src/app/clases/log';
 import { Usuario } from 'src/app/clases/usuario';
 import { AuthService } from 'src/app/services/auth.service';
+import { LogService } from 'src/app/services/log.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import Swal from 'sweetalert2';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
   selector: 'app-login',
@@ -17,8 +20,9 @@ export class LoginComponent implements OnInit {
   password: string = '';
   public listaUsuariosAccesoRapido: Usuario[] = [];
   public autocompletar: string = '';
+  public logUsuario: Log = new Log();
 
-  constructor(private usuarioService: UsuarioService, public auth: AuthService, private router: Router) {
+  constructor(private usuarioService: UsuarioService, public auth: AuthService, public logService: LogService, private router: Router) {
     this.loading = false;
    }
 
@@ -58,6 +62,15 @@ export class LoginComponent implements OnInit {
                 this.router.navigate(['bienvenido']);
               } else {
 
+                console.log('UUIDV4');
+                
+                this.logUsuario = {
+                  id: uuidv4(),
+                  diaHorario: new Date(),
+                  usuarioLog: this.email,
+                }
+                this.logService.agregarLog(this.logUsuario);
+                
                 this.router.navigate(['bienvenido']);
               }
             }

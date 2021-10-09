@@ -11,6 +11,8 @@ export class TurnoEncuestaComponent implements OnInit {
   mensaje: string = '';
   recomendar: string = 'SI';
   error: string = "";
+  prestaciones: string = '';
+  canal: string = '';
 
   constructor() { }
 
@@ -20,10 +22,10 @@ export class TurnoEncuestaComponent implements OnInit {
 
   Confirmar(opcion: boolean) {
     var aux = {
-      // atencionRecibida: this.clasificacion,
+      prestaciones: this.prestaciones,
       recomendar: this.recomendar,
       sugerencia: this.mensaje,
-      // opcion: opcion
+      canal: this.canal
     }
     console.log(aux);
 
@@ -31,7 +33,7 @@ export class TurnoEncuestaComponent implements OnInit {
       if (this.recomendar != 'SI' && this.recomendar != 'NO') {
         this.error = "4"
       } else {
-        if(this.mensaje == ''){
+        if(this.mensaje == '' || this.prestaciones == '' || this.canal == ''){
           this.error = "5";
         }
         else{

@@ -3,6 +3,7 @@ import { Usuario } from 'src/app/clases/usuario';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { UsuarioComponent } from '../usuario/usuario.component';
+import { Columns, Img, PdfMakeWrapper, Txt } from 'pdfmake-wrapper';
 
 @Component({
   selector: 'app-mi-perfil',
@@ -65,6 +66,71 @@ export class MiPerfilComponent implements OnInit {
 
   }
 
+  async generatePDF(){
+    const pdf = new PdfMakeWrapper();
+
+    pdf.info({
+      title: 'Historia clínica',
+      author: 'pdfmake-wrapper',
+      subject: 'Historia clínica',
+     });
+
+    var dia = new Date().toDateString();
+    var fecha = new Date().toTimeString();
+
+    // Header
+    pdf.header(dia + ' ' + fecha);
+
+    // pdf.watermark('Simple watermark');
+    // pdf.add( await new Img('src/../../assets/imagenes/AJW.jpg').alignment('right').build());
+    pdf.add( await new Img('src/../../assets/imagenes/logo.png').alignment('right').height(50).width(50).build());
+
+    pdf.add(      
+      new Txt('Historia Clínica').bold().alignment('center').fontSize(25).end
+    );
+
+    // Detalle
+    pdf.add(      
+      new Txt('Paciente: ' + this.usuarioLogueado?.apellido + ' ' + this.usuarioLogueado?.nombre).end
+    );
+    pdf.add(
+      new Columns(['DNI: '+ this.usuarioLogueado?.dni, ' Edad: '+ this.usuarioLogueado?.edad]).end
+    )
+    // pdf.add(      
+    //   new Txt('DNI: ' + this.usuarioLogueado?.dni + ' Edad: ' + this.usuarioLogueado?.edad).end
+    // );
+    pdf.add(      
+      new Txt(' ').end
+    );
+
+    // pdf.add( await new Img('' + this.usuarioLogueado?.imagenPerfil).alignment('right').build());
+
+    pdf.add(      
+      new Txt('Altura: ' + this.usuarioLogueado?.historiaClinica.altura).end
+    );
+    pdf.add(      
+      new Txt('Peso: ' + this.usuarioLogueado?.historiaClinica.peso).end
+    );
+    pdf.add(      
+      new Txt('Temperatura: ' + this.usuarioLogueado?.historiaClinica.temperatura).end
+    );
+    pdf.add(      
+      new Txt('Presión: ' + this.usuarioLogueado?.historiaClinica.presion).end
+    );
+
+    
+// pdf.add(
+//   new Columns(['Altura: ', 'Peso: ', 'Temperatura: ']).end
+// )
+// pdf.add(
+//   new Columns([this.usuarioLogueado?.historiaClinica.altura, this.usuarioLogueado?.historiaClinica.peso, this.usuarioLogueado?.historiaClinica.temperatura]).end
+// )
+
+
+      
+    pdf.create().open();
+    pdf.create().download();
+  }
   // async guardar() {
   //   console.log(this.usuarioLogueado);
   //   if (this.usuarioLogueado != null) {

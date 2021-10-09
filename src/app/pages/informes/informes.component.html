@@ -1,17 +1,44 @@
 <app-navbar></app-navbar>
-<p>informes works!</p>
+<!-- <p>informes works!</p> -->
 
 <div class="card">
     <div class="card-body">
         <h2 class="text-center">Informes</h2>
         <div class="row">
-            <button class="btn btn-outline-primary">Log de ingresos al sistema</button>
-            <button class="btn btn-outline-primary" (click)="informe2()">Cantidad de turnos por especialidad</button>
-            <button class="btn btn-outline-primary" (click)="informe3()">Cantidad de turnos por día</button>
-            <button class="btn btn-outline-primary" (click)="informe4()">Cantidad de turnos solicitado por médico en un lapso de tiempo</button>
-            <button class="btn btn-outline-primary">Cantidad de turnos finalizados por médico en un lapso de tiempo</button>
+            <button class="btn btn-outline-primary mb-2" (click)="informe1()">Log de ingresos al sistema</button>
+            <button class="btn btn-outline-primary mb-2" (click)="informe2()">Cantidad de turnos por especialidad</button>
+            <button class="btn btn-outline-primary mb-2" (click)="informe3()">Cantidad de turnos por día</button>
+            <button class="btn btn-outline-primary mb-2" (click)="informe4()">Cantidad de turnos solicitados por médico en un lapso de tiempo</button>
+            <button class="btn btn-outline-primary mb-2" (click)="informe5()">Cantidad de turnos finalizados por médico en un lapso de tiempo</button>
+            <button class="btn btn-outline-primary mb-2">Cantidad de visitas que tuvo la clínica</button>
+            <button class="btn btn-outline-primary mb-2" (click)="informe7()">Cantidad de pacientes por especialidad</button>
+            <button class="btn btn-outline-primary mb-2" (click)="informe8()">Cantidad de médicos por especialidad</button>
+            <button class="btn btn-outline-primary mb-2">Informe basado en la encuesta al cliente mostrando cuáles fueron las respuestas</button>
 
             </div>
+    </div>
+</div>
+
+<div *ngIf="info1 == true">
+    <hr>
+    <div class="row">
+        <div class="col-md-10 mx-auto mt-4">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center">Log de ingresos al sistema</h3>
+                </div>
+                <div class="card-body">
+                    <div class="mb-3" *ngFor="let info of arrayLogSistema let i=index">
+                        
+                        <!-- <h6 class="text-center">Por favor ingrese un comentario/reseña del turno </h6> -->
+                        <!-- <div class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="300"> -->
+                        <div class="text-info">
+                             {{info.diaHorario}} {{info.usuarioLog}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -36,6 +63,7 @@
             </div>
         </div>
     </div>
+</div>
 
 <div *ngIf="info3 == true">
     <hr>
@@ -46,18 +74,19 @@
                     <h3 class="text-center">Cantidad de turnos por dia</h3>
                 </div>
                 <div class="card-body">
-                    <div [appResaltar]="info.cantidad" class="mb-3" *ngFor="let info of arrayCantidadTurnoEspecialidad let i=index">
+                    <div [appResaltar]="info.cantidad" class="mb-3" *ngFor="let info of arrayCantidadTurnoDia let i=index">
                         
                         <!-- <h6 class="text-center">Por favor ingrese un comentario/reseña del turno </h6> -->
                         <!-- <div class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="300"> -->
                         <div class="text-info">
-                                {{info.descripcion}} {{info.cantidad}}
+                                {{info.dia}} {{info.cantidad}}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
     
 <div *ngIf="info4 == true">
     <hr>
@@ -65,7 +94,7 @@
         <div class="col-md-10 mx-auto mt-4">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="text-center">Cantidad de turnos solicitado por médico en un lapso de tiempo</h3>
+                    <h3 class="text-center">Cantidad de turnos solicitados por médico en un lapso de tiempo</h3>
                 </div>
                 <div class="card-body">
                     <div [appResaltar]="info.cantidad" class="mb-3" *ngFor="let info of arrayCantidadTurnoEspecialista let i=index">
@@ -80,3 +109,72 @@
             </div>
         </div>
     </div>
+</div>
+    
+<div *ngIf="info5 == true">
+    <hr>
+    <div class="row">
+        <div class="col-md-10 mx-auto mt-4">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center">Cantidad de turnos finalizados por médico en un lapso de tiempo</h3>
+                </div>
+                <div class="card-body">
+                    <div [appResaltar]="info.cantidad" class="mb-3" *ngFor="let info of arrayCantidadTurnoEspecialista let i=index">
+                        
+                        <!-- <h6 class="text-center">Por favor ingrese un comentario/reseña del turno </h6> -->
+                        <!-- <div class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="300"> -->
+                        <div class="text-info">
+                                {{info.apellido}} {{info.cantidad}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+    
+<div *ngIf="info7 == true">
+    <hr>
+    <div class="row">
+        <div class="col-md-10 mx-auto mt-4">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center">Cantidad de pacientes por especialidad</h3>
+                </div>
+                <div class="card-body">
+                    <div [appResaltar]="info.cantidad" class="mb-3" *ngFor="let info of arrayCantidadPacienteEspecialidad let i=index">
+                        
+                        <!-- <h6 class="text-center">Por favor ingrese un comentario/reseña del turno </h6> -->
+                        <!-- <div class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="300"> -->
+                        <div class="text-info">
+                                {{info.descripcion}} {{info.cantidad}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>    
+<div *ngIf="info8 == true">
+    <hr>
+    <div class="row">
+        <div class="col-md-10 mx-auto mt-4">
+            <div class="card">
+                <div class="card-header">
+                    <h3 class="text-center">Cantidad de médicos por especialidad</h3>
+                </div>
+                <div class="card-body">
+                    <div [appResaltar]="info.cantidad" class="mb-3" *ngFor="let info of arrayCantidadMedicoEspecialidad let i=index">
+                        
+                        <!-- <h6 class="text-center">Por favor ingrese un comentario/reseña del turno </h6> -->
+                        <!-- <div class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="300"> -->
+                        <div class="text-info">
+                                {{info.descripcion}} {{info.cantidad}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

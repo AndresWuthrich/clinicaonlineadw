@@ -6,8 +6,18 @@ body{
 div{ font-family:'Gill Sans'; }
 
 .container {
-    padding: 5px;
-    margin: 2px; 
+  background-image:url('../../../assets/imagenes/back5.jpg');
+  /* height: 250px; */
+  /* width: 500px; */
+  background-repeat: no-repeat;
+  background-position: 100%;
+  /* border-radius: 3%; */
+  background-size: 100% auto;
+  width: 100%;
+  height: 100%;
+
+  /* padding: 5px;
+  margin: 2px;  */
 }
 
 .foto{
@@ -27,8 +37,8 @@ div{ font-family:'Gill Sans'; }
 /* Padding below the footer and lighter body text */
 
 body {
-    padding-top: 3rem;
-    padding-bottom: 3rem;
+    /* padding-top: 3rem;
+    padding-bottom: 3rem; */
     color: #5a5a5a;
   }
   
@@ -76,7 +86,7 @@ body {
   
   /* Center align the text within the three columns below the carousel */
   .marketing .col-lg-3 {
-    margin-bottom: 1.5rem;
+    /* margin-bottom: 1.5rem; */
     text-align: center;
   }
   .marketing h2 {

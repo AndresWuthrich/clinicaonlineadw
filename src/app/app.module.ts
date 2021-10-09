@@ -40,7 +40,18 @@ import { InformesComponent } from './pages/informes/informes.component';
 import { PacientesComponent } from './pages/pacientes/pacientes.component';
 import { ResaltarDirective } from './directivas/resaltar.directive';
 import { UpperPipe } from './pipes/upper.pipe';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
+import { PdfMakeWrapper } from 'pdfmake-wrapper';
+import * as pdfFonts from 'pdfmake/build/vfs_fonts';
+import { HttpClient } from '@angular/common/http';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+PdfMakeWrapper.setFonts(pdfFonts);
+
+export function createTranslateLoader(http: HttpClient){
+  return new TranslateHttpLoader(http, './assets/i18n/','.json');
+}
 
 @NgModule({
   declarations: [
@@ -81,7 +92,15 @@ import { UpperPipe } from './pipes/upper.pipe';
     AngularFireDatabaseModule,
     ReactiveFormsModule,
     RecaptchaModule,
-    RecaptchaFormsModule
+    RecaptchaFormsModule,
+    TranslateModule.forRoot({
+      // loader: {
+      //   provide: TranslateLoader,
+      //   useFactory: (createTranslateLoader),
+      //   deps: [HttpClient]
+      // }
+      // defaultLanguage: 'en'
+    })
   ],
   providers: [AuthService, ExcelService],
   bootstrap: [AppComponent]
