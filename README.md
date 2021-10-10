@@ -1,4 +1,4 @@
-# ClinicaOnline
+# ClinicaOnline ![Logo](src/assets/imagenes/logo.png "Logo")
 
 Proyecto realizado con [Angular CLI](https://github.com/angular/angular-cli) version 12.0.0.
 
@@ -10,7 +10,7 @@ TP Final Laboratorio IV 2021 - UTNFRA - Técnico superior en programación.
 ## Ingreso a la Web 
 
 **Bienvenida**
-![Bienvenido](src/assets/imagenes/bienvenido.png "Bienvenido")
+![Bienvenido](src/assets/imagenes/bienvenido2.png "Bienvenido")
 
 >Desde la pantalla de bienvenida podrás:
 * Visualizar links vinculados a la clínica (carrousel).

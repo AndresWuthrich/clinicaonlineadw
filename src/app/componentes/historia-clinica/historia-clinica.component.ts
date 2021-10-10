@@ -16,6 +16,12 @@ export class HistoriaClinicaComponent implements OnInit {
   valor1: string = "";
   clave2: string = "";
   valor2: string = "";
+  clave3: string = "";
+  valor3: string = "";
+  clave4: string = "";
+  valor4: string = "";
+  clave5: string = "";
+  valor5: string = "";
   error: string = "";
 
   constructor() { }
@@ -32,7 +38,13 @@ export class HistoriaClinicaComponent implements OnInit {
       clave1: this.clave1,
       valor1: this.valor1,
       clave2: this.clave2,
-      valor2: this.valor2
+      valor2: this.valor2,
+      clave3: this.clave3,
+      valor3: this.valor3,
+      clave4: this.clave4,
+      valor4: this.valor4,
+      clave5: this.clave5,
+      valor5: this.valor5,
     }
     console.log('1',aux);
 

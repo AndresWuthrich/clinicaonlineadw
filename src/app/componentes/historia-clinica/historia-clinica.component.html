@@ -26,6 +26,7 @@
                         <input type="text" id="presion" class="form-control" [(ngModel)]="presion">
                     </div>
 
+                    <!-- datos dinámicos -->
                     <div class="form-group col-md-6 mb-6">
                         <label for="clave1">Dato dinámico 1</label>
                         <input type="text" id="clave1" class="form-control" [(ngModel)]="clave1">
@@ -45,6 +46,43 @@
                         <input type="text" id="valor2" class="form-control" [(ngModel)]="valor2">
                     </div>
 
+                    <!-- datos dinámicos SPRINT 5-->
+                    <div class="form-group col-md-6 mb-6">
+                        <label for="clave3">Dato dinámico 3 (rango)</label>
+                        <input type="text" id="clave3" class="form-control" [(ngModel)]="clave3">
+
+                    </div>
+                    <div class="form-group col-md-6 mb-6">
+                        <label for="valor3">Valor 3 (rango)</label>
+                        <input type="range" min="1" max="100" [(ngModel)]="valor3">
+                        <!-- <input type="text" id="valor3" class="form-control" [(ngModel)]="valor3"> -->
+                    </div>
+
+                    <div class="form-group col-md-6 mb-6">
+                        <label for="clave4">Dato dinámico 4 (texto numérico)</label>
+                        <input type="text" id="clave4" class="form-control" [(ngModel)]="clave4">
+                    </div>
+                    <div class="form-group col-md-6 mb-6">
+                        <label for="valor4">Valor 4 (texto numérico)</label>
+                        <input type="number" id="valor4" class="form-control" [(ngModel)]="valor4">
+                    </div>
+
+                    <div class="form-group col-md-6 mb-6">
+                        <label for="clave5">Dato dinámico 5 (select)</label>
+                        <input type="text" id="clave5" class="form-control" [(ngModel)]="clave5">
+                    </div>
+                    <div class="form-group col-md-6 mb-6">
+                        <label for="valor5">Valor 5 (select)</label>
+                        <div>
+                            <p class="valor5">
+                                <input type="radio" id="recomendarSI" name="valor5" value="SI" [(ngModel)]="valor5" checked>
+                                <label for="recomendarSI" id="recomendarSI">SI</label>
+                                <input type="radio" class="espacio" id="recomendarNO" [(ngModel)]="valor5" name="valor5" value="NO">
+                                <label for="recomendarNO" id="recomendarNO">NO</label>
+                            </p>
+                        </div>
+                    </div>
+                    
                     <div class="d-grid gap-2 mx-auto">
                         <button class="btn btn-success" type="button" (click)="Confirmar(true)">CONTINUAR</button>
                         <button class="btn btn-danger" type="button" (click)="Confirmar(false)">CANCELAR</button>

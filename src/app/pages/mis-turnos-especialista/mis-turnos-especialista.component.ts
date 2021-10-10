@@ -183,6 +183,12 @@ export class MisTurnosEspecialistaComponent implements OnInit {
         this.turnoActual!.paciente!.historiaClinica!.valor1 = $event.valor1;
         this.turnoActual!.paciente!.historiaClinica!.clave2 = $event.clave2;
         this.turnoActual!.paciente!.historiaClinica!.valor2 = $event.valor2;
+        this.turnoActual!.paciente!.historiaClinica!.clave3 = $event.clave3;
+        this.turnoActual!.paciente!.historiaClinica!.valor3 = $event.valor3;
+        this.turnoActual!.paciente!.historiaClinica!.clave4 = $event.clave4;
+        this.turnoActual!.paciente!.historiaClinica!.valor4 = $event.valor4;
+        this.turnoActual!.paciente!.historiaClinica!.clave5 = $event.clave5;
+        this.turnoActual!.paciente!.historiaClinica!.valor5 = $event.valor5;
 
         // this.turnoActual!.estado = 'Finalizado';
 

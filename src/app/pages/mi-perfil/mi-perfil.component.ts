@@ -117,6 +117,31 @@ export class MiPerfilComponent implements OnInit {
     pdf.add(      
       new Txt('Presión: ' + this.usuarioLogueado?.historiaClinica.presion).end
     );
+    if(this.usuarioLogueado?.historiaClinica.valor1 != ''){
+      pdf.add(      
+        new Txt(this.usuarioLogueado?.historiaClinica.clave1 + ': ' + this.usuarioLogueado?.historiaClinica.valor1).end
+      );
+    }
+    if(this.usuarioLogueado?.historiaClinica.valor2 != ''){
+      pdf.add(      
+        new Txt(this.usuarioLogueado?.historiaClinica.clave2 + ': ' + this.usuarioLogueado?.historiaClinica.valor2).end
+      );
+    }
+    if(this.usuarioLogueado?.historiaClinica.valor3 != ''){
+      pdf.add(      
+        new Txt(this.usuarioLogueado?.historiaClinica.clave3 + ': ' + this.usuarioLogueado?.historiaClinica.valor3).end
+      );
+    }
+    if(this.usuarioLogueado?.historiaClinica.valor4 != ''){
+      pdf.add(      
+        new Txt(this.usuarioLogueado?.historiaClinica.clave4 + ': ' + this.usuarioLogueado?.historiaClinica.valor4).end
+      );
+    }
+    if(this.usuarioLogueado?.historiaClinica.valor5 != ''){
+      pdf.add(      
+        new Txt(this.usuarioLogueado?.historiaClinica.clave5 + ': ' + this.usuarioLogueado?.historiaClinica.valor5).end
+      );
+    }
 
     
 // pdf.add(
