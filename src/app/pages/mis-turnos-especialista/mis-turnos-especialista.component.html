@@ -1,12 +1,22 @@
 <app-navbar></app-navbar>
 <!-- <br>< br> -->
 <!-- <p>mis-turnos-especialista works!</p> -->
-<!-- <div class="row" *ngIf="usuarioLogueado != null && verTabla == true"> -->
+
 <div class="row" *ngIf="usuarioLogueado != null">
     <div class="col-md-10 mx-auto mt-4" *ngIf="usuarioLogueado.perfil == 'especialista' || usuarioLogueado.perfil == 'administrador'">
         <div class="card">
             <div class="card-body">
                 <h1 class="text-center mb-3">Mis turnos</h1>
+
+                <!-- <div class="row mt-2">
+                    <div class="col">
+                        <div class="form-group">
+                            <input type="text" class="form-control"
+                                placeholder="Busqueda por especialidad o paciente..." name="filterPasadoProf"
+                                [(ngModel)]="filterPasadoProf">
+                        </div>
+                    </div>
+                </div> -->
 
                 <table class="table table-hover">
                     <thead>
@@ -22,6 +32,7 @@
                         </tr>
                     </thead>
                     <tbody *ngFor="let turno of listadoTurnos let i=index">
+                    <!-- <tbody *ngFor="let turno of listadoTurnos | filtroTurnos:filterPasadoProf let i=index"> -->
                         <tr>
                             <!-- <td class="text-left" class="text-center">{{i+1}}</td> -->
                             <td class="text-left" class="text-center">{{turno.diaTurno}}</td>

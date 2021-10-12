@@ -9,26 +9,22 @@ import { TranslateService } from '@ngx-translate/core';
   selector: 'app-bienvenido',
   templateUrl: './bienvenido.component.html',
   styleUrls: ['./bienvenido.component.css']
-//   template: `
-//   <div>{{ 'HELLO' | translate:param }}</div>
-// `
 })
+
 export class BienvenidoComponent implements OnInit {
 
   public userLogueado: Observable<any> = this.auth.fireStoreAuth.user;
   public usuarioLogueado: Usuario | null = null;
 
-  param = {value: 'world'};
+  langs: string[] = [];
 
   constructor(private usuarioService: UsuarioService, public auth: AuthService, public translate: TranslateService) {
-            // // this language will be used as a fallback when a translation isn't found in the current language
-            // translate.setDefaultLang('sp');
-            // // the lang to use, if the lang isn't available, it will use the current loader to get them
-            // translate.use('sp');
+            
+            translate.setDefaultLang('es'); // // this language will be used as a fallback when a translation isn't found in the current language
+            translate.use('es'); // // the lang to use, if the lang isn't available, it will use the current loader to get them
+            translate.addLangs(['es','en','po']); //cargo arrays
+            this.langs = this.translate.getLangs(); //puedo obtener los idiomas cargados en el array
 
-            // translate.setTranslation('sp', {
-            //   HELLO: 'hello {{value}}'
-            // }); 
             }
 
   async ngOnInit() {
@@ -41,5 +37,9 @@ export class BienvenidoComponent implements OnInit {
       console.log(dataUser);
       this.usuarioLogueado = dataUser;
     }
+  }
+
+  changeLang(lang: string){
+    this.translate.use(lang); //le paso qué idioma utilizar
   }
 }

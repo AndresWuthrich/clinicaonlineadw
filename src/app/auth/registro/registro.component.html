@@ -1,7 +1,13 @@
 <!-- <form  #captchaProtectedForm="ngForm"> -->
     <body class="container">
-        <button class="btn fotoPaciente" (click)="elegirPerfil('paciente')" *ngIf="perfil!='paciente' && perfil!='especialista'">Paciente</button>
-        <button class="btn fotoEspecialista" (click)="elegirPerfil('especialista')" *ngIf="perfil!='paciente' && perfil!='especialista'">Especialista</button>
+        <button class="btn fotoPaciente" (click)="elegirPerfil('paciente')" *ngIf="perfil!='paciente' && perfil!='especialista'">
+          <!-- Paciente -->
+          {{ 'Paciente' | translate }}
+        </button>
+        <button class="btn fotoEspecialista" (click)="elegirPerfil('especialista')" *ngIf="perfil!='paciente' && perfil!='especialista'">
+          <!-- Especialista -->
+          {{ 'Profesional' | translate }}
+        </button>
       
         <div *ngIf="perfil=='paciente' || perfil=='especialista'" class="paciente" [ngClass]="{especialista: perfil=='especialista'}">
           <form [formGroup]="formRegistro" (ngSubmit)="registro()" *ngIf="perfil=='paciente' || perfil=='especialista'">

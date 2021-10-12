@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Especialidad } from 'src/app/clases/especialidad';
 import { Turno } from 'src/app/clases/turno';
 import { Usuario } from 'src/app/clases/usuario';
@@ -42,6 +42,10 @@ export class InformesComponent implements OnInit {
   public info8: boolean = false;
   public flag: boolean = false;
 
+  chart2 = [];
+  // @ViewChild('myChart') canvasRef: ElementRef | undefined;
+  
+  
   constructor(private turnoService: TurnoService, private usuarioService: UsuarioService, private especialidadService: EspecialidadService, private logService: LogService) {
     this.turnoService.traerTodos().subscribe((turnos: Turno[]) => {
       this.listaTurnos = turnos;
@@ -65,6 +69,36 @@ export class InformesComponent implements OnInit {
    }
 
   ngOnInit(): void {
+    new Chart ('myChart', {
+      type: 'pie',
+      data: { 
+        datasets:[{
+          label: 'Voto',
+          data: [101,102,103],
+          backgroundColor: [
+            'rgba(40,23,244,0.9)',
+            'rgba(192,255,0,0.9)',
+            'rgba(239,23,244,0.9)',
+          ]
+        }],
+        labels: ['Blue', 'Green', 'Pink']
+      }
+      // options:{
+      //   title:{
+      //     Text: "PIIIIIE Chart",
+      //     display: true
+      //   },
+      //   scales:{
+      //   //   yAxes:[{
+      //   //     display: true,
+      //   //     ticks:{
+      //   //       display: true,
+      //   //       beginAtZero: true,
+      //   //     }
+      //   //   }],
+      //   }
+      // }
+    })
   }
 
   informe1(){
@@ -131,6 +165,39 @@ export class InformesComponent implements OnInit {
       console.log('2',this.cantidadTurnoEspecialidad);
 
     });
+
+    
+    new Chart ('myChart', {
+      type: 'pie',
+      data: { 
+        datasets:[{
+          label: 'Voto',
+          data: [101,102,103],
+          backgroundColor: [
+            'rgba(40,23,244,0.9)',
+            'rgba(192,255,0,0.9)',
+            'rgba(239,23,244,0.9)',
+          ]
+        }],
+        labels: ['Blue', 'Green', 'Pink']
+      }
+      // options:{
+      //   title:{
+      //     Text: "PIIIIIE Chart",
+      //     display: true
+      //   },
+      //   scales:{
+      //   //   yAxes:[{
+      //   //     display: true,
+      //   //     ticks:{
+      //   //       display: true,
+      //   //       beginAtZero: true,
+      //   //     }
+      //   //   }],
+      //   }
+      // }
+    })
+
   }
 
   informe3(){

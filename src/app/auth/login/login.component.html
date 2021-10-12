@@ -8,7 +8,9 @@
       <!-- <div  *ngIf="!(auth.usuario | async)"> CON ESTO NO ANDA-->
         <!-- <form class="form-signin"> -->
       <!-- <img class="mb-4" src="./assets/imagenes/loginadw.jpg " alt="" width="72" height="72"> -->
-      <h1 class="h3 mb-3 font-weight-normal">Iniciar sesión</h1>
+
+      <!-- <h1 class="h3 mb-3 font-weight-normal">Iniciar sesión</h1> -->
+      <h1 class="h3 mb-3 font-weight-normal">{{ 'Login' | translate }}</h1>
       
       <div class="row justify-content-around form">
         <div class= "col-8">
@@ -17,11 +19,12 @@
         </div>
 
         <div class= "col-8">
-          <label for="inputPassword" class="sr-only">Contraseña</label>
+          <label for="inputPassword" class="sr-only">Password</label>
           <input type="password" id="inputPassword" class="form-control" [(ngModel)]="password" placeholder="Contraseña" required>
           <div class="checkbox mb-3">
             <label>
-              <input type="checkbox" value="remember-me"> Recordar mis datos
+              <!-- <input type="checkbox" value="remember-me"> Recordar mis datos -->
+              <input type="checkbox" value="remember-me">{{ 'Recordar' | translate }}
             </label>
           </div>
         </div>
@@ -31,12 +34,19 @@
         <button class="btn btn-lg btn-outline-primary" [disabled]="loading" type="submit" style="margin: 5px" (click)="Ingresar()">
           <!-- <img width="24px" src="../../../assets/imagenes/adn.gif" /> -->
           <span *ngIf="loading" class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
-          Ingresar
+          <!-- Ingresar -->
+          {{ 'Ingresar' | translate }}
         </button>
         
-        <button class="btn btn-lg btn-outline-danger" style="margin: 5px" routerLink="/">Cancelar</button>
+        <button class="btn btn-lg btn-outline-danger" style="margin: 5px" routerLink="/">
+          <!-- Cancelar -->
+          {{ 'Cancelar' | translate }}
+        </button>
     
-        <button class="btn btn-lg btn-outline-success" type="submit" style="margin: 5px" routerLink="/registro">Registrarse</button>
+        <button class="btn btn-lg btn-outline-success" type="submit" style="margin: 5px" routerLink="/registro">
+          <!-- Registrarse -->
+          {{ 'Signup' | translate }}
+        </button>
       </div>
     </div>
 
@@ -46,7 +56,10 @@
       </div>
 
       <div class="row g-4" *ngIf="autocompletar=='si'">
-        <h4 class="mb-1">Usuarios</h4>
+        <h4 class="mb-1">
+          <!-- Usuarios -->
+          {{ 'Usuarios' | translate }}
+        </h4>
 
             <ul class="overflow-auto" id="boxConScroll" style="height: 300px;"
                 #scrollMe [scrollTop]="scrollMe">

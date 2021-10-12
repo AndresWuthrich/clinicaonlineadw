@@ -1,10 +1,7 @@
 <app-navbar></app-navbar>
-<!-- <br>< br> -->
-<!-- <img src="../../../assets/imagenes/back3.jpg" /> -->
 <!-- <p>bienvenido works!</p> -->
 
 <main>
-
     <!-- <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
       <div class="carousel-indicators">
         <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
@@ -64,132 +61,110 @@
         <div class="foto" *ngIf="userLogueado | async as user; else login ">
             <div class="row" *ngIf="usuarioLogueado != null">
 
-                
 
-            <!-- Three columns of text below the carousel -->
-            <div class="row"> 
-                <div *ngIf="usuarioLogueado.perfil=='paciente'">
-                    <div class="col-lg-4">
-                    <svg class="bd-placeholder-img rounded-circle" width="70" height="70" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+                <!-- <div> -->
+
+                    <!-- Three columns of text below the carousel -->
+                    <div class="row">
+                      <div class="col-lg-3">
+                        <svg class="bd-placeholder-img rounded-circle" width="70" height="70" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
             
-                    <h2>Mi perfil</h2>
-                    <!-- <p>And lastly this, the third column of representative placeholder content.</p> -->
-                    <a class="btn btn-outline-dark" routerLink="/miperfil">Mi perfil</a>
-                </div><!-- /.col-lg-4 -->
-      
-                    <div class="col-lg-4">
-                        <svg class="bd-placeholder-img rounded-circle" width="100" height="100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+                        <h2>Mi perfil</h2>
+                        <!-- <p>And lastly this, the third column of representative placeholder content.</p> -->
+                        <a class="btn btn-outline-dark" routerLink="/miperfil">Mi perfil</a>
+                      </div><!-- /.col-lg-4 -->
+
+                      
+                      <div class="col-lg-3">
+                        <div *ngIf="usuarioLogueado.perfil=='paciente' || usuarioLogueado.perfil=='administrador'">
+                          <svg class="bd-placeholder-img rounded-circle" width="70" height="70" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
                 
-                        <h2>Solicitar Turno</h2>
+                          <h2>Solicitar Turno</h2>
                         <!-- <p>Some representative placeholder content for the three columns of text below the carousel. This is the first column.</p> -->
-                        <a class="btn btn-outline-dark" routerLink="/solicitarturno">Solicitar Turno</a>
+                          <a class="btn btn-outline-dark" routerLink="/solicitarturno">Solicitar Turno</a>
+                        </div><!-- /.col-lg-4 -->
 
-                    </div><!-- /.col-lg-4 -->
-      
-                    <div class="col-lg-4">
-                        <svg class="bd-placeholder-img rounded-circle" width="100" height="100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+                        <div *ngIf="usuarioLogueado.perfil=='especialista'">
+                          <svg class="bd-placeholder-img rounded-circle" width="70" height="70" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+                        
+                          <h2>Mis turnos</h2>
+                          <!-- <p>Another exciting bit of representative placeholder content. This time, we've moved on to the second column.</p> -->
+                          <a class="btn btn-outline-dark" routerLink="/misturnos-especialista">Mis turnos</a>
+                        </div><!-- /.col-lg-4 -->
+                      </div>
+
+                      <div class="col-lg-3">
+                        <div *ngIf="usuarioLogueado.perfil=='paciente'">
+                          <svg class="bd-placeholder-img rounded-circle" width="70" height="70" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+                      
+                          <h2>Mis turnos</h2>
+                          <!-- <p>Another exciting bit of representative placeholder content. This time, we've moved on to the second column.</p> -->
+                          <a class="btn btn-outline-dark" routerLink="/misturnos">Mis turnos</a>
+                        </div><!-- /.col-lg-4 -->
+
+                        <div *ngIf="usuarioLogueado.perfil=='especialista'">
+                          <svg class="bd-placeholder-img rounded-circle" width="70" height="70" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+                  
+                          <h2>Pacientes</h2>
+                          <!-- <p>And lastly this, the third column of representative placeholder content.</p> -->
+                          <a class="btn btn-outline-dark" routerLink="/pacientes">Pacientes</a>
+                        </div><!-- /.col-lg-4 -->
+
+                        <div *ngIf="usuarioLogueado.perfil=='administrador'">
+                          <svg class="bd-placeholder-img rounded-circle" width="70" height="70" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+                      
+                          <h2>Usuarios</h2>
+                          <!-- <p>And lastly this, the third column of representative placeholder content.</p> -->
+                          <a class="btn btn-outline-dark" routerLink="/usuarios">Usuarios</a>
+                        </div><!-- /.col-lg-4 -->
+                      </div>
+
+                      <div class="col-lg-3">
+                        <div *ngIf="usuarioLogueado.perfil=='administrador'">
+                          <svg class="bd-placeholder-img rounded-circle" width="70" height="70" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
                 
-                        <h2>Mis turnos</h2>
-                        <!-- <p>Another exciting bit of representative placeholder content. This time, we've moved on to the second column.</p> -->
-                        <a class="btn btn-outline-dark" routerLink="/misturnos">Mis turnos</a>
-                    </div><!-- /.col-lg-4 -->
-      
-             </div> 
-            </div> 
+                          <h2>Turnos</h2>
+                          <!-- <p>And lastly this, the third column of representative placeholder content.</p> -->
+                          <a class="btn btn-outline-dark" routerLink="/misturnos-especialista">Turnos</a>
+                        </div>
+                      </div>
+
+                      <div class="col-lg-3">
+                        <div *ngIf="usuarioLogueado.perfil=='administrador'">
+                          <svg class="bd-placeholder-img rounded-circle" width="70" height="70" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
+                
+                          <h2>Informes</h2>
+                          <!-- <p>And lastly this, the third column of representative placeholder content.</p> -->
+                          <a class="btn btn-outline-dark" routerLink="/informes">Informes</a>
+                        </div><!-- /.col-lg-4 -->
+                      </div>
+                    </div><!-- /.row -->
+                <!-- </div>                                 -->
 
 
 
-            <!-- Three columns of text below the carousel -->
-            <div class="row"> 
-                <div class="col-lg-4">
-                    <svg class="bd-placeholder-img rounded-circle" width="70" height="70" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-            
-                    <h2>Mi perfil</h2>
-                    <!-- <p>And lastly this, the third column of representative placeholder content.</p> -->
-                    <a class="btn btn-outline-dark" routerLink="/miperfil">Mi perfil</a>
-                </div><!-- /.col-lg-4 -->
-      
-                <div *ngIf="usuarioLogueado.perfil=='paciente' || usuarioLogueado.perfil=='administrador'">
-                    <div class="col-lg-4">
-                        <svg class="bd-placeholder-img rounded-circle" width="100" height="100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-                
-                        <h2>Solicitar Turno</h2>
-                        <!-- <p>Some representative placeholder content for the three columns of text below the carousel. This is the first column.</p> -->
-                        <a class="btn btn-outline-dark" routerLink="/solicitarturno">Solicitar Turno</a>
-
-                    </div><!-- /.col-lg-4 -->
-                </div>
-      
-                <div *ngIf="usuarioLogueado.perfil=='paciente'">
-                    <div class="col-lg-4">
-                        <svg class="bd-placeholder-img rounded-circle" width="100" height="100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-                
-                        <h2>Mis turnos</h2>
-                        <!-- <p>Another exciting bit of representative placeholder content. This time, we've moved on to the second column.</p> -->
-                        <a class="btn btn-outline-dark" routerLink="/misturnos">Mis turnos</a>
-                    </div><!-- /.col-lg-4 -->
-                </div>
-      
-                <div *ngIf="usuarioLogueado.perfil=='especialista'">
-                    <div class="col-lg-4">
-                        <svg class="bd-placeholder-img rounded-circle" width="100" height="100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-                
-                        <h2>Mis turnos</h2>
-                        <!-- <p>And lastly this, the third column of representative placeholder content.</p> -->
-                        <a class="btn btn-outline-dark" routerLink="/misturnos-especialista">Mis turnos</a>
-                    </div><!-- /.col-lg-4 -->
-                    <div class="col-lg-4">
-                        <svg class="bd-placeholder-img rounded-circle" width="100" height="100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-                
-                        <h2>Pacientes</h2>
-                        <!-- <p>And lastly this, the third column of representative placeholder content.</p> -->
-                        <a class="btn btn-outline-dark" routerLink="/pacientes">Pacientes</a>
-                    </div><!-- /.col-lg-4 -->
-                </div>
-      
-                <div *ngIf="usuarioLogueado.perfil=='administrador'">
-                    <div class="col-lg-4">
-                        <svg class="bd-placeholder-img rounded-circle" width="100" height="100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-                
-                        <h2>Usuarios</h2>
-                        <!-- <p>And lastly this, the third column of representative placeholder content.</p> -->
-                        <a class="btn btn-outline-dark" routerLink="/usuarios">Usuarios</a>
-                    </div><!-- /.col-lg-4 -->
-                    <div class="col-lg-4">
-                        <svg class="bd-placeholder-img rounded-circle" width="100" height="100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-                
-                        <h2>Turnos</h2>
-                        <!-- <p>And lastly this, the third column of representative placeholder content.</p> -->
-                        <a class="btn btn-outline-dark" routerLink="/misturnos-especialista">Turnos</a>
-                    </div><!-- /.col-lg-4 -->
-                    <div class="col-lg-4">
-                        <svg class="bd-placeholder-img rounded-circle" width="100" height="100" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-                
-                        <h2>Informes</h2>
-                        <!-- <p>And lastly this, the third column of representative placeholder content.</p> -->
-                        <a class="btn btn-outline-dark" routerLink="/informes">Informes</a>
-                    </div><!-- /.col-lg-4 -->
-                </div>
-                <!-- <div *ngIf="usuarioLogueado.perfil=='administrador'">
-                    <div class="col-lg-3">
-                        <svg class="bd-placeholder-img rounded-circle" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 140x140" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#777"/><text x="50%" y="50%" fill="#777" dy=".3em">140x140</text></svg>
-                
-                        <h2>Turnos</h2> -->
-                        <!-- <p>And lastly this, the third column of representative placeholder content.</p> -->
-                        <!-- <a class="btn btn-outline-dark" routerLink="/misturnos-especialista">Turnos</a>
-                    </div> -->
-                <!-- </div> -->
-             </div> 
         </div>
     
        
       </div><!-- /.row -->
       <ng-template #login>
+
+        <!-- <div>{{ 'Hello' | translate }}</div> -->
+        <!-- <label>
+            {{ 'Idioma' | translate }}
+            <select #langSelect (change)="changeLang(langSelect.value)">
+                <option *ngFor="let lang of langs" [value]="lang">
+                    {{lang}}
+                </option>
+            </select>
+        </label> -->
+
       <div class="container">
 
         <div>
+            <h1>{{ 'Bienvenido' | translate }}</h1>            
             <!-- <div class="carousel-caption"> -->
-              <h1>Bienvenido/a. Agendá tu turno online, rápido y fácil.</h1>
+              <!-- <h1>Bienvenido/a. Agendá tu turno online, rápido y fácil.</h1> -->
               <!-- <p>Bienvenido/a. Agendá tu turno online, rápido y fácil.</p> -->
               <!-- <p><a class="btn btn-lg btn-primary" href="#">Sign up today</a></p> -->
         </div>
@@ -199,23 +174,32 @@
                 <div class="p-5 mb-4 ">
                     <a class="btn btn-outline-dark" routerLink="/auth/login">
                         <br><br>
-                        <p>Accedé desde tu celular o computadora, donde te encuentres y en cualquier momento.</p>
+                        <!-- <p>Accedé desde tu celular o computadora, donde te encuentres y en cualquier momento.</p> -->
+                        <p>{{ 'Accede' | translate }}</p>
                         <br><br>        
-                        <h1>Iniciar sesión</h1>
+                        <!-- <h1>Iniciar sesión</h1> -->
+                        <h1>{{ 'Login' | translate }}</h1>            
                     </a>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="p-5 mb-4">
                     <a class="btn btn-outline-dark" routerLink="/auth/registro">
-                        <h4>Si sos profesional</h4>
-                        <p>¿Deseas formar parte de nuestro gran equipo de profesionales?
+                        <!-- <h4>Si sos profesional</h4> -->
+                        <h4>{{ 'Siprof' | translate }}</h4>            
+
+                        <!-- <p>¿Deseas formar parte de nuestro gran equipo de profesionales? -->
+                        <p>{{ 'Formar' | translate }}</p>            
                         <br>
-                        <h4>Si sos paciente</h4>
-                        <p>Registrate e ingresá a una sala de espera donde profesionales de distintas especialidades están dispuestos a atenderte.</p>
+                        <!-- <h4>Si sos paciente</h4> -->
+                        <h4>{{ 'Sipaciente' | translate }}</h4>            
+
+                        <!-- <p>Registrate e ingresá a una sala de espera donde profesionales de distintas especialidades están dispuestos a atenderte.</p> -->
+                        <p>{{ 'Ingresa' | translate }}</p>            
                     <!-- <a class="btn btn-outline-primary" routerLink="/registro">Registrarse</a> -->
                         
-                        <h1>Registrarte</h1>
+                        <!-- <h1>Registrarte</h1> -->
+                        <h1>{{ 'Signup' | translate }}</h1>            
                     </a>
                 </div>
             </div>
@@ -231,58 +215,3 @@
 
     </div><!-- /.container -->
   </main>
-  
-
-
-
-<!-- <body class="foto">
-    <div class="col-md-6" *ngIf="userLogueado | async as user; else login "> -->
-        <!-- <div *ngIf="usuarioLogueado != null">
-            <div *ngIf="usuarioLogueado.perfil=='paciente' || usuarioLogueado.perfil=='administrador'">
-                <a class="btn btn-outline-dark" routerLink="/solicitarturno">Solicitar Turno</a>
-            </div>
-
-            <div *ngIf="usuarioLogueado.perfil=='paciente'">
-                <a class="btn btn-outline-dark" routerLink="/misturnos">Mis turnos</a>
-            </div>
-
-            <div *ngIf="usuarioLogueado.perfil=='especialista'">
-                <a class="btn btn-outline-dark" routerLink="/misturnos-especialista">Mis turnos</a>
-            </div>
-
-            <div *ngIf="usuarioLogueado.perfil=='administrador'">
-                <a class="btn btn-outline-dark" routerLink="/usuarios">Usuarios</a>
-                <a class="btn btn-outline-dark" routerLink="/misturnos-especialista">Turnos</a>
-            </div>
-
-            <a class="btn btn-outline-dark" routerLink="/miperfil">Mi perfil</a>
-        </div> -->
-    <!-- </div>
-    <ng-template #login> -->
-        <!-- <div class="row align-items-md-stretch">
-            <div class="col-md-6">
-                <div class="p-5 mb-4 ">
-                    <a class="btn btn-outline-dark" routerLink="/auth/login">
-                        <br><br><br>
-                        <p>Accedé desde tu celular o computadora, donde te encuentres y en cualquier momento.</p>
-                        <br><br>        
-                        <h1>Iniciar sesión</h1>
-                    </a>
-                </div>
-            </div>
-            <div class="col-md-6">
-                <div class="p-5 mb-4">
-                    <a class="btn btn-outline-dark" routerLink="/auth/registro">
-                        <h4>Si sos profesional</h4>
-                        <p>¿Deseas formar parte de nuestro gran equipo de profesionales?
-                        <br><br>
-                        <h4>Si sos paciente</h4>
-                        <p>Registrate e ingresá a una sala de espera donde profesionales de distintas especialidades están dispuestos a atenderte.</p>
-                        <br>
-                        <h1>Registrarte</h1>
-                    </a>
-                </div>
-            </div>
-        </div> -->
-        <!-- </ng-template>
-</body> -->
