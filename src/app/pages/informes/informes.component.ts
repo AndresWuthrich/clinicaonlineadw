@@ -5,7 +5,7 @@ import { Usuario } from 'src/app/clases/usuario';
 import { EspecialidadService } from 'src/app/services/especialidad.service';
 import { TurnoService } from 'src/app/services/turno.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
-import { Chart } from 'chart.js';
+// import { Chart } from 'chart.js';
 import { LogService } from 'src/app/services/log.service';
 import { Log } from 'src/app/clases/log';
 
@@ -69,20 +69,20 @@ export class InformesComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    new Chart ('myChart', {
-      type: 'pie',
-      data: { 
-        datasets:[{
-          label: 'Voto',
-          data: [101,102,103],
-          backgroundColor: [
-            'rgba(40,23,244,0.9)',
-            'rgba(192,255,0,0.9)',
-            'rgba(239,23,244,0.9)',
-          ]
-        }],
-        labels: ['Blue', 'Green', 'Pink']
-      }
+    // new Chart ('myChart', {
+    //   type: 'pie',
+    //   data: { 
+    //     datasets:[{
+    //       label: 'Voto',
+    //       data: [101,102,103],
+    //       backgroundColor: [
+    //         'rgba(40,23,244,0.9)',
+    //         'rgba(192,255,0,0.9)',
+    //         'rgba(239,23,244,0.9)',
+    //       ]
+    //     }],
+    //     labels: ['Blue', 'Green', 'Pink']
+    //   }
       // options:{
       //   title:{
       //     Text: "PIIIIIE Chart",
@@ -98,7 +98,7 @@ export class InformesComponent implements OnInit {
       //   //   }],
       //   }
       // }
-    })
+    // })
   }
 
   informe1(){
@@ -167,20 +167,20 @@ export class InformesComponent implements OnInit {
     });
 
     
-    new Chart ('myChart', {
-      type: 'pie',
-      data: { 
-        datasets:[{
-          label: 'Voto',
-          data: [101,102,103],
-          backgroundColor: [
-            'rgba(40,23,244,0.9)',
-            'rgba(192,255,0,0.9)',
-            'rgba(239,23,244,0.9)',
-          ]
-        }],
-        labels: ['Blue', 'Green', 'Pink']
-      }
+    // new Chart ('myChart', {
+    //   type: 'pie',
+    //   data: { 
+    //     datasets:[{
+    //       label: 'Voto',
+    //       data: [101,102,103],
+    //       backgroundColor: [
+    //         'rgba(40,23,244,0.9)',
+    //         'rgba(192,255,0,0.9)',
+    //         'rgba(239,23,244,0.9)',
+    //       ]
+    //     }],
+    //     labels: ['Blue', 'Green', 'Pink']
+    //   }
       // options:{
       //   title:{
       //     Text: "PIIIIIE Chart",
@@ -196,7 +196,7 @@ export class InformesComponent implements OnInit {
       //   //   }],
       //   }
       // }
-    })
+    // })
 
   }
 
