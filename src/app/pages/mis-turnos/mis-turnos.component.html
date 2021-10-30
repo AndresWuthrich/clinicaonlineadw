@@ -43,13 +43,13 @@
                                 Ver reseña
                               </button>
                   
-                              <button type="button" class="btn btn-warning"
-                                (click)="completarEncuesta(turno)" *ngIf="turno.estado == 'Finalizado'">
+                              <button [@rotateInOnEnter] type="button" class="btn btn-warning"
+                                (click)="completarEncuesta(turno)" *ngIf="turno.estado == 'Finalizado' && turno.encuesta.recomendar == ''">
                                 Encuesta
                               </button>
                   
                               <button type="button" class="btn btn-success"
-                                 (click)="calificarAtencion(turno)" *ngIf="turno.estado == 'Finalizado'">
+                                 (click)="calificarAtencion(turno)" *ngIf="turno.estado == 'Finalizado' && turno.calificacionAtencion == ''">
                                  Calificar atención
                           </button>
                           </td>

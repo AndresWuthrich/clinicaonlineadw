@@ -8,11 +8,15 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 // import { Chart } from 'chart.js';
 import { LogService } from 'src/app/services/log.service';
 import { Log } from 'src/app/clases/log';
+import { fadeInDownAnimation, fadeInDownOnEnterAnimation } from 'angular-animations';
 
 @Component({
   selector: 'app-informes',
   templateUrl: './informes.component.html',
-  styleUrls: ['./informes.component.css']
+  styleUrls: ['./informes.component.css'],
+  animations: [
+    fadeInDownOnEnterAnimation()
+  ]
 })
 export class InformesComponent implements OnInit {
 

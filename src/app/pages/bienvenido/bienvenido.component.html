@@ -59,7 +59,9 @@
   
     <div>
         <div class="foto" *ngIf="userLogueado | async as user; else login ">
-            <div class="row" *ngIf="usuarioLogueado != null">
+            <div class="row" [@fadeInLeftOnEnter] *ngIf="usuarioLogueado != null"> 
+            <!-- [@fadeInLeft]="fadeInLeft"  -->
+            
 
 
                 <!-- <div> -->

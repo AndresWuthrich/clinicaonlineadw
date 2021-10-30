@@ -4,11 +4,25 @@ import { Usuario } from 'src/app/clases/usuario';
 import { AuthService } from 'src/app/services/auth.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { TranslateService } from '@ngx-translate/core';
+import { animate, style, transition, trigger, useAnimation } from '@angular/animations';
+import { fadeInLeftAnimation, fadeInLeftOnEnterAnimation, fadeInOnEnterAnimation } from 'angular-animations';
+import { bounce } from 'ng-animate';
 
 @Component({
   selector: 'app-bienvenido',
   templateUrl: './bienvenido.component.html',
-  styleUrls: ['./bienvenido.component.css']
+  styleUrls: ['./bienvenido.component.css'],
+  animations: [
+    fadeInLeftOnEnterAnimation()
+    // trigger('fadeInLeft', [
+      // state()
+      // transition('* => *', useAnimation(fadeInLeft, {params: {timing: 5, delay: 2}})
+      // transition('void => *', [
+      //   style({tranform: 'translateX(-100%)'}),
+      //   animate('1s')
+      // ] )
+    // ])
+  ]
 })
 
 export class BienvenidoComponent implements OnInit {

@@ -4,11 +4,16 @@ import { AuthService } from 'src/app/services/auth.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { UsuarioComponent } from '../usuario/usuario.component';
 import { Columns, Img, PdfMakeWrapper, Txt } from 'pdfmake-wrapper';
+import { transition, trigger } from '@angular/animations';
+import { heartBeatAnimation, heartBeatOnEnterAnimation } from 'angular-animations';
 
 @Component({
   selector: 'app-mi-perfil',
   templateUrl: './mi-perfil.component.html',
-  styleUrls: ['./mi-perfil.component.css']
+  styleUrls: ['./mi-perfil.component.css'],
+  animations: [ 
+    heartBeatOnEnterAnimation()
+    ]
 })
 export class MiPerfilComponent implements OnInit {
 

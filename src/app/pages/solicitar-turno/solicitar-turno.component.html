@@ -31,7 +31,8 @@
                         </h4>
                         <ul class="list-group ">
                             <li class="list-group-item d-flex justify-content-between lh-sm"
-                                *ngFor="let especialista of listaEspecialistasCalificados let i=index"
+                            [@flipOnEnter]    
+                            *ngFor="let especialista of listaEspecialistasCalificados let i=index"
                                 (click)="clickEspecialista(especialista)">
                                 <div class=" mb-9 ">
                                     <h6 class="my-0 text-info">{{especialista.nombre}} {{especialista.apellido}}</h6>

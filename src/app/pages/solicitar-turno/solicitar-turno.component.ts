@@ -11,11 +11,16 @@ import { EspecialidadService } from 'src/app/services/especialidad.service';
 import { TurnoService } from 'src/app/services/turno.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import { v4 as uuidv4 } from 'uuid';
+import Swal from 'sweetalert2';
+import { flipAnimation, flipOnEnterAnimation } from 'angular-animations';
 
 @Component({
   selector: 'app-solicitar-turno',
   templateUrl: './solicitar-turno.component.html',
-  styleUrls: ['./solicitar-turno.component.css']
+  styleUrls: ['./solicitar-turno.component.css'],
+  animations: [
+    flipOnEnterAnimation()
+  ]
 })
 export class SolicitarTurnoComponent implements OnInit {
 
@@ -141,10 +146,24 @@ export class SolicitarTurnoComponent implements OnInit {
           //atencionRecibida: 'Prueba',
           recomendar: '',
           sugerencia: ''
-        }
+        },
+        mensajeCalificacionAtencion: '',
+        calificacionAtencion: ''
       }
       console.log(auxTurno);
-      this.turnoService.agregarTurno(auxTurno);
+      this.turnoService.agregarTurno(auxTurno)
+      .then(() => {
+        Swal.fire({
+          title: 'Turno solicitado con éxito'
+        });
+      }).catch((error) => {
+        Swal.fire({
+          title: error.code,
+          text: error.message
+        });
+      });
+      ;
+
       this.router.navigate(['/bienvenido']);
     }
 

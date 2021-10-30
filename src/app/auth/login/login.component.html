@@ -64,6 +64,7 @@
             <ul class="overflow-auto" id="boxConScroll" style="height: 300px;"
                 #scrollMe [scrollTop]="scrollMe">
                 <li type="text" class="list-group-item d-flex justify-content"
+                    @fadeIn
                     *ngFor="let usuario of listaUsuariosAccesoRapido" disable>
 
                     <input type="text" class="form-control" value="{{usuario.perfil}} {{usuario.apellido}} {{usuario.nombre}}"disabled>

@@ -4,12 +4,16 @@ import { UsuarioService } from 'src/app/services/usuario.service';
 import { TurnoService } from 'src/app/services/turno.service';
 import { Usuario } from 'src/app/clases/usuario';
 import { Turno } from 'src/app/clases/turno';
+import { rotateInAnimation, rotateInOnEnterAnimation } from 'angular-animations';
 
 
 @Component({
   selector: 'app-mis-turnos',
   templateUrl: './mis-turnos.component.html',
-  styleUrls: ['./mis-turnos.component.css']
+  styleUrls: ['./mis-turnos.component.css'],
+  animations: [
+    rotateInOnEnterAnimation()
+  ]
 })
 
 export class MisTurnosComponent implements OnInit {

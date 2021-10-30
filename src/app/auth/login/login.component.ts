@@ -1,3 +1,4 @@
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Log } from 'src/app/clases/log';
@@ -11,7 +12,16 @@ import { v4 as uuidv4 } from 'uuid';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['./login.component.css'],
+  animations: [
+    trigger('fadeIn', [
+      // state()
+      transition('void => *', [
+        style({backgroundColor: 'yellow', opacity: 0}),
+        animate(2000, style({backgroundColor: 'white', opacity: 1}))
+      ])
+    ])
+  ]
 })
 export class LoginComponent implements OnInit {
 
