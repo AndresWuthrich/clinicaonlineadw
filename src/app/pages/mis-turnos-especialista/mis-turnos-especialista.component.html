@@ -8,15 +8,10 @@
             <div class="card-body">
                 <h1 class="text-center mb-3">Mis turnos</h1>
 
-                <!-- <div class="row mt-2">
-                    <div class="col">
-                        <div class="form-group">
-                            <input type="text" class="form-control"
-                                placeholder="Busqueda por especialidad o paciente..." name="filterPasadoProf"
-                                [(ngModel)]="filterPasadoProf">
-                        </div>
-                    </div>
-                </div> -->
+              <!-- Filtrado -->
+              <div class="form-group">
+                <input type="text" class="form-control" name="filterPost" placeholder="Busque por..." [(ngModel)]="filterPost">
+              </div>
 
                 <table class="table table-hover">
                     <thead>
@@ -31,7 +26,7 @@
                             <th class="text-center">Acciones</th>
                         </tr>
                     </thead>
-                    <tbody *ngFor="let turno of listadoTurnos let i=index">
+                    <tbody *ngFor="let turno of listadoTurnos | filtroTurnos: filterPost let i=index">
                     <!-- <tbody *ngFor="let turno of listadoTurnos | filtroTurnos:filterPasadoProf let i=index"> -->
                         <tr>
                             <!-- <td class="text-left" class="text-center">{{i+1}}</td> -->
@@ -39,7 +34,7 @@
                             <td class="text-left" class="text-center">{{turno.horarioTurno}}</td>
                             <td class="text-left" class="text-center">{{turno.especialista!.nombre}} </td>
                             <td class="text-left" class="text-center">{{turno.especialidad!.descripcion}} </td>
-                            <td class="text-left" class="text-center">{{turno.paciente!.nombre}}</td>
+                            <td class="text-left" class="text-center">{{turno.paciente!.nombre}} {{turno.paciente!.apellido}}</td>
                             <td class="text-left" class="text-center">{{turno.estado}}</td>
                             <td class="text-left" class="text-center">
                                 <button type="button" class="btn btn-danger"
@@ -69,8 +64,8 @@
                                     </button>
 
                                     <button type="button" class="btn btn-info"
-                                        (click)="historiaClinica(turno)" *ngIf="turno.estado == 'Finalizado'">
-                                        Historia clínica
+                                        (click)="historiaClinica(turno)" *ngIf="turno.estado == 'Finalizado' && turno.historiaClinica.altura == ''">
+                                        Completar Historia clínica
                                     </button>
                                 </div>
                             </td>

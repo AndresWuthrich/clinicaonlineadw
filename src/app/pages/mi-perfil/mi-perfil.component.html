@@ -62,9 +62,54 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="mb-3">
-                                        
+
+                                        <!-- <div *ngFor="let turno of listaHCPacienteSel let i=index"> -->
+                                        <div *ngFor="let turno of listaTurnos let i=index">
+                                            <div class="form-control" id="exampleFormControlTextarea1" rows="1" maxlength="20"
+                                            *ngIf="turno.historiaClinica.altura != ''">
+                                                Dia Turno: {{turno.diaTurno}}</div>
+                                            <div class="form-control" id="exampleFormControlTextarea1" rows="1" maxlength="20"
+                                            *ngIf="turno.historiaClinica.altura != ''">
+                                                Especialidad: {{turno.especialidad?.descripcion}}</div>
+                            
+                                            <!-- <div class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="300">
+                                                <div                                       *ngIf="turno.historiaClinica.altura != ''">
+                                                    Altura: {{turno.historiaClinica.altura}}</div>
+                                                <div *ngIf="turno.historiaClinica.peso != ''">
+                                                    Peso: {{turno.historiaClinica.peso}}</div>
+                                            </div>     -->
+                                            <div class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="50"
+                                            *ngIf="turno.historiaClinica.altura != ''">
+                                                Altura: {{turno.historiaClinica.altura}}</div>
+                                            <div class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="50"
+                                            *ngIf="turno.historiaClinica.peso != ''">
+                                                Peso: {{turno.historiaClinica.peso}}</div>
+                                            <div class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="300"
+                                            *ngIf="turno.historiaClinica.temperatura != ''">
+                                                Temperatura: {{turno.historiaClinica.temperatura}}</div>
+                                            <div class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="300"
+                                            *ngIf="turno.historiaClinica.presion != ''">
+                                                Presión: {{turno.historiaClinica.presion}}</div>
+                
+                                            <div class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="300" 
+                                                *ngIf="turno.historiaClinica.clave1 != ''">
+                                                {{turno.historiaClinica.clave1}} : {{turno.historiaClinica.valor1}}</div>
+                                            <div class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="300" 
+                                                *ngIf="turno.historiaClinica.clave2 != ''">
+                                                {{turno.historiaClinica.clave2}} : {{turno.historiaClinica.valor2}}</div>
+                                            <div class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="300" 
+                                                *ngIf="turno.historiaClinica.clave3 != ''">
+                                                {{turno.historiaClinica.clave3}} : {{turno.historiaClinica.valor3}}</div>
+                                            <div class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="300" 
+                                                *ngIf="turno.historiaClinica.clave4 != ''">
+                                                {{turno.historiaClinica.clave4}} : {{turno.historiaClinica.valor4}}</div>
+                                            <div class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="300" 
+                                                *ngIf="turno.historiaClinica.clave5 != ''">
+                                                {{turno.historiaClinica.clave5}} : {{turno.historiaClinica.valor5}}</div>
+                                        </div>
+                
                                         <!-- <h6 class="text-center">Por favor ingrese un comentario/reseña del turno </h6> -->
-                                        <div class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="300">
+                                        <!-- <div class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="300">
                                             Altura: {{usuarioLogueado.historiaClinica.altura}}</div>
                                         <div class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="300">
                                             Peso: {{usuarioLogueado.historiaClinica.peso}}</div>
@@ -72,7 +117,7 @@
                                             Temperatura: {{usuarioLogueado.historiaClinica.temperatura}}</div>
                                         <div class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="300">
                                             Presión: {{usuarioLogueado.historiaClinica.presion}}</div>
-                                        </div>
+                                        </div> -->
                                 </div>
                             </div>
                         </div>

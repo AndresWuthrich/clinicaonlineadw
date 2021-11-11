@@ -19,6 +19,7 @@ export class MisTurnosEspecialistaComponent implements OnInit {
   turnoActual: Turno | null = null;
 
   mensaje: string = '';
+  filterPost = '';
 
   //Pantallas
   verTabla: boolean = true;
@@ -192,20 +193,43 @@ export class MisTurnosEspecialistaComponent implements OnInit {
 
         // this.turnoActual!.estado = 'Finalizado';
 
-        // var idTurno = await this.turnoService.obtenerDocumentoTurno(this.turnoActual!);
-        // console.log(this.turnoActual);
-        // console.log(idTurno);
-        // if (idTurno != null) {
-        //   this.turnoService.updateComentario(idTurno, this.turnoActual!);
-        // }
-
         var idUsuario = await this.usuarioService.obtenerDocumentoUsuario(this.turnoActual!.paciente!);
         console.log('3',this.turnoActual!.paciente);
         console.log('4',idUsuario);
         if (idUsuario != null) {
           this.usuarioService.actualizarHistoriaClinica(idUsuario, this.turnoActual!.paciente!);
         }
+
+
+
+
+
+        // this.turnoActual!.comentarioEspecialista = this.mensaje;
+        this.turnoActual!.historiaClinica!.altura = $event.altura;
+        this.turnoActual!.historiaClinica!.peso = $event.peso;
+        this.turnoActual!.historiaClinica!.temperatura = $event.temperatura;
+        this.turnoActual!.historiaClinica!.presion = $event.presion;
+        this.turnoActual!.historiaClinica!.clave1 = $event.clave1;
+        this.turnoActual!.historiaClinica!.valor1 = $event.valor1;
+        this.turnoActual!.historiaClinica!.clave2 = $event.clave2;
+        this.turnoActual!.historiaClinica!.valor2 = $event.valor2;
+        this.turnoActual!.historiaClinica!.clave3 = $event.clave3;
+        this.turnoActual!.historiaClinica!.valor3 = $event.valor3;
+        this.turnoActual!.historiaClinica!.clave4 = $event.clave4;
+        this.turnoActual!.historiaClinica!.valor4 = $event.valor4;
+        this.turnoActual!.historiaClinica!.clave5 = $event.clave5;
+        this.turnoActual!.historiaClinica!.valor5 = $event.valor5;
+
+        // this.turnoActual!.estado = 'Finalizado';
+
+        var idTurno = await this.turnoService.obtenerDocumentoTurno(this.turnoActual!);
+        console.log('5',this.turnoActual);
+        console.log('6',idTurno);
+        if (idTurno != null) {
+          this.turnoService.updateComentario(idTurno, this.turnoActual!);
+        }
       }
+
       this.historiaClinicaPantalla = false;
       this.verTabla = true;
 

@@ -20,15 +20,20 @@ export class Turno {
     comentarioAdmin?: string = '';
     comentarioPaciente?: string = '';
     comentarioEspecialista?: string = '';
-    // historiaClinica?: any = {
-    //     altura: '',
-    //     peso: '',
-    //     temperatura: '',
-    //     presion: '',
-    //     datosDinamicos: [
-    //         {clave: '', valor: ''},
-    //         {clave: '', valor: ''},
-    //         {clave: '', valor: ''}
-    //     ]
-    // };
-}
+
+    historiaClinica?: any = {
+        altura: '',
+        peso: '',
+        temperatura: '',
+        presion: '',
+        clave1: '', 
+        valor1: '',
+        clave2: '', 
+        valor2: '',
+        clave3: '', 
+        valor3: '',
+        clave4: '', 
+        valor4: '',
+        clave5: '', 
+        valor5: ''
+    };}

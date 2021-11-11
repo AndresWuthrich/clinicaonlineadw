@@ -6,6 +6,8 @@ import { UsuarioComponent } from '../usuario/usuario.component';
 import { Columns, Img, PdfMakeWrapper, Txt } from 'pdfmake-wrapper';
 import { transition, trigger } from '@angular/animations';
 import { heartBeatAnimation, heartBeatOnEnterAnimation } from 'angular-animations';
+import { TurnoService } from 'src/app/services/turno.service';
+import { Turno } from 'src/app/clases/turno';
 
 @Component({
   selector: 'app-mi-perfil',
@@ -20,8 +22,10 @@ export class MiPerfilComponent implements OnInit {
   public usuarioLogueado: Usuario | null = null;
   listaEspecialidades:string = '';
   horariosProfesional:any = '';
+  public listaTurnos: Turno[] = [];
+  public listaHCPacienteSel: Turno[] = [];
 
-  constructor(public auth: AuthService, private usuarioService: UsuarioService) {
+  constructor(public auth: AuthService, private usuarioService: UsuarioService, private turnoService: TurnoService) {
    }
 
   async ngOnInit() {
@@ -30,11 +34,25 @@ export class MiPerfilComponent implements OnInit {
     console.log('ACTUAL' +usuarioActual?.email);
 
     if(usuarioActual?.email != null){
+      // this.listaHCPacienteSel = [];
+
       var datosUsuario: any = await this.usuarioService.obtenerUsuarioPorEmail(usuarioActual?.email);
       console.log('DATO USER' + datosUsuario);
       this.usuarioLogueado = datosUsuario;
+
+      this.turnoService.traerTurnosPacientePorUid(datosUsuario.uid).subscribe(data => {
+        this.listaTurnos = data;
+      });
+      console.log('lt', this.listaTurnos);
+
+      this.listaTurnos.forEach(turno => {
+        // if(turno.estado == 'Finalizado' && turno.historiaClinica?.altura != ''){
+          this.listaHCPacienteSel.push(turno);          
+        // }                  
+      });
+      console.log('hc', this.listaHCPacienteSel);
     }
-    console.log('data' + this.usuarioLogueado?.horarioAtencion);
+    // console.log('data' + this.usuarioLogueado?.horarioAtencion);
 
 
     // if(this.usuarioLogueado?.perfil == 'especialista'){
@@ -110,43 +128,112 @@ export class MiPerfilComponent implements OnInit {
 
     // pdf.add( await new Img('' + this.usuarioLogueado?.imagenPerfil).alignment('right').build());
 
-    pdf.add(      
-      new Txt('Altura: ' + this.usuarioLogueado?.historiaClinica.altura).end
-    );
-    pdf.add(      
-      new Txt('Peso: ' + this.usuarioLogueado?.historiaClinica.peso).end
-    );
-    pdf.add(      
-      new Txt('Temperatura: ' + this.usuarioLogueado?.historiaClinica.temperatura).end
-    );
-    pdf.add(      
-      new Txt('Presión: ' + this.usuarioLogueado?.historiaClinica.presion).end
-    );
-    if(this.usuarioLogueado?.historiaClinica.valor1 != ''){
+    this.listaTurnos.forEach(turno => {
       pdf.add(      
-        new Txt(this.usuarioLogueado?.historiaClinica.clave1 + ': ' + this.usuarioLogueado?.historiaClinica.valor1).end
+        new Txt('Día turno: ' + turno.diaTurno).end
       );
-    }
-    if(this.usuarioLogueado?.historiaClinica.valor2 != ''){
       pdf.add(      
-        new Txt(this.usuarioLogueado?.historiaClinica.clave2 + ': ' + this.usuarioLogueado?.historiaClinica.valor2).end
+        new Txt('Especialidad: ' + turno.especialidad?.descripcion).end
       );
-    }
-    if(this.usuarioLogueado?.historiaClinica.valor3 != ''){
+      // pdf.add(      
+      //   new Columns(['Día turno: ' + turno.diaTurno, 'Especialidad: ' + turno.especialidad?.descripcion]).end
+      // );
+      // if(turno.historiaClinica?.altura != ''){
+      //   pdf.add(      
+      //     new Txt('Altura: ' + turno.historiaClinica?.altura).end
+      //   );
+      // }
+      // if(turno.historiaClinica?.peso != ''){
+      //   pdf.add(      
+      //     new Txt('Peso: ' + turno.historiaClinica?.peso).end
+      //   );
+      // }
+      // if(turno.historiaClinica?.temperatura != ''){
+      //   pdf.add(      
+      //     new Txt('Temperatura: ' + turno.historiaClinica?.temperatura).end
+      //   );
+      // }
+      // if(turno.historiaClinica?.presion != ''){
+      //   pdf.add(      
+      //     new Txt('Presión: ' + turno.historiaClinica?.presion).end
+      //   );
+      // }
+
+      if(turno.historiaClinica?.altura != ''){
+        pdf.add(      
+          new Columns(['Altura: ' + turno.historiaClinica?.altura, 'Peso: ' + turno.historiaClinica?.peso, 
+          'Temperatura: ' + turno.historiaClinica?.temperatura, 'Presión: ' + turno.historiaClinica?.presion]).end
+        );
+      }
+
+      if(turno.historiaClinica?.valor1 != ''){
+        pdf.add(      
+          new Txt(turno.historiaClinica?.clave1 + ': ' + turno.historiaClinica?.valor1).end
+        );
+      }
+      if(turno.historiaClinica?.valor2 != ''){
+        pdf.add(      
+          new Txt(turno.historiaClinica?.clave2 + ': ' + turno.historiaClinica?.valor2).end
+        );
+      }
+      if(turno.historiaClinica?.valor3 != ''){
+        pdf.add(      
+          new Txt(turno.historiaClinica?.clave3 + ': ' + turno.historiaClinica?.valor3).end
+        );
+      }
+      if(turno.historiaClinica?.valor4 != ''){
+        pdf.add(      
+          new Txt(turno.historiaClinica?.clave4 + ': ' + turno.historiaClinica?.valor4).end
+        );
+      }
+      if(turno.historiaClinica?.valor5 != ''){
+        pdf.add(      
+          new Txt(turno.historiaClinica?.clave5 + ': ' + turno.historiaClinica?.valor5).end
+        );
+      }
       pdf.add(      
-        new Txt(this.usuarioLogueado?.historiaClinica.clave3 + ': ' + this.usuarioLogueado?.historiaClinica.valor3).end
+        new Txt(' ').end
       );
-    }
-    if(this.usuarioLogueado?.historiaClinica.valor4 != ''){
-      pdf.add(      
-        new Txt(this.usuarioLogueado?.historiaClinica.clave4 + ': ' + this.usuarioLogueado?.historiaClinica.valor4).end
-      );
-    }
-    if(this.usuarioLogueado?.historiaClinica.valor5 != ''){
-      pdf.add(      
-        new Txt(this.usuarioLogueado?.historiaClinica.clave5 + ': ' + this.usuarioLogueado?.historiaClinica.valor5).end
-      );
-    }
+      
+    });
+
+    // pdf.add(      
+    //   new Txt('Altura: ' + this.usuarioLogueado?.historiaClinica.altura).end
+    // );
+    // pdf.add(      
+    //   new Txt('Peso: ' + this.usuarioLogueado?.historiaClinica.peso).end
+    // );
+    // pdf.add(      
+    //   new Txt('Temperatura: ' + this.usuarioLogueado?.historiaClinica.temperatura).end
+    // );
+    // pdf.add(      
+    //   new Txt('Presión: ' + this.usuarioLogueado?.historiaClinica.presion).end
+    // );
+    // if(this.usuarioLogueado?.historiaClinica.valor1 != ''){
+    //   pdf.add(      
+    //     new Txt(this.usuarioLogueado?.historiaClinica.clave1 + ': ' + this.usuarioLogueado?.historiaClinica.valor1).end
+    //   );
+    // }
+    // if(this.usuarioLogueado?.historiaClinica.valor2 != ''){
+    //   pdf.add(      
+    //     new Txt(this.usuarioLogueado?.historiaClinica.clave2 + ': ' + this.usuarioLogueado?.historiaClinica.valor2).end
+    //   );
+    // }
+    // if(this.usuarioLogueado?.historiaClinica.valor3 != ''){
+    //   pdf.add(      
+    //     new Txt(this.usuarioLogueado?.historiaClinica.clave3 + ': ' + this.usuarioLogueado?.historiaClinica.valor3).end
+    //   );
+    // }
+    // if(this.usuarioLogueado?.historiaClinica.valor4 != ''){
+    //   pdf.add(      
+    //     new Txt(this.usuarioLogueado?.historiaClinica.clave4 + ': ' + this.usuarioLogueado?.historiaClinica.valor4).end
+    //   );
+    // }
+    // if(this.usuarioLogueado?.historiaClinica.valor5 != ''){
+    //   pdf.add(      
+    //     new Txt(this.usuarioLogueado?.historiaClinica.clave5 + ': ' + this.usuarioLogueado?.historiaClinica.valor5).end
+    //   );
+    // }
 
     
 // pdf.add(

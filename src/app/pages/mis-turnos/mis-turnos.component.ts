@@ -24,6 +24,7 @@ export class MisTurnosComponent implements OnInit {
   turnoActual: Turno | null = null;
 
   mensaje: string = '';
+  filterPost = '';
 
   //Pantallas
   verTabla: boolean = true;

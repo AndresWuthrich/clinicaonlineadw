@@ -75,6 +75,7 @@ export class TurnoService {
       estado: turno.estado,
       comentarioPaciente: turno.comentarioPaciente,
       comentarioEspecialista: turno.comentarioEspecialista,
+      historiaClinica: turno.historiaClinica
     }).then(() => {
         console.log("Documento actualizado!");
       })
@@ -111,4 +112,24 @@ export class TurnoService {
         console.error("Error en la actualizacion: ", error);
       });
   }
+    
+  // async actualizarHistoriaClinica(documento: any, user: Usuario) {
+  //   var usuario = this.afs.collection(this.dbPath).doc(documento);
+  //   console.log(usuario);
+
+  //   return usuario.update({
+  //     historiaClinica: user.historiaClinica
+  //   })
+  //     .then(() => {
+  //       Swal.fire({
+  //         title: 'Agregado de historia clínica exitoso'
+  //       });
+  //     }).catch((error) => {
+  //       Swal.fire({
+  //         title: error.code,
+  //         text: error.message
+  //       });
+  //     });
+  // }
+
 }

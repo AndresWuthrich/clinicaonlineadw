@@ -47,6 +47,7 @@ import { PdfMakeWrapper } from 'pdfmake-wrapper';
 import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { FiltroTurnosPipe } from './pipes/filtro-turnos.pipe';
 
 PdfMakeWrapper.setFonts(pdfFonts);
 
@@ -85,7 +86,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     InformesComponent,
     PacientesComponent,
     ResaltarDirective,
-    UpperPipe
+    UpperPipe,
+    FiltroTurnosPipe
   ],
   imports: [
     BrowserModule,
