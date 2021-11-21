@@ -14,10 +14,10 @@
             <button class="btn btn-outline-primary mb-2" (click)="informe3()">Cantidad de turnos por día</button>
             <button class="btn btn-outline-primary mb-2" (click)="informe4()">Cantidad de turnos solicitados por médico en un lapso de tiempo</button>
             <button class="btn btn-outline-primary mb-2" (click)="informe5()">Cantidad de turnos finalizados por médico en un lapso de tiempo</button>
-            <button class="btn btn-outline-primary mb-2">Cantidad de visitas que tuvo la clínica</button>
+            <button disabled class="btn btn-outline-primary mb-2">Cantidad de visitas que tuvo la clínica</button>
             <button class="btn btn-outline-primary mb-2" (click)="informe7()">Cantidad de pacientes por especialidad</button>
             <button class="btn btn-outline-primary mb-2" (click)="informe8()">Cantidad de médicos por especialidad</button>
-            <button class="btn btn-outline-primary mb-2">Informe basado en la encuesta al cliente mostrando cuáles fueron las respuestas</button>
+            <button disabled class="btn btn-outline-primary mb-2">Informe basado en la encuesta al cliente mostrando cuáles fueron las respuestas</button>
 
             </div>
     </div>
@@ -44,6 +44,8 @@
             </div>
         </div>
     </div>
+
+    <div [chart]="chart"></div>
 </div>
 
 <div *ngIf="info2 == true">
@@ -55,12 +57,14 @@
                     <h3 class="text-center">Cantidad de turnos por especialidad</h3>
                 </div>
                 <div class="card-body">
-                    <div [appResaltar]="info.cantidad" class="mb-3" *ngFor="let info of arrayCantidadTurnoEspecialidad let i=index">
+                    <div [appResaltar]="info.y" class="mb-3" *ngFor="let info of arrayCantidadTurnoEspecialidad let i=index">
+                    <!-- <div [appResaltar]="info.cantidad" class="mb-3" *ngFor="let info of arrayCantidadTurnoEspecialidad let i=index"> -->
                         
                         <!-- <h6 class="text-center">Por favor ingrese un comentario/reseña del turno </h6> -->
                         <!-- <div class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="300"> -->
                         <div class="text-info">
-                             {{info.descripcion}} {{info.cantidad}}
+                             {{info.name}} {{info.y}}
+                             <!-- {{info.descripcion}} {{info.cantidad}} -->
                         </div>
                     </div>
                 </div>
@@ -68,51 +72,7 @@
         </div>
     </div>
 
-    <p>HOLA CHART</p>
-<!-- <div [chart]="chart2"></div> -->
-
-    <div>
-        <!-- <canvas id="myChart" width="400" height="400"></canvas>             -->
-        <!-- <canvas #myChart></canvas>             -->
-        <!-- <canvas id="myChart">{{ chart2 }}</canvas>             -->
-    </div>
-
-
-
- <!--   <body> -->
-        <!-- <canvas id="myChart" style="width:100%;max-width:700px">CHART</canvas>             -->
-
-        
-        <!-- <script>
-            var xValues = ["Italy", "France", "Spain", "USA", "Argentina"];
-            var yValues = [55, 49, 44, 24, 15];
-            var barColors = [
-              "#b91d47",
-              "#00aba9",
-              "#2b5797",
-              "#e8c3b9",
-              "#1e7145"
-            ];
-            
-
-            new Chart("myChart", {
-              type: "pie",
-              data: {
-                labels: xValues,
-                datasets: [{
-                  backgroundColor: barColors,
-                  data: yValues
-                }]
-              },
-              options: {
-                title: {
-                  display: true,
-                  text: "World Wide Wine Production 2018"
-                }
-              }
-            });
-            </script> -->
-    <!-- </body> -->
+    <div [chart]="chart"></div>
 </div>
 
 <div *ngIf="info3 == true">
@@ -124,18 +84,22 @@
                     <h3 class="text-center">Cantidad de turnos por dia</h3>
                 </div>
                 <div class="card-body">
-                    <div [appResaltar]="info.cantidad" class="mb-3" *ngFor="let info of arrayCantidadTurnoDia let i=index">
+                    <div [appResaltar]="info.y" class="mb-3" *ngFor="let info of arrayCantidadTurnoDia let i=index">
+                    <!-- <div [appResaltar]="info.cantidad" class="mb-3" *ngFor="let info of arrayCantidadTurnoDia let i=index"> -->
                         
                         <!-- <h6 class="text-center">Por favor ingrese un comentario/reseña del turno </h6> -->
                         <!-- <div class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="300"> -->
                         <div class="text-info">
-                                {{info.dia}} {{info.cantidad}}
+                            {{info.name}} {{info.y}}
+                            <!-- {{info.dia}} {{info.cantidad}} -->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <div [chart]="chart"></div>
 </div>
     
 <div *ngIf="info4 == true">
@@ -147,18 +111,22 @@
                     <h3 class="text-center">Cantidad de turnos solicitados por médico en un lapso de tiempo</h3>
                 </div>
                 <div class="card-body">
-                    <div [appResaltar]="info.cantidad" class="mb-3" *ngFor="let info of arrayCantidadTurnoEspecialista let i=index">
+                    <div [appResaltar]="info.y" class="mb-3" *ngFor="let info of arrayCantidadTurnoEspecialista let i=index">
+                    <!-- <div [appResaltar]="info.cantidad" class="mb-3" *ngFor="let info of arrayCantidadTurnoEspecialista let i=index"> -->
                         
                         <!-- <h6 class="text-center">Por favor ingrese un comentario/reseña del turno </h6> -->
                         <!-- <div class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="300"> -->
                         <div class="text-info">
-                                {{info.apellido}} {{info.cantidad}}
+                            {{info.name}} {{info.y}}
+                            <!-- {{info.apellido}} {{info.cantidad}} -->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <div [chart]="chart"></div>
 </div>
     
 <div *ngIf="info5 == true">
@@ -170,18 +138,22 @@
                     <h3 class="text-center">Cantidad de turnos finalizados por médico en un lapso de tiempo</h3>
                 </div>
                 <div class="card-body">
-                    <div [appResaltar]="info.cantidad" class="mb-3" *ngFor="let info of arrayCantidadTurnoEspecialista let i=index">
+                    <!-- <div [appResaltar]="info.cantidad" class="mb-3" *ngFor="let info of arrayCantidadTurnoEspecialista let i=index"> -->
+                    <div [appResaltar]="info.y" class="mb-3" *ngFor="let info of arrayCantidadTurnoEspecialista let i=index">
                         
                         <!-- <h6 class="text-center">Por favor ingrese un comentario/reseña del turno </h6> -->
                         <!-- <div class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="300"> -->
                         <div class="text-info">
-                                {{info.apellido}} {{info.cantidad}}
+                            {{info.name}} {{info.y}}
+                            <!-- {{info.apellido}} {{info.cantidad}} -->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <div [chart]="chart"></div>
 </div>
     
 <div *ngIf="info7 == true">
@@ -193,18 +165,22 @@
                     <h3 class="text-center">Cantidad de pacientes por especialidad</h3>
                 </div>
                 <div class="card-body">
-                    <div [appResaltar]="info.cantidad" class="mb-3" *ngFor="let info of arrayCantidadPacienteEspecialidad let i=index">
+                    <div [appResaltar]="info.y" class="mb-3" *ngFor="let info of arrayCantidadPacienteEspecialidad let i=index">
+                    <!-- <div [appResaltar]="info.cantidad" class="mb-3" *ngFor="let info of arrayCantidadPacienteEspecialidad let i=index"> -->
                         
                         <!-- <h6 class="text-center">Por favor ingrese un comentario/reseña del turno </h6> -->
                         <!-- <div class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="300"> -->
                         <div class="text-info">
-                                {{info.descripcion}} {{info.cantidad}}
+                            {{info.name}} {{info.y}}
+                            <!-- {{info.descripcion}} {{info.cantidad}} -->
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <div [chart]="chart"></div>
 </div>    
 <div *ngIf="info8 == true">
     <hr>
@@ -215,16 +191,21 @@
                     <h3 class="text-center">Cantidad de médicos por especialidad</h3>
                 </div>
                 <div class="card-body">
-                    <div [appResaltar]="info.cantidad" class="mb-3" *ngFor="let info of arrayCantidadMedicoEspecialidad let i=index">
+                    <div [appResaltar]="info.y" class="mb-3" *ngFor="let info of arrayCantidadMedicoEspecialidad let i=index">
+                    <!-- <div [appResaltar]="info.cantidad" class="mb-3" *ngFor="let info of arrayCantidadMedicoEspecialidad let i=index"> -->
                         
                         <!-- <h6 class="text-center">Por favor ingrese un comentario/reseña del turno </h6> -->
                         <!-- <div class="form-control" id="exampleFormControlTextarea1" rows="3" maxlength="300"> -->
                         <div class="text-info">
-                                {{info.descripcion}} {{info.cantidad}}
+                            {{info.name}} {{info.y}}
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+
+    <div [chart]="chart"></div>
 </div>
+
+<div [chart]="chart"></div>

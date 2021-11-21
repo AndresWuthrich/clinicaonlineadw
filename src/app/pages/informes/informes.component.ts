@@ -4,11 +4,13 @@ import { Turno } from 'src/app/clases/turno';
 import { Usuario } from 'src/app/clases/usuario';
 import { EspecialidadService } from 'src/app/services/especialidad.service';
 import { TurnoService } from 'src/app/services/turno.service';
-import { UsuarioService } from 'src/app/services/usuario.service';
-// import { Chart } from 'chart.js';
+import { UsuarioService } from 'src/app/services/usuario.service'; 
 import { LogService } from 'src/app/services/log.service';
 import { Log } from 'src/app/clases/log';
 import { fadeInDownAnimation, fadeInDownOnEnterAnimation } from 'angular-animations';
+// import * as Highcharts from 'highcharts';
+import { Chart } from 'angular-highcharts';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-informes',
@@ -23,6 +25,7 @@ export class InformesComponent implements OnInit {
   public listaTurnos: Turno[] = [];
   public listaEspecialidades: Especialidad[] = [];
   public listaEspecialistas: Usuario[] = [];
+  public listaPacientes: Usuario[] = [];
   public listaLogs: Log[] = [];
 
   public cantidadTurnoDia: any | null;
@@ -45,10 +48,9 @@ export class InformesComponent implements OnInit {
   public info7: boolean = false;
   public info8: boolean = false;
   public flag: boolean = false;
+  public flagPac: boolean = false;
 
-  chart2 = [];
-  // @ViewChild('myChart') canvasRef: ElementRef | undefined;
-  
+  public pac: any;
   
   constructor(private turnoService: TurnoService, private usuarioService: UsuarioService, private especialidadService: EspecialidadService, private logService: LogService) {
     this.turnoService.traerTodos().subscribe((turnos: Turno[]) => {
@@ -73,36 +75,6 @@ export class InformesComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    // new Chart ('myChart', {
-    //   type: 'pie',
-    //   data: { 
-    //     datasets:[{
-    //       label: 'Voto',
-    //       data: [101,102,103],
-    //       backgroundColor: [
-    //         'rgba(40,23,244,0.9)',
-    //         'rgba(192,255,0,0.9)',
-    //         'rgba(239,23,244,0.9)',
-    //       ]
-    //     }],
-    //     labels: ['Blue', 'Green', 'Pink']
-    //   }
-      // options:{
-      //   title:{
-      //     Text: "PIIIIIE Chart",
-      //     display: true
-      //   },
-      //   scales:{
-      //   //   yAxes:[{
-      //   //     display: true,
-      //   //     ticks:{
-      //   //       display: true,
-      //   //       beginAtZero: true,
-      //   //     }
-      //   //   }],
-      //   }
-      // }
-    // })
   }
 
   informe1(){
@@ -157,12 +129,15 @@ export class InformesComponent implements OnInit {
     arrayEspecialidad.forEach(descripcion => {
 
       this.cantidadTurnoEspecialidad = {
-        descripcion: descripcion,
-        cantidad: 0,
+        // descripcion: descripcion,
+        // cantidad: 0,
+        name: descripcion,
+        y: 0,
       }
       this.listaTurnos.forEach(turno => {
         if (turno.especialidad!.descripcion == descripcion) {
-          this.cantidadTurnoEspecialidad.cantidad++;
+          this.cantidadTurnoEspecialidad.y++;
+          // this.cantidadTurnoEspecialidad.cantidad++;
         }
       });
       this.arrayCantidadTurnoEspecialidad.push(this.cantidadTurnoEspecialidad);
@@ -170,38 +145,26 @@ export class InformesComponent implements OnInit {
 
     });
 
-    
-    // new Chart ('myChart', {
-    //   type: 'pie',
-    //   data: { 
-    //     datasets:[{
-    //       label: 'Voto',
-    //       data: [101,102,103],
-    //       backgroundColor: [
-    //         'rgba(40,23,244,0.9)',
-    //         'rgba(192,255,0,0.9)',
-    //         'rgba(239,23,244,0.9)',
-    //       ]
-    //     }],
-    //     labels: ['Blue', 'Green', 'Pink']
-    //   }
-      // options:{
-      //   title:{
-      //     Text: "PIIIIIE Chart",
-      //     display: true
-      //   },
-      //   scales:{
-      //   //   yAxes:[{
-      //   //     display: true,
-      //   //     ticks:{
-      //   //       display: true,
-      //   //       beginAtZero: true,
-      //   //     }
-      //   //   }],
-      //   }
-      // }
-    // })
-
+    this.chart = new Chart({
+      chart: {
+        type: 'pie'
+      },
+      title: {
+        text: 'Cantidad de turnos por especialidad'
+      },
+      // credits: {
+      //   enabled: false
+      // },
+      series: [
+        {
+          type: 'pie',
+          // name: 'Line 1',
+          // data: [1,2,3]
+          data: this.arrayCantidadTurnoEspecialidad
+        }
+      ]
+    });
+  
   }
 
   informe3(){
@@ -233,19 +196,42 @@ export class InformesComponent implements OnInit {
     arrayDias.forEach(dia => {
 
       this.cantidadTurnoDia = {
-        dia: dia,
-        cantidad: 0,
+        // dia: dia,
+        // cantidad: 0,
+        name: dia,
+        y: 0,
       }
 
       this.listaTurnos.forEach(turno => {
         if (turno.diaTurno == dia) {
-          this.cantidadTurnoDia.cantidad++;
+          // this.cantidadTurnoDia.cantidad++;
+          this.cantidadTurnoDia.y++;
         }
       })
       this.arrayCantidadTurnoDia.push(this.cantidadTurnoDia);
       console.log('3',this.arrayCantidadTurnoDia);
       console.log('3',arrayDias);
 
+    });
+
+    this.chart = new Chart({
+      chart: {
+        type: 'pie'
+      },
+      title: {
+        text: 'Cantidad de turnos por día'
+      },
+      // credits: {
+      //   enabled: false
+      // },
+      series: [
+        {
+          type: 'pie',
+          // name: 'Line 1',
+          // data: [1,2,3]
+          data: this.arrayCantidadTurnoDia
+        }
+      ]
     });
   }
 
@@ -268,17 +254,40 @@ export class InformesComponent implements OnInit {
     arrayEspecialista.forEach(apellido => {
 
       this.cantidadTurnoEspecialista = {
-        apellido: apellido,
-        cantidad: 0,
+        // apellido: apellido,
+        // cantidad: 0,
+        name: apellido,
+        y: 0,
       }
       this.listaTurnos.forEach(turno => {
         if (turno.especialista!.apellido == apellido) {
-          this.cantidadTurnoEspecialista.cantidad++;
+          this.cantidadTurnoEspecialista.y++;
+          // this.cantidadTurnoEspecialista.cantidad++;
         }
       });
       this.arrayCantidadTurnoEspecialista.push(this.cantidadTurnoEspecialista);
       console.log('4',this.cantidadTurnoEspecialista);
 
+    });
+
+    this.chart = new Chart({
+      chart: {
+        type: 'pie'
+      },
+      title: {
+        text: 'Cantidad de turnos solicitados por médico'
+      },
+      // credits: {
+      //   enabled: false
+      // },
+      series: [
+        {
+          type: 'pie',
+          // name: 'Line 1',
+          // data: [1,2,3]
+          data: this.arrayCantidadTurnoEspecialista
+        }
+      ]
     });
   }
 
@@ -301,19 +310,42 @@ export class InformesComponent implements OnInit {
     arrayEspecialista.forEach(apellido => {
 
       this.cantidadTurnoEspecialista = {
-        apellido: apellido,
-        cantidad: 0,
+        name: apellido,
+        y: 0,
+        // apellido: apellido,
+        // cantidad: 0,
       }
       this.listaTurnos.forEach(turno => {
         if (turno.especialista!.apellido == apellido && turno.estado == 'Finalizado') {
-          this.cantidadTurnoEspecialista.cantidad++;
+          this.cantidadTurnoEspecialista.y++;
+          // this.cantidadTurnoEspecialista.cantidad++;
         }
       });
       this.arrayCantidadTurnoEspecialista.push(this.cantidadTurnoEspecialista);
       console.log('4',this.cantidadTurnoEspecialista);
 
     });
-  }
+
+    this.chart = new Chart({
+      chart: {
+        type: 'pie'
+      },
+      title: {
+        text: 'Cantidad de turnos finalizados por médico'
+      },
+      // credits: {
+      //   enabled: false
+      // },
+      series: [
+        {
+          type: 'pie',
+          // name: 'Line 1',
+          // data: [1,2,3]
+          data: this.arrayCantidadTurnoEspecialista
+        }
+      ]
+    }); 
+   }
 
   informe7(){ //no anda
     this.info1 = false;
@@ -325,6 +357,7 @@ export class InformesComponent implements OnInit {
     this.info8 = false;
 
     this.arrayCantidadPacienteEspecialidad = [] //blanqueo array
+    this.cantidadPacienteEspecialidad = [] //blanqueo array
 
     var arrayEspecialidad: string[] = [];
     this.listaEspecialidades.forEach(especialidad => {
@@ -332,19 +365,70 @@ export class InformesComponent implements OnInit {
     });
 
     arrayEspecialidad.forEach(descripcion => {
+      this.listaPacientes = [] //blanqueo array
+      this.flagPac = false;
 
       this.cantidadPacienteEspecialidad = {
-        descripcion: descripcion,
-        cantidad: 0
+        name: descripcion,
+        y: 0
+        // descripcion: descripcion,
+        // cantidad: 0
       }
       this.listaTurnos.forEach(turno => {
         if (turno.especialidad!.descripcion == descripcion) {
-          this.cantidadPacienteEspecialidad.cantidad++;
+          this.flag = false;
+          if (this.flagPac == false){
+            this.flagPac = true;
+            this.pac = turno.paciente;
+            this.listaPacientes.push(this.pac);
+            this.cantidadPacienteEspecialidad.y++;
+
+            console.log('flagPac', this.flagPac);
+            console.log('push', this.listaPacientes);
+            console.log('pac1', this.pac);
+          }
+
+          this.listaPacientes.forEach(paciente => {
+            console.log('temail', turno.paciente?.email);
+
+            if (paciente.email == turno.paciente?.email){
+              console.log('pemail', paciente.email);
+              this.flag = true;
+            }
+            console.log('flag',this.flag);
+            this.pac = turno.paciente;
+          })
+          if (this.flag == false){
+            this.listaPacientes.push(this.pac);
+            console.log('pac', this.pac);
+            this.cantidadPacienteEspecialidad.y++;
+            // this.cantidadPacienteEspecialidad.cantidad++;
+           }
         }
       });
       this.arrayCantidadPacienteEspecialidad.push(this.cantidadPacienteEspecialidad);
       console.log('2',this.cantidadPacienteEspecialidad);
 
+    });
+
+    this.chart = new Chart({
+      chart: {
+        type: 'pie'
+      },
+      title: {
+        text: 'Cantidad de pacientes por especialidad'
+      },
+      // credits: {
+      //   enabled: false
+      // },
+      series: [
+        {
+          type: 'pie',
+          // name: 'Line 1',
+          // data: [1,2,3]
+          data: this.arrayCantidadPacienteEspecialidad
+        }
+      ]
     });
   }
 
@@ -367,19 +451,60 @@ export class InformesComponent implements OnInit {
     arrayEspecialidad.forEach(descripcion => {
 
       this.cantidadMedicoEspecialidad = {
-        descripcion: descripcion,
-        cantidad: 0,
+        // descripcion: descripcion,
+        // cantidad: 0,
+        name: descripcion,
+        y: 0,
       }
       this.listaEspecialistas.forEach(especialista => {
         especialista.especialidad?.forEach(especialidad => {
           if (especialidad.descripcion == descripcion) {
-            this.cantidadMedicoEspecialidad.cantidad++;
+            this.cantidadMedicoEspecialidad.y++;
+            // this.cantidadMedicoEspecialidad.cantidad++;
           }
         })
       });
       this.arrayCantidadMedicoEspecialidad.push(this.cantidadMedicoEspecialidad);
       console.log('2',this.cantidadMedicoEspecialidad);
     });
-  }
 
-}
+    this.chart = new Chart({
+      chart: {
+        type: 'pie'
+      },
+      title: {
+        text: 'Cantidad de médicos por especialidad'
+      },
+      // credits: {
+      //   enabled: false
+      // },
+      series: [
+        {
+          type: 'pie',
+          name: 'Line 1',
+          data: this.arrayCantidadMedicoEspecialidad
+        }
+      ]
+    });
+    }
+
+
+  chart = new Chart({
+    chart: {
+      type: 'pie'
+    },
+    title: {
+      text: 'Piechart'
+    },
+    // credits: {
+    //   enabled: false
+    // },
+    series: [
+      {
+        type: 'pie',
+        name: 'Line 1',
+        data: [1,2,3]
+      }
+    ]
+  });
+  }
