@@ -26,6 +26,7 @@ export class PacientesComponent implements OnInit {
   public registroUp: boolean;
   public condicion: boolean = false;
   public perfil: string = '';
+  public dia: any;
 
   usuarioIngresado: any;
   
@@ -75,6 +76,9 @@ export class PacientesComponent implements OnInit {
         });        
       });
     }
+  
+    this.dia = new Date().toDateString();
+
   }
 
   elegirPerfil(perfil: string){

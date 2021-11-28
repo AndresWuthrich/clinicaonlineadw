@@ -49,6 +49,8 @@ import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { FiltroTurnosPipe } from './pipes/filtro-turnos.pipe';
 import { ChartModule } from 'angular-highcharts';
+import { FechaPipe } from './pipes/fecha.pipe';
+import { SaludoDirective } from './directivas/saludo.directive';
 
 PdfMakeWrapper.setFonts(pdfFonts);
 
@@ -88,7 +90,9 @@ export function HttpLoaderFactory(http: HttpClient) {
     PacientesComponent,
     ResaltarDirective,
     UpperPipe,
-    FiltroTurnosPipe
+    FiltroTurnosPipe,
+    FechaPipe,
+    SaludoDirective
   ],
   imports: [
     BrowserModule,

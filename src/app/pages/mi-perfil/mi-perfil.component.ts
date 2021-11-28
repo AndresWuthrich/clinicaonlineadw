@@ -8,6 +8,7 @@ import { transition, trigger } from '@angular/animations';
 import { heartBeatAnimation, heartBeatOnEnterAnimation } from 'angular-animations';
 import { TurnoService } from 'src/app/services/turno.service';
 import { Turno } from 'src/app/clases/turno';
+import { FechaPipe } from 'src/app/pipes/fecha.pipe';
 
 @Component({
   selector: 'app-mi-perfil',
@@ -24,6 +25,7 @@ export class MiPerfilComponent implements OnInit {
   horariosProfesional:any = '';
   public listaTurnos: Turno[] = [];
   public listaHCPacienteSel: Turno[] = [];
+  public dia: any;
 
   constructor(public auth: AuthService, private usuarioService: UsuarioService, private turnoService: TurnoService) {
    }
@@ -54,6 +56,7 @@ export class MiPerfilComponent implements OnInit {
     }
     // console.log('data' + this.usuarioLogueado?.horarioAtencion);
 
+    this.dia = new Date().toDateString();
 
     // if(this.usuarioLogueado?.perfil == 'especialista'){
     //   this.usuarioLogueado?.especialidad?.forEach(e => {
@@ -98,17 +101,28 @@ export class MiPerfilComponent implements OnInit {
       subject: 'Historia clínica',
      });
 
-    var dia = new Date().toDateString();
-    var fecha = new Date().toTimeString();
+    this.dia = new Date().toDateString();
+    var hora = new Date().toTimeString();
+    
+    var diaa =   this.dia.substring(0,3);
+    var mesa =   this.dia.substring(4,7);
+    var nroa =   this.dia.substring(8,10);
+    var anoa =   this.dia.substring(11,15);
 
+    console.log(diaa);
+    console.log(mesa);
+    console.log(nroa);
+    console.log(anoa);
+   
     // Header
-    pdf.header(dia + ' ' + fecha);
+    pdf.header(this.dia + ' ' + hora);
+    // pdf.header(this.dia | fecha);
 
     // pdf.watermark('Simple watermark');
     // pdf.add( await new Img('src/../../assets/imagenes/AJW.jpg').alignment('right').build());
     pdf.add( await new Img('src/../../assets/imagenes/logo.png').alignment('right').height(50).width(50).build());
 
-    pdf.add(      
+    pdf.add(                                                                                                                                   
       new Txt('Historia Clínica').bold().alignment('center').fontSize(25).end
     );
 

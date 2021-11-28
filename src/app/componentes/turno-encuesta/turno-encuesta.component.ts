@@ -13,6 +13,10 @@ export class TurnoEncuestaComponent implements OnInit {
   error: string = "";
   prestaciones: string = '';
   canal: string = '';
+  canali: string = '';
+  canalt: string = '';
+  canalr: string = '';
+  canale: string = '';
 
   constructor() { }
 
@@ -21,6 +25,20 @@ export class TurnoEncuestaComponent implements OnInit {
 
 
   Confirmar(opcion: boolean) {
+
+    console.log('canal', this.canal);
+    // this.canali = '';
+    // if(this.canal == true){
+    //   this.canali = 'publicidad';
+    // } else {
+    //   this.canali = 'recomendación';
+    // }
+
+    // console.log('canali', this.canali);
+    // console.log('canalt', this.canalt);
+    // console.log('canalr', this.canalr);
+    // console.log('canale', this.canale);
+
     var aux = {
       prestaciones: this.prestaciones,
       recomendar: this.recomendar,
