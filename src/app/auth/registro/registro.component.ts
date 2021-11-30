@@ -8,23 +8,17 @@ import { AuthService } from 'src/app/services/auth.service';
 import { EspecialidadService } from 'src/app/services/especialidad.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
-export interface FormModel {
-  captcha?: string;
-}
+// export interface FormModel {
+//   captcha?: string;
+// }
 
 @Component({
   selector: 'app-registro',
 
-// styles: [
-//     `
-//       .error {
-//         color: crimson;
-//       }
-//       .success {
-//         color: green;
-//       }
-//     `,
-//   ],
+//   template: `<ng2-google-recaptcha 
+//   [siteKey]="recaptchaSiteKey" 
+//   (onCaptchaComplete)="onCaptchaComplete($event)">
+// </ng2-google-recaptcha>`,
 
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.css']
@@ -32,9 +26,9 @@ export interface FormModel {
 export class RegistroComponent implements OnInit {
 
   // title = 'captcha-example';
-  // private recaptchaSiteKey = '6LdCCPMaAAAAAGknNFbHeXd8ZdYAYGTPUQD0GJMA';
+  // private recaptchaSiteKey = '6LeBpWYdAAAAAH0O9qi5tSss0R8YiqQTgNg7OU-B';
 
-  public formModel: FormModel = {};
+  // public formModel: FormModel = {};
 
   // email: string = '';
   // password: string = '';
@@ -58,6 +52,7 @@ export class RegistroComponent implements OnInit {
   usuarioIngresado: any;
   
   public formRegistro: FormGroup;
+  public captcha: any;
 
   constructor(private fb: FormBuilder, private usuarioService: UsuarioService, private especialidadService: EspecialidadService, private router: Router, public auth: AuthService) {
     // this.usuarioIngresado = this.authService.usuario;
@@ -89,6 +84,25 @@ export class RegistroComponent implements OnInit {
   ngOnInit(): void {
     this.agregarDias();
     console.log(this.formRegistro);
+  }
+
+  // private onCaptchaComplete(response: any) {
+  //   console.log('reCAPTCHA response recieved:');
+  //   console.log(response.success);
+  //   console.log(response.token);
+  // }
+
+  resolved2(captchaResponse: any) {
+    console.log(`Resolved response token: ${captchaResponse}`);
+    this.captcha = captchaResponse;
+    //res.getResponse(captchaResponse);
+  }
+
+  
+  resolved(captchaResponse: any, res: string) {
+    console.log(`Resolved response token: ${captchaResponse}`);
+    this.captcha = captchaResponse;
+    //res.getResponse(captchaResponse);
   }
 
   agregarDias() {

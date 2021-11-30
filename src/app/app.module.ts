@@ -51,6 +51,7 @@ import { FiltroTurnosPipe } from './pipes/filtro-turnos.pipe';
 import { ChartModule } from 'angular-highcharts';
 import { FechaPipe } from './pipes/fecha.pipe';
 import { SaludoDirective } from './directivas/saludo.directive';
+// import { Ng2GoogleRecaptchaModule } from 'ng2-google-recaptcha';
 
 PdfMakeWrapper.setFonts(pdfFonts);
 
@@ -106,6 +107,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     ReactiveFormsModule,
     RecaptchaModule,
     RecaptchaFormsModule,
+    // Ng2GoogleRecaptchaModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
