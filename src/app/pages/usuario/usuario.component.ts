@@ -70,6 +70,7 @@ export class UsuarioComponent implements OnInit {
     this.signup = false;
     this.registroUp = false;
 
+    
     this.formAdmin = this.fb.group({
       'nombre':['', Validators.required],
       'apellido':['', Validators.required],

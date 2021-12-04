@@ -42,11 +42,11 @@
                 <small class="invalid" *ngIf="formRegistro.get('dni')?.errors?.min && formRegistro.get('dni')?.touched">El dni debe ser mayor a 1.000.000</small>
               </div>
       
-              <div class="col-md-12 mb-2" *ngIf="perfil=='paciente'">
+              <!-- <div class="col-md-12 mb-2" *ngIf="perfil=='paciente'">
                 <label for="obraSocial" class="form-label">Obra social</label>
                 <input type="text" class="form-control" id="obraSocial" placeholder="Ingrese obra social" formControlName='obraSocial'>
                 <small class="invalid" *ngIf="formRegistro.get('obraSocial')?.errors?.required && formRegistro.get('obraSocial')?.touched">La obra social es requerida</small>
-              </div>
+              </div> -->
       
               <!-- <div class="col-md-12 mb-2" *ngIf="perfil=='especialista'">
                 <label for="especialidad" class="form-label">Especialidad</label>
@@ -105,21 +105,23 @@
                 <input type="file" class="form-control" id="imagen" placeholder="Ingrese imagen de perfil" formControlName='imagen' (change)="cargarImagen($event)">
                 <small class="invalid" *ngIf="formRegistro.get('imagen')?.errors?.required && formRegistro.get('imagen')?.touched">La imagen de perfil es requerida</small>
               </div>
-              <div class="col-md-12 mb-2" *ngIf="perfil=='paciente'">
+              <!-- <div class="col-md-12 mb-2">
                 <label for="imagen2" class="form-label">2da imagen de perfil</label>
                 <input type="file" class="form-control" id="imagen2" placeholder="Ingrese 2da imagen de perfil" formControlName='imagen2' (change)="cargarImagen2($event)">
                 <small class="invalid" *ngIf="formRegistro.get('imagen2')?.errors?.required && formRegistro.get('imagen2')?.touched">La 2da imagen de perfil es requerida</small>
-              </div>
+              </div> -->
             </div>
       
             <!-- <div class="g-recaptcha" data-sitekey="6LeBpWYdAAAAAH0O9qi5tSss0R8YiqQTgNg7OU-B">CAPTCHA</div> -->
             
-            <div class="col-sm-2 text-center mt-4">
+            <div class="col-sm-2 text-center mt-4" *ngIf= "deshabilitaCaptcha">
               <!-- <h2>sd</h2> -->
               <re-captcha (resolved)="resolved2($event)"  
                   siteKey="6LeBpWYdAAAAAH0O9qi5tSss0R8YiqQTgNg7OU-B">
               </re-captcha>
-          </div>
+            </div>
+            
+            <button type="button" (click)="deshabilitarCaptcha()" class="btn btn-primary">Deshabilitar captcha</button>
           <!-- <div class="col-sm-2 text-center mt-4">
             <re-captcha (resolved)="resolved2($event)" formControlName="recaptchaReactive" 
                 siteKey="6LeBpWYdAAAAAH0O9qi5tSss0R8YiqQTgNg7OU-B">

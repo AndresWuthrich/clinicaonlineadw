@@ -38,6 +38,7 @@ export class RegistroComponent implements OnInit {
   public perfil: string = '';
   private imagenPerfil: any;
   private imagenPerfil2: any;
+  public deshabilitaCaptcha: boolean = true;
 
   public usuarioAlta: Usuario = new Usuario();
   public especialidadAlta: Especialidad = new Especialidad();
@@ -59,21 +60,34 @@ export class RegistroComponent implements OnInit {
     this.signup = false;
     this.registroUp = false;
 
-    this.formRegistro = this.fb.group({
-      'nombre':['', Validators.required],
-      'apellido':['', Validators.required],
-      'edad':['', [Validators.required, Validators.min(18), Validators.max(99)]],
-      'dni':['', [Validators.required, Validators.min(1000000)]],
-      // 'perfil':['', Validators.required],
-      'email':['', Validators.required],
-      'password':['', [Validators.required, Validators.minLength(6)]],
-      'imagen':['', Validators.required],      
-
-      // 'imagen2':['', Validators.required],      
-      // 'obraSocial':['', Validators.required],
-      // 'especialidad':['', Validators.required],          
-    });
-
+    if(this.perfil == 'paciente'){
+      this.formRegistro = this.fb.group({
+        'nombre':['', Validators.required],
+        'apellido':['', Validators.required],
+        'edad':['', [Validators.required, Validators.min(18), Validators.max(99)]],
+        'dni':['', [Validators.required, Validators.min(1000000)]],
+        // 'perfil':['', Validators.required],
+        'email':['', Validators.required],
+        'password':['', [Validators.required, Validators.minLength(6)]],
+        'imagen':['', Validators.required],      
+  
+        // 'imagen2':['', Validators.required],      
+        // 'obraSocial':['', Validators.required],
+        'especialidad':['', Validators.required]          
+      });
+    } else{
+      this.formRegistro = this.fb.group({
+        'nombre':['', Validators.required],
+        'apellido':['', Validators.required],
+        'edad':['', [Validators.required, Validators.min(18), Validators.max(99)]],
+        'dni':['', [Validators.required, Validators.min(1000000)]],
+        // 'perfil':['', Validators.required],
+        'email':['', Validators.required],
+        'password':['', [Validators.required, Validators.minLength(6)]],
+        'imagen':['', Validators.required]  
+      });
+    }
+  
     this.especialidadService.traerTodas().subscribe((especialidades: Especialidad[]) => {
       console.log(especialidades);
       this.listaEspecialidades = especialidades;
@@ -97,14 +111,16 @@ export class RegistroComponent implements OnInit {
     this.captcha = captchaResponse;
     //res.getResponse(captchaResponse);
   }
-
-  
   resolved(captchaResponse: any, res: string) {
     console.log(`Resolved response token: ${captchaResponse}`);
     this.captcha = captchaResponse;
     //res.getResponse(captchaResponse);
   }
-
+  deshabilitarCaptcha(){
+    // this.captchaResuelto=true;
+    // this.captchaResuelto2=true;
+    this.deshabilitaCaptcha = false;
+  }
   agregarDias() {
 
     this.listaDiasSeleccionadas.push(new DiasAtencion(true, 'LUNES', 8, 19));
@@ -152,8 +168,8 @@ export class RegistroComponent implements OnInit {
       this.usuarioAlta.uid = value?.user?.uid;
  
       if(this.perfil=='paciente'){
-        this.usuarioAlta.imagenPerfil2 = this.formRegistro.controls['imagen2'].value;
-        this.usuarioAlta.obraSocial = this.formRegistro.controls['obraSocial'].value;
+        // this.usuarioAlta.imagenPerfil2 = this.formRegistro.controls['imagen2'].value;
+        // this.usuarioAlta.obraSocial = this.formRegistro.controls['obraSocial'].value;
         this.usuarioAlta.cuentaAprobada = true;
         
         console.log(this.imagenPerfil);
