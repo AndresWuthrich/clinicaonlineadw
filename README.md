@@ -1,4 +1,4 @@
-# ClinicaOnline ![Logo](src/assets/imagenes/logo.png[width=20px] "Logo"){:height="50px" width="50px"}
+# ClinicaOnline ![Logo](src/assets/imagenes/logo.png "Logo")
 
 Proyecto realizado con [Angular CLI](https://github.com/angular/angular-cli) version 12.0.0.
 

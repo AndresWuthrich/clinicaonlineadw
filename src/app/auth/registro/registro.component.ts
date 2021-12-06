@@ -57,8 +57,7 @@ export class RegistroComponent implements OnInit {
         'imagen':['', Validators.required],      
   
         'imagen2':['', Validators.required],      
-        'obra':['', Validators.required],
-        'especialidad':['', Validators.required]          
+        'obra':['', Validators.required]
       });
     } else{
       this.formRegistro = this.fb.group({
@@ -69,7 +68,8 @@ export class RegistroComponent implements OnInit {
         // 'perfil':['', Validators.required],
         'email':['', Validators.required],
         'password':['', [Validators.required, Validators.minLength(6)]],
-        'imagen':['', Validators.required]  
+        'imagen':['', Validators.required],  
+        'especialidad':['', Validators.required]          
       });
     }
   
