@@ -78,7 +78,6 @@ export class PacientesComponent implements OnInit {
     }
   
     this.dia = new Date().toDateString();
-
   }
 
   elegirPerfil(perfil: string){

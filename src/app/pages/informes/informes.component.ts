@@ -11,6 +11,7 @@ import { fadeInDownAnimation, fadeInDownOnEnterAnimation } from 'angular-animati
 // import * as Highcharts from 'highcharts';
 import { Chart } from 'angular-highcharts';
 import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
+import { Img, PdfMakeWrapper, Txt } from 'pdfmake-wrapper';
 
 @Component({
   selector: 'app-informes',
@@ -164,7 +165,6 @@ export class InformesComponent implements OnInit {
         }
       ]
     });
-  
   }
 
   informe3(){
@@ -507,4 +507,4 @@ export class InformesComponent implements OnInit {
       }
     ]
   });
-  }
+}

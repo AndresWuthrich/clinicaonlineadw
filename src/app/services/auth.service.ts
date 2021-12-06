@@ -39,7 +39,7 @@ export class AuthService {
       // this.router.navigate(['bienvenido']);
       return usuarioRegistrado;
     // })
-    } catch(error)  {
+    } catch(error: any)  {
       //this.errorRegistro = error.message;
 
       Swal.fire({
@@ -85,7 +85,7 @@ export class AuthService {
   }
   
   return resultado;
-  }catch(error)  {
+  }catch(error: any)  {
   // //   this.errorLogin = error.message;
      console.log(error);
 
@@ -101,11 +101,9 @@ export class AuthService {
   Logout(){
     this.fireStoreAuth.signOut();
     this.router.navigate(['bienvenido']);
-
   }
 
   obtenerUsuarioActual() {
     return this.fireStoreAuth.authState.pipe(first()).toPromise();
   }  
 }
-

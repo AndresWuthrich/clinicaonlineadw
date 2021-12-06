@@ -1,7 +1,9 @@
-# ClinicaOnline ![Logo](src/assets/imagenes/logo.png "Logo"){:height="50%" width="50%"}
+# ClinicaOnline ![Logo](src/assets/imagenes/logo.png[width=20px] "Logo"){:height="50px" width="50px"}
 
 Proyecto realizado con [Angular CLI](https://github.com/angular/angular-cli) version 12.0.0.
+
 TP Final Laboratorio IV 2021 - UTNFRA - Técnico superior en programación.
+
 [Sitio WEB de GitHub](https://github.com/AndresWuthrich/clinicaonlineadw)
 
 -----
@@ -9,18 +11,17 @@ TP Final Laboratorio IV 2021 - UTNFRA - Técnico superior en programación.
 
 **Bienvenida**
 ![Bienvenido](src/assets/imagenes/bienvenido2.png "Bienvenido")
-
 La clínica OnLine, especialista en salud, cuenta actualmente con consultorios (6 en la actualidad), dos laboratorios (físicos en la clínica), y una sala de espera general. Está abierta al público de lunes a viernes en el horario de 8:00 a 19:00, y los sábados en el horario de 8:00 a 14:00. Trabajan en ella profesionales de diversas especialidades, que ocupan los consultorios acorde a su disponibilidad, y reciben en ellos pacientes con turno para consulta o tratamiento. Dichos turnos son pedidos por la web seleccionando el profesional o la especialidad.
 
 >Desde la pantalla de bienvenida podrás:
 * Seleccionar idioma de la web. Opciones: Español - Inglés - Portugués.
 * Ingresar a las siguientes opciones:
-    * Registro
-    Primero deberá seleccionar perfil. Luego completar datos requeridos, y validar mail.    
+    * Registro   
     ![Registro](src/assets/imagenes/registro.png "Registro")
+    Primero deberá seleccionar perfil. Luego completar datos requeridos, y validar mail.    
     * Login
-    Con usuario validado podrá acceder a la web. Los especialistas deberán ser aprobados por el administrador.
     ![Login](src/assets/imagenes/login.png "Login")
+    Con usuario validado podrá acceder a la web. Los especialistas deberán ser aprobados por el administrador.
 
 
 <!-- ![principal](http://octaviovillegas.github.io/CursoIngresoJS/img/principal.gif) -->
@@ -43,8 +44,7 @@ La clínica OnLine, especialista en salud, cuenta actualmente con consultorios (
         * Log de ingresos al sistema
         * Cantidad de turnos por especialidad
         * Cantidad de turnos por día
-        * Cantidad de turnos solicitado por médico en un lapso de tiempo
-        * Cantidad de turnos finalizados por médico en un lapso de tiempo      
+        * etc...      
 
 * Especialista:
     ![Turnos](src/assets/imagenes/turnos.png "Turnos")

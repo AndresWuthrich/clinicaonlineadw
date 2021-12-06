@@ -48,10 +48,12 @@ import * as pdfFonts from 'pdfmake/build/vfs_fonts';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { FiltroTurnosPipe } from './pipes/filtro-turnos.pipe';
-import { ChartModule } from 'angular-highcharts';
+import { ChartModule, HIGHCHARTS_MODULES } from 'angular-highcharts';
+import exporting from 'highcharts/modules/exporting.src.js';
 import { FechaPipe } from './pipes/fecha.pipe';
 import { SaludoDirective } from './directivas/saludo.directive';
-// import { Ng2GoogleRecaptchaModule } from 'ng2-google-recaptcha';
+import { CaptchaDirective } from './directivas/captcha.directive';
+
 
 PdfMakeWrapper.setFonts(pdfFonts);
 
@@ -59,6 +61,10 @@ PdfMakeWrapper.setFonts(pdfFonts);
 export function HttpLoaderFactory(http: HttpClient) {
   // return new TranslateHttpLoader(http);
    return new TranslateHttpLoader(http, './assets/i18n/','.json');
+}
+
+export function highchartsModules(){
+  return [ exporting];
 }
 
 @NgModule({
@@ -93,7 +99,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     UpperPipe,
     FiltroTurnosPipe,
     FechaPipe,
-    SaludoDirective
+    SaludoDirective,
+    CaptchaDirective
   ],
   imports: [
     BrowserModule,
@@ -107,7 +114,6 @@ export function HttpLoaderFactory(http: HttpClient) {
     ReactiveFormsModule,
     RecaptchaModule,
     RecaptchaFormsModule,
-    // Ng2GoogleRecaptchaModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
@@ -116,7 +122,11 @@ export function HttpLoaderFactory(http: HttpClient) {
       }
     })
   ],
-  providers: [AuthService, ExcelService],
+  providers: [AuthService, ExcelService,
+    {
+      provide: HIGHCHARTS_MODULES,
+      useFactory: highchartsModules,
+    }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

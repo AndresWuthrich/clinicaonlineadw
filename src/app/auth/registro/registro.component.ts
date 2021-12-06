@@ -8,27 +8,12 @@ import { AuthService } from 'src/app/services/auth.service';
 import { EspecialidadService } from 'src/app/services/especialidad.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
 
-// export interface FormModel {
-//   captcha?: string;
-// }
-
 @Component({
   selector: 'app-registro',
-
-//   template: `<ng2-google-recaptcha 
-//   [siteKey]="recaptchaSiteKey" 
-//   (onCaptchaComplete)="onCaptchaComplete($event)">
-// </ng2-google-recaptcha>`,
-
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.css']
 })
 export class RegistroComponent implements OnInit {
-
-  // title = 'captcha-example';
-  // private recaptchaSiteKey = '6LeBpWYdAAAAAH0O9qi5tSss0R8YiqQTgNg7OU-B';
-
-  // public formModel: FormModel = {};
 
   // email: string = '';
   // password: string = '';
@@ -71,8 +56,8 @@ export class RegistroComponent implements OnInit {
         'password':['', [Validators.required, Validators.minLength(6)]],
         'imagen':['', Validators.required],      
   
-        // 'imagen2':['', Validators.required],      
-        // 'obraSocial':['', Validators.required],
+        'imagen2':['', Validators.required],      
+        'obra':['', Validators.required],
         'especialidad':['', Validators.required]          
       });
     } else{
@@ -100,12 +85,6 @@ export class RegistroComponent implements OnInit {
     console.log(this.formRegistro);
   }
 
-  // private onCaptchaComplete(response: any) {
-  //   console.log('reCAPTCHA response recieved:');
-  //   console.log(response.success);
-  //   console.log(response.token);
-  // }
-
   resolved2(captchaResponse: any) {
     console.log(`Resolved response token: ${captchaResponse}`);
     this.captcha = captchaResponse;
@@ -131,12 +110,6 @@ export class RegistroComponent implements OnInit {
     this.listaDiasSeleccionadas.push(new DiasAtencion(true, 'SABADO', 8, 14));
 
   }
-
-  // private onCaptchaComplete(response: any) {
-  //   console.log('reCAPTCHA response recieved:');
-  //   console.log(response.success);
-  //   console.log(response.token);
-  // }
 
   elegirPerfil(perfil: string){
     this.perfil = perfil;
@@ -168,8 +141,8 @@ export class RegistroComponent implements OnInit {
       this.usuarioAlta.uid = value?.user?.uid;
  
       if(this.perfil=='paciente'){
-        // this.usuarioAlta.imagenPerfil2 = this.formRegistro.controls['imagen2'].value;
-        // this.usuarioAlta.obraSocial = this.formRegistro.controls['obraSocial'].value;
+        this.usuarioAlta.imagenPerfil2 = this.formRegistro.controls['imagen2'].value;
+        this.usuarioAlta.obraSocial = this.formRegistro.controls['obra'].value;
         this.usuarioAlta.cuentaAprobada = true;
         
         console.log(this.imagenPerfil);
@@ -180,13 +153,6 @@ export class RegistroComponent implements OnInit {
       } else {
         // this.usuarioAlta.especialidad = this.formRegistro.controls['especialidad'].value;
         this.usuarioAlta.especialidad = this.listaEspecialidadesSeleccionadas;
-
-        // this.listaDiasSeleccionadas.push(new DiasAtencion(true, 'Lunes', 8, 19));
-        // this.listaDiasSeleccionadas.push(new DiasAtencion(true, 'Martes', 8, 19));
-        // this.listaDiasSeleccionadas.push(new DiasAtencion(true, 'Miercoles', 8, 19));
-        // this.listaDiasSeleccionadas.push(new DiasAtencion(true, 'Jueves', 8, 19));
-        // this.listaDiasSeleccionadas.push(new DiasAtencion(true, 'Viernes', 8, 19));
-        // this.listaDiasSeleccionadas.push(new DiasAtencion(true, 'Sabado', 8, 14));
 
         this.usuarioAlta.horarioAtencion = this.listaDiasSeleccionadas;
 

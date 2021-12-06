@@ -200,10 +200,6 @@ export class MisTurnosEspecialistaComponent implements OnInit {
           this.usuarioService.actualizarHistoriaClinica(idUsuario, this.turnoActual!.paciente!);
         }
 
-
-
-
-
         // this.turnoActual!.comentarioEspecialista = this.mensaje;
         this.turnoActual!.historiaClinica!.altura = $event.altura;
         this.turnoActual!.historiaClinica!.peso = $event.peso;

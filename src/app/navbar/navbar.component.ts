@@ -18,16 +18,11 @@ export class NavbarComponent implements OnInit {
   
   public userLogueado: Observable<any> = this.auth.fireStoreAuth.user;
   
-  // constructor(private router: Router,
-  //   public auth: AuthService,
-  //   private mensajesService: MensajesService) { }
-
   constructor(public auth: AuthService, public translate: TranslateService) { 
     translate.setDefaultLang('es'); // // this language will be used as a fallback when a translation isn't found in the current language
     translate.use('es'); // // the lang to use, if the lang isn't available, it will use the current loader to get them
     translate.addLangs(['es','en','po']); //cargo arrays
     this.langs = this.translate.getLangs(); //puedo obtener los idiomas cargados en el array
-
   }
   
   ngOnInit(): void {
