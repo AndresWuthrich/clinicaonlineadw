@@ -168,7 +168,7 @@ export class UsuarioService {
     task.snapshotChanges().pipe(finalize(()=>{
       fileRef.getDownloadURL().subscribe(urlImagen =>{
         console.log('URL_IMAGEN', urlImagen);
-        if(imagenPerfil == 'imagenPerfil'){
+        if(imagenPerfil == 'imagenPerfil2'){
 
           usuario.imagenPerfil2 = urlImagen;
 
