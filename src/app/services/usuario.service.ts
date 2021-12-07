@@ -91,9 +91,9 @@ export class UsuarioService {
     //   })
     // })).subscribe();
 
-    this.agregarImagenPerfil2(usuario, imagen2);
+    // this.agregarImagenPerfil2(usuario, imagen2);
 
-    // this.uploadImagen('imagenPerfil2', imagen2, usuario);
+    this.uploadImagen2('imagenPerfil2', imagen2, usuario);
 
     // this.filePath = `imagenes/${imagen2.name}`;
     // console.log(imagen2.name);
@@ -137,6 +137,43 @@ export class UsuarioService {
 
           console.log("URL1" + urlImagen);
           console.log("perf" + usuario.perfil);
+
+          if(usuario.perfil == 'especialista' || usuario.perfil == 'administrador'){
+            this.agregarUsuario(usuario);
+          }
+        } 
+        // else{
+        //   this.img2 = urlImagen;
+        //   console.log("URL2" + this.img2);
+        //   console.log("perf" + usuario.perfil);
+
+        //   usuario.imagenPerfil2 = urlImagen;
+        //   if(usuario.perfil == 'paciente'){
+        //     this.agregarUsuario(usuario);
+        //   }
+          // usuario.imagenPerfil2 = urlImagen;
+          // console.log("URL2" + usuario.imagenPerfil2);
+        // }
+        })
+    })).subscribe();
+  }
+
+  uploadImagen2(imagenPerfil: string, imagen: any, usuario: Usuario){
+    this.filePath = `imagenes/${usuario.uid}/${imagen.name}`;
+    console.log(imagen.name);
+    const fileRef = this.storage.ref(this.filePath);
+    console.log(this.filePath);
+    const task = this.storage.upload(this.filePath, imagen);
+    console.log(imagen);
+    task.snapshotChanges().pipe(finalize(()=>{
+      fileRef.getDownloadURL().subscribe(urlImagen =>{
+        console.log('URL_IMAGEN', urlImagen);
+        if(imagenPerfil == 'imagenPerfil'){
+
+          usuario.imagenPerfil2 = urlImagen;
+
+          console.log("URL2" + urlImagen);
+          console.log("perf " + usuario.perfil);
 
           // if(usuario.perfil == 'especialista' || usuario.perfil == 'administrador'){
             this.agregarUsuario(usuario);

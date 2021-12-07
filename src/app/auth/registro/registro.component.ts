@@ -58,36 +58,6 @@ export class RegistroComponent implements OnInit {
         'imagen':['', Validators.required] 
   
       }); 
-   
-
-    // console.log('constructor:',this.perfil);
-    // if(this.perfil == 'paciente'){
-    //   this.formRegistro = this.fb.group({
-    //     'nombre':['', Validators.required],
-    //     'apellido':['', Validators.required],
-    //     'edad':['', [Validators.required, Validators.min(18), Validators.max(99)]],
-    //     'dni':['', [Validators.required, Validators.min(1000000)]],
-    //     // 'perfil':['', Validators.required],
-    //     'email':['', Validators.required],
-    //     'password':['', [Validators.required, Validators.minLength(6)]],
-    //     'imagen':['', Validators.required],      
-  
-    //     'imagen2':['', Validators.required],      
-    //     'obra':['', Validators.required]
-    //   }); 
-    // } else{
-    //   this.formRegistro = this.fb.group({
-    //     'nombre':['', Validators.required],
-    //     'apellido':['', Validators.required],
-    //     'edad':['', [Validators.required, Validators.min(18), Validators.max(99)]],
-    //     'dni':['', [Validators.required, Validators.min(1000000)]],
-    //     // 'perfil':['', Validators.required],
-    //     'email':['', Validators.required],
-    //     'password':['', [Validators.required, Validators.minLength(6)]],
-    //     'imagen':['', Validators.required],  
-    //     'especialidad':['', Validators.required]          
-    //   });
-    // }
   
     this.especialidadService.traerTodas().subscribe((especialidades: Especialidad[]) => {
       console.log(especialidades);
