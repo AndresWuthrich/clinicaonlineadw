@@ -15,7 +15,7 @@
       </div>
     </div>
     <div class="card">
-        <div class="card-header">
+        <!-- <div class="card-header"> -->
 
           <!-- <form class="form" [formGroup]="formAdmin" (ngSubmit)="registroAdmin()" *ngIf="perfil=='paciente' || perfil=='especialista'"> -->
         <form class="form" [formGroup]="formAdmin" (ngSubmit)="registro()">
@@ -79,10 +79,10 @@
             </div>
           </div>
         </form>
-      </div>
+      <!-- </div> -->
     </div>
 
-    <hr>
+    <!-- <hr> -->
     <button class="btn btn-block" (click)="exportAsXLSXEspecialistas()">
       <i class="fa fa-file-excel-o" style="font-size:48px;color:blue"></i>
       Descargue lista de usuarios

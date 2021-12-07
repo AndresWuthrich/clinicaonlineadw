@@ -45,7 +45,8 @@ export class RegistroComponent implements OnInit {
     this.signup = false;
     this.registroUp = false;
 
-    if(this.perfil == 'paciente'){
+        console.log('constructor:',this.perfil);
+    
       this.formRegistro = this.fb.group({
         'nombre':['', Validators.required],
         'apellido':['', Validators.required],
@@ -54,30 +55,44 @@ export class RegistroComponent implements OnInit {
         // 'perfil':['', Validators.required],
         'email':['', Validators.required],
         'password':['', [Validators.required, Validators.minLength(6)]],
-        'imagen':['', Validators.required],      
+        'imagen':['', Validators.required] 
   
-        'imagen2':['', Validators.required],      
-        'obra':['', Validators.required]
-      });
-    } else{
-      this.formRegistro = this.fb.group({
-        'nombre':['', Validators.required],
-        'apellido':['', Validators.required],
-        'edad':['', [Validators.required, Validators.min(18), Validators.max(99)]],
-        'dni':['', [Validators.required, Validators.min(1000000)]],
-        // 'perfil':['', Validators.required],
-        'email':['', Validators.required],
-        'password':['', [Validators.required, Validators.minLength(6)]],
-        'imagen':['', Validators.required],  
-        'especialidad':['', Validators.required]          
-      });
-    }
+      }); 
+   
+
+    // console.log('constructor:',this.perfil);
+    // if(this.perfil == 'paciente'){
+    //   this.formRegistro = this.fb.group({
+    //     'nombre':['', Validators.required],
+    //     'apellido':['', Validators.required],
+    //     'edad':['', [Validators.required, Validators.min(18), Validators.max(99)]],
+    //     'dni':['', [Validators.required, Validators.min(1000000)]],
+    //     // 'perfil':['', Validators.required],
+    //     'email':['', Validators.required],
+    //     'password':['', [Validators.required, Validators.minLength(6)]],
+    //     'imagen':['', Validators.required],      
+  
+    //     'imagen2':['', Validators.required],      
+    //     'obra':['', Validators.required]
+    //   }); 
+    // } else{
+    //   this.formRegistro = this.fb.group({
+    //     'nombre':['', Validators.required],
+    //     'apellido':['', Validators.required],
+    //     'edad':['', [Validators.required, Validators.min(18), Validators.max(99)]],
+    //     'dni':['', [Validators.required, Validators.min(1000000)]],
+    //     // 'perfil':['', Validators.required],
+    //     'email':['', Validators.required],
+    //     'password':['', [Validators.required, Validators.minLength(6)]],
+    //     'imagen':['', Validators.required],  
+    //     'especialidad':['', Validators.required]          
+    //   });
+    // }
   
     this.especialidadService.traerTodas().subscribe((especialidades: Especialidad[]) => {
       console.log(especialidades);
       this.listaEspecialidades = especialidades;
     });
-
   }
 
   ngOnInit(): void {
@@ -99,6 +114,7 @@ export class RegistroComponent implements OnInit {
     // this.captchaResuelto=true;
     // this.captchaResuelto2=true;
     this.deshabilitaCaptcha = false;
+    console.log(this.formRegistro);
   }
   agregarDias() {
 
@@ -113,6 +129,37 @@ export class RegistroComponent implements OnInit {
 
   elegirPerfil(perfil: string){
     this.perfil = perfil;
+    console.log(this.perfil);
+
+    console.log('constructor:',this.perfil);
+    if(this.perfil == 'paciente'){
+      this.formRegistro = this.fb.group({
+        'nombre':['', Validators.required],
+        'apellido':['', Validators.required],
+        'edad':['', [Validators.required, Validators.min(18), Validators.max(99)]],
+        'dni':['', [Validators.required, Validators.min(1000000)]],
+        // 'perfil':['', Validators.required],
+        'email':['', Validators.required],
+        'password':['', [Validators.required, Validators.minLength(6)]],
+        'imagen':['', Validators.required],      
+  
+        'imagen2':['', Validators.required],      
+        'obra':['', Validators.required]
+      }); 
+    } else{
+      this.formRegistro = this.fb.group({
+        'nombre':['', Validators.required],
+        'apellido':['', Validators.required],
+        'edad':['', [Validators.required, Validators.min(18), Validators.max(99)]],
+        'dni':['', [Validators.required, Validators.min(1000000)]],
+        // 'perfil':['', Validators.required],
+        'email':['', Validators.required],
+        'password':['', [Validators.required, Validators.minLength(6)]],
+        'imagen':['', Validators.required],  
+        'especialidad':['', Validators.required]          
+      });
+    }
+
   }
 
   async registro(){
