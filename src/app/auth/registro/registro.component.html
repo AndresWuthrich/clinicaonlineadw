@@ -125,7 +125,7 @@
           
             <div class="row container">
               <div class="col-md-12 d-grid gap-2 container2">
-                <button type="submit" class="btn btn-primary btn-block" [disabled]="signup" [disabled]="formRegistro.invalid">
+                <button type="submit" class="btn btn-primary btn-block" [disabled]="formRegistro.invalid || signup==false">
                     <span *ngIf="signup" class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
                   Registro
                 </button>

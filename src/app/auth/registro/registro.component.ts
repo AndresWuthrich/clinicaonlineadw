@@ -7,6 +7,7 @@ import { Usuario } from 'src/app/clases/usuario';
 import { AuthService } from 'src/app/services/auth.service';
 import { EspecialidadService } from 'src/app/services/especialidad.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-registro',
@@ -39,6 +40,7 @@ export class RegistroComponent implements OnInit {
   
   public formRegistro: FormGroup;
   public captcha: any;
+  public captchaFlag: boolean = false;
 
   constructor(private fb: FormBuilder, private usuarioService: UsuarioService, private especialidadService: EspecialidadService, private router: Router, public auth: AuthService) {
     // this.usuarioIngresado = this.authService.usuario;
@@ -74,17 +76,23 @@ export class RegistroComponent implements OnInit {
     console.log(`Resolved response token: ${captchaResponse}`);
     this.captcha = captchaResponse;
     //res.getResponse(captchaResponse);
+    this.captchaFlag = true;
+    this.signup = true;
+
   }
   resolved(captchaResponse: any, res: string) {
     console.log(`Resolved response token: ${captchaResponse}`);
     this.captcha = captchaResponse;
     //res.getResponse(captchaResponse);
+    this.captchaFlag = true;
+    this.signup = true;
   }
   deshabilitarCaptcha(){
     // this.captchaResuelto=true;
     // this.captchaResuelto2=true;
     this.deshabilitaCaptcha = false;
     console.log(this.formRegistro);
+    this.signup = true;
   }
   agregarDias() {
 
@@ -137,7 +145,22 @@ export class RegistroComponent implements OnInit {
 
     const { email, password } = this.formRegistro.value;
     
-    this.signup = true;
+    console.log('desa',this.deshabilitaCaptcha);
+    console.log('cap',this.captcha);
+    console.log('signup',this.signup);
+
+    // var swal=0;
+    // while(this.deshabilitaCaptcha == true && this.captchaFlag == false){
+    // if(this.deshabilitaCaptcha == true && this.captchaFlag == false){
+    //   swal++;
+    //   console.log('swal', swal);
+    //   Swal.fire({
+    //     title: 'Complete captcha'
+    //   });  
+    // }
+    
+
+    // this.signup = true;
     
     setTimeout(() => {
       this.signup = false;
